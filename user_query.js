@@ -2,11 +2,11 @@ const bcrypt = require("bcrypt");
 
 const Pool = require("pg").Pool;
 const pool = new Pool({
-  user: "admin",
-  host: "localhost",
-  database: "quatrogrocer",
-  password: "Quatrogrocer12#", //find how to hide/encrypt the password
-  port: 5433,
+  user: "postgres",
+  host: "postgres",
+  database: "my_db",
+  password: "postgres", //find how to hide/encrypt the password
+  port: 5432,
 });
 
 const getUsers = (request, response) => {

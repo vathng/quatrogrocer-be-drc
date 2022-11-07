@@ -1,0 +1,38 @@
+version: "3"
+services:
+  app:
+    build: .
+    networks:
+      - backend
+    environment:
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=my_db
+    depends_on:
+      - postgres
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 3000:3000
+    container_name: quatrogrocernodejs
+    # tty: true
+    command: ["npm", "run", "dev"]
+  postgres:
+    image: postgres:13-alpine
+    restart: always
+    ports:
+      - 5434:5432
+    environment:
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=my_db
+    networks:
+      - backend
+    volumes:
+      - ./db-init/:/docker-entrypoint-initdb.d/
+      - ../postgres_data/:/var/lib/postgresql/data
+    container_name: quatrogrocerdb
+networks:
+  backend:
