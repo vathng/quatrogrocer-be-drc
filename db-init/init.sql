@@ -39,3 +39,4 @@ create table quatro_address(
      postcode int not null, 
      state text not null 
 );
+-- SQL
