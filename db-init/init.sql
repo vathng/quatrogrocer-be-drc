@@ -37,7 +37,7 @@ create table quatro_address(
      address_line_1 varchar(50) not null, 
      address_line_2 varchar(50) not null, 
      address_line_3 varchar(50) not null, 
-     postcode int not null, 
+     postcode varchar not null, 
      state text not null 
 );
 -- SQL

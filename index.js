@@ -5,6 +5,7 @@ const app = express();
 const port = 3000;
 const db_user = require("./controller/user_query");
 const db_product = require("./controller/product_query");
+const db_address = require("./controller/address_query");
 
 app.use(
   cors({
@@ -39,6 +40,11 @@ app.post(
   db_product.updateProductQuantityAPI
 );
 app.delete("/quatro_product/delete", db_product.deleteProductAPI);
+//Address
+app.get("/quatro_address/get", db_address.searchAddressAPI);
+app.post("/quatro_address/create", db_address.createAddressAPI);
+app.post("/quatro_address/update_details", db_address.updateAddressDetailsAPI);
+app.delete("/quatro_address/delete", db_address.deleteAddressAPI);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
