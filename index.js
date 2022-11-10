@@ -3,8 +3,8 @@ const bodyParser = require("body-parser");
 var cors = require("cors");
 const app = express();
 const port = 3000;
-const db_user = require("./user_query");
-const db_product = require("./product_query");
+const db_user = require("./controller/user_query");
+const db_product = require("./controller/product_query");
 
 app.use(
   cors({
@@ -23,24 +23,22 @@ app.get("/", (request, response) => {
   response.json({ info: "Node.js, Express, and Postgres API" });
 });
 
-app.get("/quatro_user", db_user.getUsers);
-app.get("/quatro_user/:first_name/:last_name", db_user.searchUser);
-app.get("/quatro_user/:user_id", db_user.getUserById);
-app.post("/quatro_user", db_user.createUser);
-app.put(
-  "/quatro_user/:user_id/:email/:password/:first_name/:last_name/:date_of_birth/:phone_number",
-  db_user.updateUser
+//User
+app.post("/quatro_user/login", db_user.loginAPI);
+app.post("/quatro_user/create", db_user.createUserAPI);
+app.post("/quatro_user/search", db_user.searchUserAPI);
+app.post("/quatro_user/update", db_user.updateUserAPI);
+app.delete("/quatro_user/delete", db_user.deleteUserAPI);
+//Product
+app.get("/quatro_product/get", db_product.searchProductAPI);
+app.post("/quatro_product/create", db_product.createProductAPI);
+app.post("/quatro_product/update_details", db_product.updateProductDetailsAPI);
+app.post("/quatro_product/update_price", db_product.updateProductPriceAPI);
+app.post(
+  "/quatro_product/update_quantity",
+  db_product.updateProductQuantityAPI
 );
-app.delete("/quatro_user/:user_id", db_user.deleteUser);
-
-app.get("/quatro_product", db_product.getProducts);
-app.get("/quatro_product/p_id/:product_id", db_product.getProductById);
-app.get("/quatro_product/p_name/:product_name", db_product.getProductByName);
-app.get(
-  "/quatro_product/p_category/:category",
-  db_product.getProductByCategory
-);
-// app.get("/quatro_product/p_/:quantity", db_product.getProductQuantity);
+app.delete("/quatro_product/delete", db_product.deleteProductAPI);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);

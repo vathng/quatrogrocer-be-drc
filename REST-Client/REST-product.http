@@ -1,0 +1,15 @@
+GET http://localhost:3000/quatro_product/get
+
+
+###
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Kicap Pedas Manis Mahsuri",
+    "product_description" : "Penambah Selera",
+    "product_category": "Soy Sauce",
+    "product_price": "RM6.00",
+    "product_quantity": "25",
+    "product_image": "https://eborong.com.my/wp-content/uploads/2019/03/mahsuri_kicap_manis_pedas_410ml.jpg"
+}

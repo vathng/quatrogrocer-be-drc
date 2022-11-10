@@ -1,0 +1,52 @@
+# Get User
+GET http://localhost:3000/quatro_user
+
+### 
+GET http://localhost:3000/quatro_user/John/Doe
+
+### 
+POST http://localhost:3000/quatro_user/login
+Content-Type: application/json
+
+{
+    "email":"test3@test.com",
+    "password":"test1234"
+}
+### 
+POST http://localhost:3000/quatro_user/search
+Content-Type: application/json
+
+{
+    "first_name":"John",
+    "last_name":"Wong"
+}
+
+###
+POST http://localhost:3000/quatro_user/create
+Content-Type: application/json
+
+{
+    "email":"test3@test.com",
+    "password":"test1234"
+}
+
+###
+POST http://localhost:3000/quatro_user/update
+Content-Type: application/json
+
+{   
+    "first_name": "Marianne",
+    "last_name": "Wong",
+    "date_of_birth": "2000-02-03",
+    "phone_number" : "0192345442",
+    "email":"mei7w@labuan.com",
+    "password":"",
+    "user_id" : 4
+}
+###
+DELETE  http://localhost:3000/quatro_user/delete
+Content-Type: application/json
+
+{
+    "user_id":2
+}
