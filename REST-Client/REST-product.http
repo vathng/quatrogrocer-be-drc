@@ -6,10 +6,48 @@ POST http://localhost:3000/quatro_product/create
 Content-Type: application/json
 
 {
-    "product_name":"Kicap Pedas Manis Mahsuri",
-    "product_description" : "Penambah Selera",
-    "product_category": "Soy Sauce",
-    "product_price": "RM6.00",
-    "product_quantity": "25",
-    "product_image": "https://eborong.com.my/wp-content/uploads/2019/03/mahsuri_kicap_manis_pedas_410ml.jpg"
+    "product_name":"Ayam Kampung",
+    "product_description" : "Ayam ternakan kampung Janda Baik",
+    "product_category": "Raw Materials",
+    "product_price": "RM16.00 per KG",
+    "product_quantity": "11",
+    "product_link": "https://cdn1-production-images-kly.akamaized.net/QzTTZqGXM5PqL9REm9okFMn-r20=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/2702436/original/016317800_1547270165-shutterstock_314020379.jpg"
+}
+
+###
+POST http://localhost:3000/quatro_product/update_details
+Content-Type: application/json
+
+{
+    "product_name":"Ayam Kampung",
+    "product_description" : "Ayam ternakan kampung Janda Baik",
+    "product_category": "Raw Materials",
+    "product_link": "https://cdn1-production-images-kly.akamaized.net/QzTTZqGXM5PqL9REm9okFMn-r20=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/2702436/original/016317800_1547270165-shutterstock_314020379.jpg",
+    "product_id" : "17"
+}
+
+###
+POST http://localhost:3000/quatro_product/update_price
+Content-Type: application/json
+
+{
+    "product_price": "6.00",
+    "product_id": "3"
+}
+
+###
+POST http://localhost:3000/quatro_product/update_quantity
+Content-Type: application/json
+
+{
+    "product_quantity": "11",
+    "product_id": "3"
+}
+
+###
+DELETE http://localhost:3000/quatro_product/delete
+Content-Type: application/json
+
+{
+    "product_id" : "9"
 }
