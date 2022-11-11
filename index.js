@@ -2,13 +2,13 @@ const express = require("express");
 const bodyParser = require("body-parser");
 var cors = require("cors");
 const app = express();
-const port = 3000;
+const port = 3001;
 const db_user = require("./controller/user_query");
 const db_product = require("./controller/product_query");
 
 app.use(
   cors({
-    origin: "http://localhost:3001",
+    origin: "http://localhost:3000",
   })
 );
 
