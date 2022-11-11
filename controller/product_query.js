@@ -15,7 +15,6 @@ const getAllProduct = async function () {
   let resultQuery = await pool.query(query);
 
   let GetProduct = resultQuery.rows;
-  console.log(GetProduct);
   return GetProduct;
 };
 
