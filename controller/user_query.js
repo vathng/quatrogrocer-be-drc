@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const { Query } = require("pg");
+const jwt = require("jsonwebtoken");
 
 const Pool = require("pg").Pool;
 const pool = new Pool({
@@ -12,7 +13,7 @@ const pool = new Pool({
 
 const searchUser = async function (first_name, last_name) {
   let query = {
-    text: "select * from quatro_user where first_name=$1 and last_name=$2",
+    text: "select first_name, last_name from quatro_user where first_name=$1 and last_name=$2",
     values: [first_name, last_name],
   };
 
@@ -36,9 +37,15 @@ const searchUserAPI = async (request, response) => {
   }
 };
 
+const createToken = (user_id) => {
+  return jwt.sign({ user_id: user_id }, process.env.SECRET, {
+    expiresIn: "1d",
+  });
+};
+
 const loginUser = async function (email, password) {
   let query = {
-    text: "select * from quatro_user where email=$1",
+    text: "select email, password from quatro_user where email=$1",
     values: [email],
   };
 
@@ -49,7 +56,6 @@ const loginUser = async function (email, password) {
     throw Error("Email doesnt exist");
   }
 
-  console.log(user);
   let validPassword = await bcrypt.compare(password, user[0]["password"]);
 
   if (!validPassword) {
@@ -62,7 +68,8 @@ const loginAPI = async (request, response) => {
   const { email, password } = request.body;
   try {
     let user = await loginUser(email, password);
-    response.status(200).json({ result: user });
+    let userJwt = createToken(user.user_id);
+    response.status(200).json({ result: email, userJwt });
   } catch (error) {
     response.status(404).json({ error: error.message });
   }
@@ -70,7 +77,7 @@ const loginAPI = async (request, response) => {
 
 const createUser = async function (email, password) {
   let query_1 = {
-    text: "select * from quatro_user where email=$1",
+    text: "select email, password from quatro_user where email=$1",
     values: [email],
   };
 
@@ -99,7 +106,9 @@ const createUserAPI = async (request, response) => {
   const { email, password } = request.body;
   try {
     let newUser = await createUser(email, password);
-    response.status(200).json({ result: newUser });
+    const newUserJwt = createToken(newUser.user_id);
+
+    response.status(200).json({ result: email, newUserJwt });
   } catch (error) {
     console.log("error:", error);
     response.status(404).json({ error: error.message });
@@ -165,9 +174,10 @@ const updateUserAPI = async (request, response) => {
       password,
       user_id
     );
+    const updateUserJwt = createToken(updateUserDB.user_id);
     response
       .status(200)
-      .json({ result: updateUserDB, message: "User updated" });
+      .json({ result: email, updateUserJwt, message: "User updated" });
   } catch (error) {
     console.log("error:", error);
     response.status(404).json({ error: error.message });

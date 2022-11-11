@@ -6,6 +6,8 @@ const port = 3000;
 const db_user = require("./controller/user_query");
 const db_product = require("./controller/product_query");
 const db_address = require("./controller/address_query");
+const db_auth = require("./middleware/requireAuth");
+require("dotenv").config();
 
 app.use(
   cors({
@@ -25,8 +27,11 @@ app.get("/", (request, response) => {
 });
 
 //User
+// app.use(db_auth);
 app.post("/quatro_user/login", db_user.loginAPI);
+// app.use(db_auth);
 app.post("/quatro_user/create", db_user.createUserAPI);
+// app.use(db_auth);
 app.post("/quatro_user/search", db_user.searchUserAPI);
 app.post("/quatro_user/update", db_user.updateUserAPI);
 app.delete("/quatro_user/delete", db_user.deleteUserAPI);
@@ -45,6 +50,7 @@ app.get("/quatro_address/get", db_address.searchAddressAPI);
 app.post("/quatro_address/create", db_address.createAddressAPI);
 app.post("/quatro_address/update_details", db_address.updateAddressDetailsAPI);
 app.delete("/quatro_address/delete", db_address.deleteAddressAPI);
+app.use(db_auth);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
