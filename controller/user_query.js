@@ -1,14 +1,14 @@
 const bcrypt = require("bcrypt");
 const { Query } = require("pg");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const Pool = require("pg").Pool;
 const pool = new Pool({
-  user: "postgres",
-  host: "postgres",
-  database: "my_db",
-  password: "postgres", //find how to hide/encrypt the password
-  port: 5432,
+  user: `${process.env.PGUSERNAME}`,
+  database: `${process.env.DATABASE_URL}`,
+  password: `${process.env.PGPASSWORD}`,
+  port: process.env.PGPORT,
 });
 
 const searchUser = async function (first_name, last_name) {
@@ -28,6 +28,7 @@ const searchUser = async function (first_name, last_name) {
 
 const searchUserAPI = async (request, response) => {
   const { first_name, last_name } = request.body;
+  console.log(process.env.PGUSERNAME);
 
   try {
     let fl_name = await searchUser(first_name, last_name);

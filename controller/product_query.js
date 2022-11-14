@@ -1,10 +1,11 @@
+require("dotenv").config();
+
 const Pool = require("pg").Pool;
 const pool = new Pool({
-  user: "postgres",
-  host: "postgres",
-  database: "my_db",
-  password: "postgres", //find how to hide/encrypt the password
-  port: 5432,
+  user: `${process.env.PGUSERNAME}`,
+  database: `${process.env.DATABASE_URL}`,
+  password: `${process.env.PGPASSWORD}`,
+  port: process.env.PGPORT,
 });
 
 const getAllProduct = async function () {

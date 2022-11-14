@@ -9,12 +9,12 @@ POST http://localhost:3000/quatro_user/login
 Content-Type: application/json
 
 {
-    "email":"test3@test.com",
-    "password":"test1234"
+    "email":"cleement@test.com",
+    "password":"dogshit"
 }
 ### 
 POST http://localhost:3000/quatro_user/search
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJpYXQiOjE2NjgxNTM5NTMsImV4cCI6MTY2ODI0MDM1M30.MBZLFJNZEVB-eiRHN-e1dNruAqMOjDGZ4I7AKEcd06E
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJpYXQiOjE2NjgxNTM5OTIsImV4cCI6MTY2ODI0MDM5Mn0.-AivlL2yWRmf8HbmnxP2dRrcN6f4g_XtYdz06tyWshs
 Content-Type: application/json
 
 {
@@ -27,7 +27,7 @@ POST http://localhost:3000/quatro_user/create
 Content-Type: application/json
 
 { 
-    "email":"test69@test.com",
+    "email":"newuser@test.com",
     "password":"test1234"
 }
 
