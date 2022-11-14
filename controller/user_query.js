@@ -130,6 +130,18 @@ const updateUser = async function (
   if (isNaN(phone_number)) {
     throw error("Invalid phone number");
   }
+  let query_1 = {
+    text: "select email from quatro_user where user_id=$1",
+    values: [user_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let user = resultQuery_1.rows;
+
+  if (user.length === 0) {
+    throw Error("User doesnt exist");
+  }
+
   let query = {
     text: `update quatro_user set first_name = coalesce(nullif($1,''), first_name),
            last_name = coalesce(nullif($2,''), last_name),
@@ -151,6 +163,10 @@ const updateUser = async function (
 
   let resultQuery = await pool.query(query);
   let userUpdate = resultQuery.rows;
+
+  // if (!userUpdate?.user_id) {
+  //   throw Error("User doesnt exist");
+  // }
 
   return userUpdate[0];
 };
@@ -175,7 +191,7 @@ const updateUserAPI = async (request, response) => {
       password,
       user_id
     );
-    const updateUserJwt = createToken(updateUserDB.user_id);
+    const updateUserJwt = createToken(updateUserDB?.user_id);
     response
       .status(200)
       .json({ result: email, updateUserJwt, message: "User updated" });

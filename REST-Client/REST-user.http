@@ -9,8 +9,8 @@ POST http://localhost:3000/quatro_user/login
 Content-Type: application/json
 
 {
-    "email":"cleement@test.com",
-    "password":"dogshit"
+    "email":"newuser@test.com",
+    "password":"test1234"
 }
 ### 
 POST http://localhost:3000/quatro_user/search
@@ -33,16 +33,17 @@ Content-Type: application/json
 
 ###
 POST http://localhost:3000/quatro_user/update
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2Njg0MTE2ODksImV4cCI6MTY2ODQ5ODA4OX0.QLgmftQzLcNDWqNvuAidz7ZbgqhrUqD3Rr7ZTuXJamo
 Content-Type: application/json
 
 {   
-    "first_name": "Marianne",
-    "last_name": "Wong",
-    "date_of_birth": "2000-02-03",
+    "first_name": "Cheng",
+    "last_name": "Ng",
+    "date_of_birth": "2000-08-02",
     "phone_number" : "0192345442",
-    "email":"mei7w@labuan.com",
+    "email":"chw@labuan.com",
     "password":"",
-    "user_id" : 4
+    "user_id" : 6
 }
 ###
 DELETE  http://localhost:3000/quatro_user/delete

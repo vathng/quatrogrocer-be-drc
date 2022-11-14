@@ -30,7 +30,7 @@ app.get("/", (request, response) => {
 app.post("/quatro_user/login", db_user.loginAPI);
 app.post("/quatro_user/create", db_user.createUserAPI);
 app.post("/quatro_user/search", db_user.searchUserAPI);
-app.post("/quatro_user/update", db_auth, db_user.updateUserAPI);
+app.post("/quatro_user/update", db_user.updateUserAPI);
 app.delete("/quatro_user/delete", db_auth, db_user.deleteUserAPI);
 //Product
 app.get("/quatro_product/get", db_product.searchProductAPI);
