@@ -37,11 +37,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2Njg0MTE2O
 Content-Type: application/json
 
 {   
-    "first_name": "Cheng",
-    "last_name": "Ng",
+    "first_name": "Ch",
+    "last_name": "Nooo",
     "date_of_birth": "2000-08-02",
     "phone_number" : "0192345442",
-    "email":"chw@labuan.com",
+    "email":"oikj@labuan.com",
     "password":"",
     "user_id" : 6
 }
