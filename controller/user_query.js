@@ -109,7 +109,7 @@ const createUserAPI = async (request, response) => {
     let newUser = await createUser(email, password);
     //const newUserJwt = createToken(newUser.user_id);
 
-    response.status(200).json({ result: email });
+    response.status(200).json({ result: email, message: "User Created" });
   } catch (error) {
     console.log("error:", error);
     response.status(404).json({ error: error.message });
@@ -216,7 +216,7 @@ const deleteUserAPI = async (request, response) => {
   const { user_id } = request.body;
   try {
     let userDelete = await deleteUser(user_id);
-    response.status(200).json({ result: userDelete });
+    response.status(200).json({ result: userDelete, message: "User deleted" });
   } catch (error) {
     console.log("error:", error);
     response.status(404).json({ error: error.message });
