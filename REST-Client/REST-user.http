@@ -9,15 +9,15 @@ POST http://localhost:3001/quatro_user/login
 Content-Type: application/json
 
 {
-    "email":"test3@test.com",
-    "password":"test1234"
+    "email":"meow@meow.com",
+    "password":"meow123"
 }
 ### 
 POST http://localhost:3001/quatro_user/search
 Content-Type: application/json
 
 {
-    "first_name":"John",
+    "first_name":"Marianne",
     "last_name":"Wong"
 }
 
@@ -26,8 +26,8 @@ POST http://localhost:3001/quatro_user/create
 Content-Type: application/json
 
 {
-    "email":"test3@test.com",
-    "password":"test1234"
+    "email":"meow@meow.com",
+    "password":"meow1234"
 }
 
 ###

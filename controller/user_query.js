@@ -49,12 +49,13 @@ const loginUser = async function (email, password) {
     throw Error("Email doesnt exist");
   }
 
-  console.log(user);
   let validPassword = await bcrypt.compare(password, user[0]["password"]);
 
   if (!validPassword) {
     throw Error("Invalid Password");
   }
+  console.log(user);
+
   return user[0];
 };
 
