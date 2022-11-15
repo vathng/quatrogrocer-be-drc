@@ -5,10 +5,10 @@ services:
     networks:
       - backend
     environment:
-      - POSTGRES_PORT=5432
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=my_db
+      - POSTGRES_PORT=${PGPORT}
+      - POSTGRES_USER=${PGUSERNAME}
+      - POSTGRES_PASSWORD=${PGPASSWORD}
+      - POSTGRES_DB=${DATABASE_URL}
     depends_on:
       - postgres
     volumes:
@@ -24,10 +24,10 @@ services:
     ports:
       - 5434:5432
     environment:
-      - POSTGRES_PORT=5432
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=my_db
+      - POSTGRES_PORT=${PGPORT}
+      - POSTGRES_USER=${PGUSERNAME}
+      - POSTGRES_PASSWORD=${PGPASSWORD}
+      - POSTGRES_DB=${DATABASE_URL}
     networks:
       - backend
     volumes:

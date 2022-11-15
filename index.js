@@ -6,6 +6,8 @@ const port = 3001;
 const db_user = require("./controller/user_query");
 const db_product = require("./controller/product_query");
 const db_address = require("./controller/address_query");
+const db_auth = require("./middleware/requireAuth");
+require("dotenv").config();
 
 app.use(
   cors({

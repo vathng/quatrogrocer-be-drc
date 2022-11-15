@@ -1,18 +1,19 @@
 const bcrypt = require("bcrypt");
 const { Query } = require("pg");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const Pool = require("pg").Pool;
 const pool = new Pool({
-  user: "postgres",
-  host: "postgres",
-  database: "my_db",
-  password: "postgres", //find how to hide/encrypt the password
-  port: 5432,
+  user: `${process.env.PGUSERNAME}`,
+  database: `${process.env.DATABASE_URL}`,
+  password: `${process.env.PGPASSWORD}`,
+  port: process.env.PGPORT,
 });
 
 const searchUser = async function (first_name, last_name) {
   let query = {
-    text: "select * from quatro_user where first_name=$1 and last_name=$2",
+    text: "select first_name, last_name from quatro_user where first_name=$1 and last_name=$2",
     values: [first_name, last_name],
   };
 
@@ -27,6 +28,7 @@ const searchUser = async function (first_name, last_name) {
 
 const searchUserAPI = async (request, response) => {
   const { first_name, last_name } = request.body;
+  console.log(process.env.PGUSERNAME);
 
   try {
     let fl_name = await searchUser(first_name, last_name);
@@ -36,9 +38,15 @@ const searchUserAPI = async (request, response) => {
   }
 };
 
+const createToken = (user_id) => {
+  return jwt.sign({ user_id: user_id }, process.env.SECRET, {
+    expiresIn: "1d",
+  });
+};
+
 const loginUser = async function (email, password) {
   let query = {
-    text: "select * from quatro_user where email=$1",
+    text: "select email, password from quatro_user where email=$1",
     values: [email],
   };
 
@@ -63,7 +71,8 @@ const loginAPI = async (request, response) => {
   const { email, password } = request.body;
   try {
     let user = await loginUser(email, password);
-    response.status(200).json({ result: user });
+    let userJwt = createToken(user.user_id);
+    response.status(200).json({ result: email, userJwt });
   } catch (error) {
     response.status(404).json({ error: error.message });
   }
@@ -71,7 +80,7 @@ const loginAPI = async (request, response) => {
 
 const createUser = async function (email, password) {
   let query_1 = {
-    text: "select * from quatro_user where email=$1",
+    text: "select email, password from quatro_user where email=$1",
     values: [email],
   };
 
@@ -100,7 +109,9 @@ const createUserAPI = async (request, response) => {
   const { email, password } = request.body;
   try {
     let newUser = await createUser(email, password);
-    response.status(200).json({ result: newUser });
+    //const newUserJwt = createToken(newUser.user_id);
+
+    response.status(200).json({ result: email, message: "User Created" });
   } catch (error) {
     console.log("error:", error);
     response.status(404).json({ error: error.message });
@@ -121,6 +132,18 @@ const updateUser = async function (
   if (isNaN(phone_number)) {
     throw error("Invalid phone number");
   }
+  let query_1 = {
+    text: "select email from quatro_user where user_id=$1",
+    values: [user_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let user = resultQuery_1.rows;
+
+  if (user.length === 0) {
+    throw Error("User doesnt exist");
+  }
+
   let query = {
     text: `update quatro_user set first_name = coalesce(nullif($1,''), first_name),
            last_name = coalesce(nullif($2,''), last_name),
@@ -142,6 +165,10 @@ const updateUser = async function (
 
   let resultQuery = await pool.query(query);
   let userUpdate = resultQuery.rows;
+
+  // if (!userUpdate?.user_id) {
+  //   throw Error("User doesnt exist");
+  // }
 
   return userUpdate[0];
 };
@@ -166,9 +193,10 @@ const updateUserAPI = async (request, response) => {
       password,
       user_id
     );
+    const updateUserJwt = createToken(updateUserDB?.user_id);
     response
       .status(200)
-      .json({ result: updateUserDB, message: "User updated" });
+      .json({ result: email, updateUserJwt, message: "User updated" });
   } catch (error) {
     console.log("error:", error);
     response.status(404).json({ error: error.message });
@@ -190,7 +218,7 @@ const deleteUserAPI = async (request, response) => {
   const { user_id } = request.body;
   try {
     let userDelete = await deleteUser(user_id);
-    response.status(200).json({ result: userDelete });
+    response.status(200).json({ result: userDelete, message: "User deleted" });
   } catch (error) {
     console.log("error:", error);
     response.status(404).json({ error: error.message });

@@ -31,7 +31,7 @@ POST http://localhost:3001/quatro_product/update_price
 Content-Type: application/json
 
 {
-    "product_price": "6.00",
+    "product_price": "6.20",
     "product_id": "3"
 }
 
