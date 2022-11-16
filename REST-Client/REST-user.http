@@ -46,9 +46,9 @@ Content-Type: application/json
     "user_id" : 6
 }
 ###
-DELETE  http://localhost:3000/quatro_user/delete
+DELETE  http://localhost:3002/quatro_user/delete
 Content-Type: application/json
 
 {
-    "user_id":2
+    "user_id":5
 }

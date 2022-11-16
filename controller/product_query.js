@@ -10,7 +10,7 @@ const pool = new Pool({
 
 const getAllProduct = async function () {
   let query = {
-    text: "select product_name, product_description, product_category, product_price, product_quantity from quatro_product order by product_id asc",
+    text: "select product_name, product_description, product_category, product_price, product_quantity, product_image from quatro_product order by product_id asc",
   };
 
   let resultQuery = await pool.query(query);
@@ -49,7 +49,7 @@ const createProduct = async function (
   }
 
   let query = {
-    text: "insert into quatro_product(product_name, product_description, product_category, product_price, product_quantity, product_link) values($1,$2,$3,$4,$5,$6) returning product_id",
+    text: "insert into quatro_product(product_name, product_description, product_category, product_price, product_quantity, product_image) values($1,$2,$3,$4,$5,$6) returning product_id",
     values: [
       product_name,
       product_description,
@@ -102,17 +102,20 @@ const updateProductDetails = async function (
     text: `update quatro_product set product_name = coalesce(nullif($1,''), product_name),
            product_description = coalesce(nullif($2,''), product_description),
            product_category = coalesce(nullif($3,''), product_category),
-           product_image = coalesce(nullif($4,''), product_link)
+           product_image = coalesce(nullif($4,''), product_image)
            where product_id = $5;`,
     values: [
       product_name,
       product_description,
       product_category,
-      product_link,
       product_id,
       product_image,
     ],
   };
+  let resultQuery = await pool.query(query);
+  let updateProductDetails = resultQuery.rows;
+
+  return updateProductDetails;
 };
 
 const updateProductDetailsAPI = async (request, response) => {
@@ -125,7 +128,7 @@ const updateProductDetailsAPI = async (request, response) => {
   } = request.body;
 
   try {
-    let updateProductDetailsDB = await updateProductDetails(
+    let updateProductDetails = await updateProductDetails(
       product_name,
       product_description,
       product_category,
@@ -135,7 +138,7 @@ const updateProductDetailsAPI = async (request, response) => {
 
     response
       .status(200)
-      .json({ result: updateProductDetailsDB, message: "Product updated" });
+      .json({ result: updateProductDetails, message: "Product updated" });
   } catch (error) {
     console.log("error:", error);
     response.status(404).json({ error: error.message });
