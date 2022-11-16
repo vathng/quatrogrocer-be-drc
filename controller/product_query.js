@@ -102,17 +102,20 @@ const updateProductDetails = async function (
     text: `update quatro_product set product_name = coalesce(nullif($1,''), product_name),
            product_description = coalesce(nullif($2,''), product_description),
            product_category = coalesce(nullif($3,''), product_category),
-           product_image = coalesce(nullif($4,''), product_link)
+           product_image = coalesce(nullif($4,''), product_image)
            where product_id = $5;`,
     values: [
       product_name,
       product_description,
       product_category,
-      product_link,
-      product_id,
       product_image,
+      product_id,
     ],
   };
+  let resultQuery = await pool.query(query);
+  let updateProductDetails = resultQuery.rows;
+
+  return updateProductDetails;
 };
 
 const updateProductDetailsAPI = async (request, response) => {
@@ -125,7 +128,7 @@ const updateProductDetailsAPI = async (request, response) => {
   } = request.body;
 
   try {
-    let updateProductDetailsDB = await updateProductDetails(
+    let updateProductDetails = await updateProductDetails(
       product_name,
       product_description,
       product_category,
@@ -135,7 +138,7 @@ const updateProductDetailsAPI = async (request, response) => {
 
     response
       .status(200)
-      .json({ result: updateProductDetailsDB, message: "Product updated" });
+      .json({ result: updateProductDetails, message: "Product updated" });
   } catch (error) {
     console.log("error:", error);
     response.status(404).json({ error: error.message });

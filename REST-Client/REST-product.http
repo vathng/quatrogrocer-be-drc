@@ -11,8 +11,24 @@ Content-Type: application/json
     "product_category": "Raw Materials",
     "product_price": "16.00",
     "product_quantity": "11",
+}
+{
+    "product_name":"Mineral Water",
+    "product_description" : "Sky juice",
+    "product_category": "Drinks",
+    "product_price": 2.50,
+    "product_quantity": "100",
     "product_image": "https://cdn1-production-images-kly.akamaized.net/QzTTZqGXM5PqL9REm9okFMn-r20=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/2702436/original/016317800_1547270165-shutterstock_314020379.jpg"
 }
+{
+    "product_name":"Tropicana Apple Juice 320ml",
+    "product_description":"Apple Juice to your daily routine for a delicious and convenient source of vitamin C. Refreshing apple juice with a deliciously sweet taste",
+    "product_category":"Juice",
+    "product_price": 3.45,
+    "product_quantity":"100",
+    "product_image":"https://m.media-amazon.com/images/I/61cPgyyfqEL._SL1500_.jpg "
+}
+
 
 ###
 POST http://localhost:3001/quatro_product/create
@@ -35,7 +51,7 @@ Content-Type: application/json
     "product_name":"Ayam Kampung",
     "product_description" : "Ayam ternakan kampung Janda Baik",
     "product_category": "Raw Materials",
-    "product_link": "https://cdn1-production-images-kly.akamaized.net/QzTTZqGXM5PqL9REm9okFMn-r20=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/2702436/original/016317800_1547270165-shutterstock_314020379.jpg",
+    "product_image": "https://cdn1-production-images-kly.akamaized.net/QzTTZqGXM5PqL9REm9okFMn-r20=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/2702436/original/016317800_1547270165-shutterstock_314020379.jpg",
     "product_id" : "17"
 }
 
@@ -53,8 +69,8 @@ POST http://localhost:3001/quatro_product/update_quantity
 Content-Type: application/json
 
 {
-    "product_quantity": "11",
-    "product_id": "3"
+    "product_quantity": "48",
+    "product_id": "1"
 }
 
 ###
@@ -62,5 +78,5 @@ DELETE http://localhost:3001/quatro_product/delete
 Content-Type: application/json
 
 {
-    "product_id" : "9"
+    "product_id" : "2"
 }

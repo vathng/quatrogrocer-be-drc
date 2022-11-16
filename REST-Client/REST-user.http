@@ -35,18 +35,18 @@ POST http://localhost:3001/quatro_user/update
 Content-Type: application/json
 
 {   
-    "first_name": "Ch",
-    "last_name": "Nooo",
-    "date_of_birth": "2000-08-02",
-    "phone_number" : "0192345442",
-    "email":"oikj@labuan.com",
+    "first_name": "Cheng",
+    "last_name": "Ng",
+    "date_of_birth": "1999-07-03",
+    "phone_number" : "0149728336",
+    "email":"vathng99@labuan.com",
     "password":"",
-    "user_id" : 6
+    "user_id" : 2
 }
 ###
 DELETE  http://localhost:3001/quatro_user/delete
 Content-Type: application/json
 
 {
-    "user_id":2
+    "user_id":5
 }
