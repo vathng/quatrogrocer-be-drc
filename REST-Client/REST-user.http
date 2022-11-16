@@ -9,12 +9,11 @@ POST http://localhost:3000/quatro_user/login
 Content-Type: application/json
 
 {
-    "email":"newuser@test.com",
+    "email":"vathng@test.com",
     "password":"test1234"
 }
 ### 
 POST http://localhost:3000/quatro_user/search
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJpYXQiOjE2NjgxNTM5OTIsImV4cCI6MTY2ODI0MDM5Mn0.-AivlL2yWRmf8HbmnxP2dRrcN6f4g_XtYdz06tyWshs
 Content-Type: application/json
 
 {
@@ -27,7 +26,7 @@ POST http://localhost:3000/quatro_user/create
 Content-Type: application/json
 
 { 
-    "email":"newuser@test.com",
+    "email":"vathng@test.com",
     "password":"test1234"
 }
 
@@ -37,13 +36,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2Njg0MTE2O
 Content-Type: application/json
 
 {   
-    "first_name": "Ch",
-    "last_name": "Nooo",
-    "date_of_birth": "2000-08-02",
-    "phone_number" : "0192345442",
-    "email":"oikj@labuan.com",
+    "first_name": "Cheng",
+    "last_name": "Ng",
+    "date_of_birth": "1999-07-03",
+    "phone_number" : "0149728336",
+    "email":"vathng99@labuan.com",
     "password":"",
-    "user_id" : 6
+    "user_id" : 2
 }
 ###
 DELETE  http://localhost:3002/quatro_user/delete

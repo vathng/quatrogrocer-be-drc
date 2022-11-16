@@ -108,8 +108,8 @@ const updateProductDetails = async function (
       product_name,
       product_description,
       product_category,
-      product_id,
       product_image,
+      product_id,
     ],
   };
   let resultQuery = await pool.query(query);
