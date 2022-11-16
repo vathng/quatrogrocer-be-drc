@@ -32,6 +32,7 @@ app.post("/quatro_user/create", db_user.createUserAPI);
 app.post("/quatro_user/search", db_user.searchUserAPI);
 app.post("/quatro_user/update", db_user.updateUserAPI);
 app.delete("/quatro_user/delete", db_user.deleteUserAPI);
+app.get("/quatro_user/getpassword", db_user.getPasswordAPI);
 //Product
 app.get("/quatro_product/get", db_product.searchProductAPI);
 app.post("/quatro_product/create", db_product.createProductAPI);
