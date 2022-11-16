@@ -1,0 +1,417 @@
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Mineral Water",
+    "product_description" : "Sky juice",
+    "product_category": "Drinks",
+    "product_price": 2.50,
+    "product_quantity": "100",
+    "product_image": "https://cdn1-production-images-kly.akamaized.net/QzTTZqGXM5PqL9REm9okFMn-r20=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/2702436/original/016317800_1547270165-shutterstock_314020379.jpg"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Tropicana Apple Juice 320ml",
+    "product_description":"Apple Juice to your daily routine for a delicious and convenient source of vitamin C. Refreshing apple juice with a deliciously sweet taste",
+    "product_category":"Juice",
+    "product_price": 3.45,
+    "product_quantity":"100",
+    "product_image":"https://m.media-amazon.com/images/I/61cPgyyfqEL._SL1500_.jpg "
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"My Mochi Ice Cream Cookies & Cream 6S 180G ",
+    "product_description":"Edible method: Defrosted ready to eat(Do not repeatedly defrost to affect the quality, 1% recommended half defrost flavour best) KEEP FROZEN AT -18°C OR BELOW",
+    "product_category":"Bread & Pastry",
+    "product_price": 10.99,
+    "product_quantity":"100",
+    "product_image":"https://www.mymochi.com/wp-content/uploads/2018/12/Smores-110cals_no-shadow_400.png "
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Strawberry Danish Bread 4 Pcs ",
+    "product_description":"This the BEST strawberry danish. It uses frozen puff pastry with fluffy cream cheese filling. On top are fresh strawberries that are baked. To give this pastry a fresh taste, it has a lemon icing drizzle.",
+    "product_category":"Bread & Pastry",
+    "product_price": 4.99,
+    "product_quantity":"100",
+    "product_image":"https://www.sugarsaltmagic.com/wp-content/uploads/2022/03/Cream-Cheese-Strawberry-Danish-3FEAT-500x500.jpg "
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Custard Danish Bread 4Pcs ",
+    "product_description":"A well-known favourite, the custard Danish pastry, are buttery, flaky pastry circles filled with custard and jam or apricots. ",
+    "product_category":"Bread & Pastry",
+    "product_price": 4.99,
+    "product_quantity":"100",
+    "product_image": "https://i.pinimg.com/736x/fc/78/bc/fc78bcc62819f46c153852467e6840e0.jpg"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Gardenia Waffles- Chocolate ",
+    "product_description":"Contain 1 piece of chocolate flavour waffle 42g ",
+    "product_category":"Bread & Pastry",
+    "product_price": 1.50,
+    "product_quantity":"100",
+    "product_image": "https://cdn.shopify.com/s/files/1/0434/5338/2808/products/048244-1-1_8bbb9a20-6c1c-41b6-9e9a-388a128fa196.jpg?v=1665804412"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Gardenia Waffles - Vanilla",
+    "product_description":"Contain 1 piece of vanilla waffle 42g",
+    "product_category":"Bread & Pastry",
+    "product_price": 1.50,
+    "product_quantity":"100",
+    "product_image": "https://lzd-img-global.slatic.net/g/p/5f501e1a8d75bbe83818e5e8211dacab.jpg_720x720q80.jpg_.webp"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Gardenia Waffles- Orange",
+    "product_description":"Contain 1 piece of orange waffle 42g ",
+    "product_category":"Bread & Pastry",
+    "product_price": 1.50,
+    "product_quantity":"100",
+    "product_image": "https://cdn.happyfresh.com/t/s_large,c_fit/spree/images/attachments/9df7a15a097e94da9d9bdba7a829117e2fb4263e-original.jpg"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Premio Italian Chicken Sausage 120G",
+    "product_description":"What’s better than Italian chicken sausage? Premio Italian Chicken Sausage with Cheese & Garlic, of course! This sausage, made with flavorful Romano and Parmesan cheeses and garlic, packs enough flavor to be put on a roll and savored all by itself. It could be a tasty addition to your next pasta dish or the star of meal centered on its mouth-watering flavors. Either way, this delicious sausage is ready to be the star of your next meal today! Find the Premio retailer closest to you, or order online now.",
+    "product_category":"Meat",
+    "product_price": 5.99,
+    "product_quantity":"100",
+    "product_image": "https://www.premiofoods.com/content/uploads/2017/04/italian-chicken-sausage.jpg"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Sweet Italian Chicken Sausage With Kale",
+    "product_description":"We thought adding a superfood like kale to our chicken sausage was a super idea — so we did. Premio Sweet Italian Chicken Sausage with Kale has significantly less fat than USDA data for pork and beef sausage, plus the endless list of benefits from kale. If you’re looking for a sausage that will bring another level of taste without adding extra fat, your search is over. Order now!",
+    "product_category":"Meat",
+    "product_price": 8.99,
+    "product_quantity":"100",
+    "product_image": "https://www.premiofoods.com/content/uploads/2017/04/Sweet-Italian-Chicken-Sausage-wKale.jpg"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Sweet & Hot Italian Sausage",
+    "product_description":"What’s better than getting two in one? Nothing we can think of. That’s why we put two of our most famous Italian sausages in one convenient package — the Premio Hot/Sweet Combo Pack. Now you don’t have to choose between hot and sweet because you can have them both in one.Satisfy the heat lovers and the sweet lovers at your table by using our tasty, convenient hot/sweet combo pack to make an unforgettable meal today.",
+    "product_category":"Meat",
+    "product_price": 8.99,
+    "product_quantity":"100",
+    "product_image": "https://www.premiofoods.com/content/uploads/2017/04/Sweet-Italian-Chicken-Sausage.jpg"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Dragon Fruit 1pcs",
+    "product_description":"Dragon fruit is a food that grows on a climbing cactus called hylocereus, which you'll find in tropical regions around the world. It’s rich in antioxidants like flavonoids, phenolic acid, and betacyanin. These natural substances protect your cells from damage by free radicals -- molecules that can lead to diseases like cancer and premature aging. Sweet and tropical flavour, honey jackfruit generally has a better taste when eaten fresh.",
+    "product_category":"Fruit",
+    "product_price": 5.50,
+    "product_quantity":"100",
+    "product_image": "https://dusun.b-cdn.net/wp-content/uploads/2021/09/3-count-image-of-dragon-fruit-white-fruit-28658616893484_600x600.jpg"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Nangka Madu/Honey Jack 350g",
+    "product_description":"Sweet and tropical flavour, honey jackfruit generally has a better taste when eaten fresh.",
+    "product_category":"Fruit",
+    "product_price": 6.59,
+    "product_quantity":"100",
+    "product_image": "https://810freshmart.com/wp-content/uploads/2020/10/Limpek-honey-jackfruit.gif"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Pineapple Sarawak 1pcs",
+    "product_description":"Supersweet. Rich of vitamin C. Juicy and tasty.",
+    "product_category":"Fruit",
+    "product_price": 6.59,
+    "product_quantity":"100",
+    "product_image": "http://www.kedaiku.nas.my/image/cache/catalog/Kedai%20Runcit/Produk/Fresh%20Food/Fresh%20Fruit/Tropical%20Fruits/Nanas%20Sarawak%20M%201%20Piece-500x500.jpg"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Banana Mas-KG",
+    "product_description":"Pisang Mas bananas are an excellent source of fiber to regulate the digestive tract, vitamin C to strengthen the immune system, and potassium to balance fluid levels within the body.",
+    "product_category":"Fruit",
+    "product_price": 5.69,
+    "product_quantity":"100",
+    "product_image": "https://marketplace.seldec.my/images/thumbnails/1320/1080/detailed/35/berangan.jpeg"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Gourmessa Beef Pastrami 100G",
+    "product_description":"Gourmessa Beef Pastrami is either made from a cut called the deckle, a lean, wide, firm shoulder cut, or the navel, a smaller and juicier section right below the ribs. The distinctive flavors of pastrami are smoke, spicy black pepper, and the sweet citrus tang of coriander.",
+    "product_category":"Meat",
+    "product_price": 9.99,
+    "product_quantity":"100",
+    "product_image": "https://www.checkers.co.za/medias/10536530EA-20190726-Media-checkers515Wx515H.webp?context=bWFzdGVyfGltYWdlc3wyODg4NHxpbWFnZS93ZWJwfGltYWdlcy9oYTEvaDFhLzkwMDQzNDc1NTU4NzAud2VicHxlODU4OWQ3Y2M2M2MwNGVhOGQzMjc4Y2M1Zjc1NTkxYjY0NjcxMjE4NTAzYjFkMTEzNzllYjEyNzc1ODM0YWNh"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Gourmessa Beef Salami 100G",
+    "product_description":"Made from premium raw ingredients under supervised and hygienic conditions, Gourmessa Beef Salami guarantees high quality taste in every bite.",
+    "product_category":"Meat",
+    "product_price": 10.99,
+    "product_quantity":"100",
+    "product_image": "https://www.desasegar.com.my/storage/media/filemanager/frozen%20food/Gourmessa%20Beef%20Salami%20100g.png"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Pawada Corned Beef 150G",
+    "product_description":"Beef,Starch,Salt,Sugar,Monosodium Glutamate (E621),Sodium Nitrite (E250).",
+    "product_category":"Meat",
+    "product_price": 9.49,
+    "product_quantity":"100",
+    "product_image": "https://www.halalfoodmaster.com/images/detailed/3/Untitled_design_zy9w-kj.png"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Chicken Thigh 1KG",
+    "product_description":"Aqina Chicken Thigh, the top portion of the leg above the knee joint that is connected to the body of the chicken. It is a good source of lean protein.",
+    "product_category":"Meat",
+    "product_price": 10.50,
+    "product_quantity":"100",
+    "product_image": "https://hearty.com.my/wp-content/uploads/2021/05/C007.jpg"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Chicken Wing 1KG",
+    "product_description":"Aqina Chicken Wing. Perfect for spicy Asian chicken recipe.",
+    "product_category":"Meat",
+    "product_price": 17.90,
+    "product_quantity":"100",
+    "product_image": "https://cdn.store-assets.com/s/377840/i/17108336.jpeg"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Chicken Drumstick 1KG",
+    "product_description":"Aqina Chicken Drumstick. Perfect for spicy Asian chicken recipe.",
+    "product_category":"Meat",
+    "product_price": 17.90,
+    "product_quantity":"100",
+    "product_image": "https://smina.com.mt/wp-content/uploads/2015/11/chicken-drumsticks.jpg"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Lively Raspberry Lemon Balm Tea 450ML",
+    "product_description":"Calm with the wonder of lemon balm. Known as the 'Elixir of Life', the lemon balm herb has been consumed by many cultures over the ages for the relaxing effects of its refreshing citrusy notes. 100% recyclable.",
+    "product_category":"Beverage",
+    "product_price": 3.50,
+    "product_quantity":"100",
+    "product_image": "https://www.nestle.com.my/sites/g/files/pydnoa251/files/lively-tea-calm-thumb.jpg"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"FN Seasons Ice Lemon Tea 1L",
+    "product_description":"Sedimentation and colour change may occur due to natural ingredients used. Water,Sugar,Citric Acid,Flavourings,Black Tea Extract (contains Tea Polyphenols* 28mg/ 100ml Seasons Ice Lemon Tea),Ascorbic Acid,Lemon Juice,Naturally contains Antioxidant*.",
+    "product_category":"Beverage",
+    "product_price": 3.50,
+    "product_quantity":"100",
+    "product_image": "https://d11vuao38tfjvv.cloudfront.net/files/fc4d3bf59470fd659d90901594551d5f3c07be7ba4faace22c7bedadc317b8d6.jpg"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"OYOSHI Original Green Tea 1L",
+    "product_description":"Sedimentation and colour change may occur due to natural ingredients used. Brewed Jasmine Green Tea,Fructose,Ascorbic Acid,Contains Acidity Regulator (INS452) as Permitted Food Conditioner and Permitted Flavouring Substance,Additives derived from Plant and Synthetic Origin.",
+    "product_category":"Beverage",
+    "product_price": 3.99,
+    "product_quantity":"100",
+    "product_image": "https://d11vuao38tfjvv.cloudfront.net/files/fc4d3bf59470fd659d90901594551d5f3c07be7ba4faace22c7bedadc317b8d6.jpg"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Lively Pear Schisandra Tea 450ml",
+    "product_description":"Used as a traditional Chinese remedy over the centuries, Schisandra berries are believed to promote longevity by helping the body to restore its natural balance of Yin and Yang. 100% recyclable.",
+    "product_category":"Beverage",
+    "product_price": 3.50,
+    "product_quantity":"100",
+    "product_image": "https://www.nestle.com.my/sites/g/files/pydnoa251/files/lively-tea-sustain-thumb.jpg"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Lively Orange Guarana Tea 450ml",
+    "product_description":"For centuries, the Guarani tribes of the Amazon have been brewing Guarana into drinks that they believe help to improve focus and sharpen the senses. We often have those moments when we need clear focus ta tackle our day's priority. Lively Tea FOCUS with Guarana extra is an enlivening brew of earthy black tea with tangy orange peel notes. 100% recyclable.",
+    "product_category":"Beverage",
+    "product_price": 3.50,
+    "product_quantity":"100",
+    "product_image": "https://www.nestle.com.my/sites/g/files/pydnoa251/files/lively-tea-focus-thumb.jpg"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Lipton Ice Lemon Tea 1.5L",
+    "product_description":" Enjoy the unlimited refreshment with Lipton Ice Lemon Tea. Its classic iced black tea is infused with the burst of zesty lemon, for an exceptional iced tea taste. Tasty and refreshing.",
+    "product_category":"Beverage",
+    "product_price": 4.80,
+    "product_quantity":"100",
+    "product_image": "https://www.aceminimart.sg/wp-content/uploads/LIPTON-ICE-LEMON-TEA-450ML.jpg"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Lupak Butter In Foil Salted 200G",
+    "product_description":"Lurpak Salted Butter has a fresh, pure buttery taste that is great for cooking and baking. It is also great as spreads since the saltiness does not overpower the true buttery taste of the butter.",
+    "product_category":"Dairy",
+    "product_price": 15.25,
+    "product_quantity":"100",
+    "product_image": "https://www.alaincoop.com/medias/?context=bWFzdGVyfGltYWdlc3wyNzYxM3xpbWFnZS9qcGVnfGg5Yi9oNzIvODc5NjUyNTAwMjc4MnxlNzY4OWMxODkwMGZjYjM0YzdiM2JlOWEwYWExMzQyMzJjMjhkZDQzOWYwNWU2OWQ0Y2IxOTgxMWFkYzc2MmE5"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Tatura Bega Salted Butter 250G",
+    "product_description":"Tatura Salted Butter is a great all-purpose butter and also the perfect companion in the kitchen. It tastes so great on its own, spread on a warm piece of bread. You can always trust its flavour to elevate the taste of all your favourite dishes.",
+    "product_category":"Dairy",
+    "product_price": 16.40,
+    "product_quantity":"100",
+    "product_image": "https://shoplineimg.com/5f43709637bed500306a4248/6048bd4306dbb00011fa487e/800x.webp?source_format=png"
+}
+
+###
+
+POST http://localhost:3000/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"TRU Blue Garlic Butter 150G",
+    "product_description":"Tru Blue Garlic Butter Spread is made with real garlic. It is a tasty garlicy butter spread that can be used on bread or crackers or used in preparing your favourite dishes.Made with real garlicUsed on breads or in preparing your fav.",
+    "product_category":"Dairy",
+    "product_price": 10.30,
+    "product_quantity":"100",
+    "product_image": "https://cdn0.woolworths.media/content/wowproductimages/large/071247_5.jpg"
+}
