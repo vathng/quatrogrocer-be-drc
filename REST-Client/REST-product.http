@@ -23,7 +23,7 @@ Content-Type: application/json
     "product_description" : "Ayam ternakan kampung Janda Baik",
     "product_category": "Raw Materials",
     "product_image": "https://cdn1-production-images-kly.akamaized.net/QzTTZqGXM5PqL9REm9okFMn-r20=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/2702436/original/016317800_1547270165-shutterstock_314020379.jpg",
-    "product_id" : "17"
+    "product_id" : 17
 }
 
 ###
