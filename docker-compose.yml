@@ -9,6 +9,7 @@ services:
       - POSTGRES_USER=${PGUSERNAME}
       - POSTGRES_PASSWORD=${PGPASSWORD}
       - POSTGRES_DB=${DATABASE_URL}
+      - SECRET = ${SECRET}
     depends_on:
       - postgres
     volumes:
