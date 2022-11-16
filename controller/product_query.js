@@ -10,7 +10,7 @@ const pool = new Pool({
 
 const getAllProduct = async function () {
   let query = {
-    text: "select product_name, product_description, product_category, product_price, product_quantity from quatro_product order by product_id asc",
+    text: "select product_name, product_description, product_category, product_price, product_quantity, product_image from quatro_product order by product_id asc",
   };
 
   let resultQuery = await pool.query(query);
@@ -113,8 +113,9 @@ const updateProductDetails = async function (
     ],
   };
   let resultQuery = await pool.query(query);
-  let productUpdate = resultQuery.rows;
-  return productUpdate;
+  let updateProductDetails = resultQuery.rows;
+
+  return updateProductDetails;
 };
 
 const updateProductDetailsAPI = async (request, response) => {
@@ -127,7 +128,7 @@ const updateProductDetailsAPI = async (request, response) => {
   } = request.body;
 
   try {
-    let updateProductDetailsDB = await updateProductDetails(
+    let updateProductDetails = await updateProductDetails(
       product_name,
       product_description,
       product_category,
@@ -137,7 +138,7 @@ const updateProductDetailsAPI = async (request, response) => {
 
     response
       .status(200)
-      .json({ result: updateProductDetailsDB, message: "Product updated" });
+      .json({ result: updateProductDetails, message: "Product updated" });
   } catch (error) {
     console.log("error:", error);
     response.status(404).json({ error: error.message });
