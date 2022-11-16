@@ -2,23 +2,18 @@
 GET http://localhost:3002/quatro_user
 
 ### 
-GET http://localhost:3000/quatro_user/John/Doe
+GET http://localhost:5000/quatro_user/John/Doe
 
 ### 
 POST http://localhost:3002/quatro_user/login
 Content-Type: application/json
 
 {
-<<<<<<< HEAD
     "email":"jdoe@gmail.com",
     "password":"test12345"
-=======
-    "email":"vathng@test.com",
-    "password":"test1234"
->>>>>>> ba80367e229e6a9cf170d264770e4f41b6e96cdd
 }
 ### 
-POST http://localhost:3000/quatro_user/search
+POST http://localhost:5000/quatro_user/search
 Content-Type: application/json
 
 {
@@ -27,7 +22,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/quatro_user/create
+POST http://localhost:5000/quatro_user/create
 Content-Type: application/json
 
 { 
@@ -40,7 +35,6 @@ POST http://localhost:3002/quatro_user/update
 Content-Type: application/json
 
 {   
-<<<<<<< HEAD
     "first_name": "Ch",
     "last_name": "Nooo",
     "date_of_birth": "2000-08-02",
@@ -48,15 +42,6 @@ Content-Type: application/json
     "email":"",
     "password":"",
     "user_id" : 7
-=======
-    "first_name": "Cheng",
-    "last_name": "Ng",
-    "date_of_birth": "1999-07-03",
-    "phone_number" : "0149728336",
-    "email":"vathng99@labuan.com",
-    "password":"",
-    "user_id" : 2
->>>>>>> ba80367e229e6a9cf170d264770e4f41b6e96cdd
 }
 ###
 DELETE  http://localhost:3002/quatro_user/delete

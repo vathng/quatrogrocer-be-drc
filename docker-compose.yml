@@ -15,7 +15,7 @@ services:
     volumes:
       - .:/usr/src/app
     ports:
-      - 3002:3002
+      - 5000:5000
     container_name: quatrogrocernodejs
     # tty: true
     command: ["npm", "run", "dev"]
