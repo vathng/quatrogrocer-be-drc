@@ -107,9 +107,9 @@ const createUserAPI = async (request, response) => {
   const { email, password } = request.body;
   try {
     let newUser = await createUser(email, password);
-    const newUserJwt = createToken(newUser.user_id);
+    //const newUserJwt = createToken(newUser.user_id);
 
-    response.status(200).json({ result: email, newUserJwt });
+    response.status(200).json({ result: email });
   } catch (error) {
     console.log("error:", error);
     response.status(404).json({ error: error.message });

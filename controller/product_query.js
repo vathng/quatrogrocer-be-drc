@@ -34,7 +34,7 @@ const createProduct = async function (
   product_category,
   product_price,
   product_quantity,
-  product_link
+  product_image
 ) {
   let query_1 = {
     text: "select * from quatro_product where product_name=$1",
@@ -49,14 +49,14 @@ const createProduct = async function (
   }
 
   let query = {
-    text: "insert into quatro_product(product_name, product_description, product_category, product_price, product_quantity, product_link) values($1,$2,$3,$4,$5,$6) returning product_id",
+    text: "insert into quatro_product(product_name, product_description, product_category, product_price, product_quantity, product_image) values($1,$2,$3,$4,$5,$6) returning product_id",
     values: [
       product_name,
       product_description,
       product_category,
       product_price,
       product_quantity,
-      product_link,
+      product_image,
     ],
   };
 
@@ -73,7 +73,7 @@ const createProductAPI = async (request, response) => {
     product_category,
     product_price,
     product_quantity,
-    product_link,
+    product_image,
   } = request.body;
   try {
     let newProduct = await createProduct(
@@ -82,7 +82,7 @@ const createProductAPI = async (request, response) => {
       product_category,
       product_price,
       product_quantity,
-      product_link
+      product_image
     );
     response.status(200).json({ result: newProduct });
   } catch (error) {
@@ -95,23 +95,26 @@ const updateProductDetails = async function (
   product_name,
   product_description,
   product_category,
-  product_link,
+  product_image,
   product_id
 ) {
   let query = {
     text: `update quatro_product set product_name = coalesce(nullif($1,''), product_name),
            product_description = coalesce(nullif($2,''), product_description),
            product_category = coalesce(nullif($3,''), product_category),
-           product_link = coalesce(nullif($4,''), product_link)
+           product_image = coalesce(nullif($4,''), product_image)
            where product_id = $5;`,
     values: [
       product_name,
       product_description,
       product_category,
-      product_link,
+      product_image,
       product_id,
     ],
   };
+  let resultQuery = await pool.query(query);
+  let productUpdate = resultQuery.rows;
+  return productUpdate;
 };
 
 const updateProductDetailsAPI = async (request, response) => {
@@ -119,7 +122,7 @@ const updateProductDetailsAPI = async (request, response) => {
     product_name,
     product_description,
     product_category,
-    product_link,
+    product_image,
     product_id,
   } = request.body;
 
@@ -128,7 +131,7 @@ const updateProductDetailsAPI = async (request, response) => {
       product_name,
       product_description,
       product_category,
-      product_link,
+      product_image,
       product_id
     );
 
