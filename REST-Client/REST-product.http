@@ -9,9 +9,22 @@ Content-Type: application/json
     "product_name":"Ayam Kampung",
     "product_description" : "Ayam ternakan kampung Janda Baik",
     "product_category": "Raw Materials",
-    "product_price": "RM16.00 per KG",
+    "product_price": "16.00",
     "product_quantity": "11",
     "product_image": "https://cdn1-production-images-kly.akamaized.net/QzTTZqGXM5PqL9REm9okFMn-r20=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/2702436/original/016317800_1547270165-shutterstock_314020379.jpg"
+}
+
+###
+POST http://localhost:3001/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Tropicana Apple Juice 320ml",
+    "product_description" : "Apple Juice to your daily routine for a delicious and convenient source of vitamin C. Refreshing apple juice with a deliciously sweet taste",
+    "product_category": "Juice",
+    "product_price": "3.45",
+    "product_quantity": "100",
+    "product_image": "https://m.media-amazon.com/images/I/61cPgyyfqEL._SL1500_.jpg"
 }
 
 ###

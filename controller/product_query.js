@@ -10,7 +10,7 @@ const pool = new Pool({
 
 const getAllProduct = async function () {
   let query = {
-    text: "select product_name, product_description, product_category, product_price, product_quantity from quatro_product order by product_id asc",
+    text: "select product_name, product_description, product_category, product_price, product_quantity, product_image from quatro_product order by product_id asc",
   };
 
   let resultQuery = await pool.query(query);
@@ -49,7 +49,7 @@ const createProduct = async function (
   }
 
   let query = {
-    text: "insert into quatro_product(product_name, product_description, product_category, product_price, product_quantity, product_link) values($1,$2,$3,$4,$5,$6) returning product_id",
+    text: "insert into quatro_product(product_name, product_description, product_category, product_price, product_quantity, product_image) values($1,$2,$3,$4,$5,$6) returning product_id",
     values: [
       product_name,
       product_description,
