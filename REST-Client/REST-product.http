@@ -5,13 +5,13 @@ GET http://localhost:5000/quatro_product/get
 POST http://localhost:5000/quatro_product/create
 Content-Type: application/json
 
-{
-    "product_name":"Ayam Kampung",
-    "product_description" : "Ayam ternakan kampung Janda Baik",
-    "product_category": "Raw Materials",
-    "product_price": "16.00",
-    "product_quantity": "11",
-}
+# {
+#     "product_name":"Ayam Kampung",
+#     "product_description" : "Ayam ternakan kampung Janda Baik",
+#     "product_category": "Raw Materials",
+#     "product_price": "16.00",
+#     "product_quantity": "11",
+# }
 {
     "product_name":"Mineral Water",
     "product_description" : "Sky juice",
