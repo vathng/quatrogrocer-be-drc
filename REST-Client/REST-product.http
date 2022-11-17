@@ -1,8 +1,8 @@
-GET http://localhost:3000/quatro_product/get
+GET http://localhost:5000/quatro_product/get
 
 
 ###
-POST http://localhost:3000/quatro_product/create
+POST http://localhost:5000/quatro_product/create
 Content-Type: application/json
 
 {
@@ -29,7 +29,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/quatro_product/update_price
+POST http://localhost:5000/quatro_product/update_price
 Content-Type: application/json
 
 {
