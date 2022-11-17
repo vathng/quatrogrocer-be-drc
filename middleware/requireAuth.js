@@ -22,7 +22,7 @@ const requireAuth = async (req, res, next) => {
     const { user_id } = jwt.verify(jwtToken, process.env.SECRET);
 
     let query = {
-      text: "select email from quatro_user where user_id = $1;",
+      text: `select email from quatro_user where user_id = $1`,
       values: [user_id],
     };
 

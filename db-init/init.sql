@@ -1,3 +1,5 @@
+
+
 create table quatro_user(
     user_id serial primary key,
     email varchar not null,
