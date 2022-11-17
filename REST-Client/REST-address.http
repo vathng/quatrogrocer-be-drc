@@ -7,7 +7,7 @@ Content-Type: application/json
 
 {
     "address_line_1": "No 12",
-    "address_line_2": "Persiaran Pakatan Jaya 10",
+    "address_line_2": "",
     "address_line_3": "Taman Pakatan Jaya",
     "postcode": "31150 Ulu Kinta",
     "state": "Perak",
@@ -22,8 +22,8 @@ Content-Type: application/json
     "address_line_1": "No 2",
     "address_line_2": "Persiaran Pakatan Jaya 7",
     "address_line_3": "",
-    "postcode": "",
-    "state": "",
+    "state": "12345 Lubok Antu",
+    "postcode": "Kueq",
     "address_id": "2"
 }
 

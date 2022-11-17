@@ -85,8 +85,8 @@ const updateAddressDetails = async function (
   address_line_1,
   address_line_2,
   address_line_3,
-  state,
   postcode,
+  state,
   address_id
 ) {
   let query_1 = {
@@ -112,8 +112,8 @@ const updateAddressDetails = async function (
       address_line_1,
       address_line_2,
       address_line_3,
-      state,
       postcode,
+      state,
       address_id,
     ],
   };
@@ -128,8 +128,8 @@ const updateAddressDetailsAPI = async (request, response) => {
     address_line_1,
     address_line_2,
     address_line_3,
-    state,
     postcode,
+    state,
     address_id,
   } = request.body;
 
@@ -138,8 +138,8 @@ const updateAddressDetailsAPI = async (request, response) => {
       address_line_1,
       address_line_2,
       address_line_3,
-      state,
       postcode,
+      state,
       address_id
     );
 
