@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 var cors = require("cors");
 const app = express();
-const port = 3000;
+const port = 5004;
 const db_user = require("./controller/user_query");
 const db_product = require("./controller/product_query");
 const db_address = require("./controller/address_query");
@@ -11,7 +11,7 @@ require("dotenv").config();
 
 app.use(
   cors({
-    origin: "http://localhost:3001",
+    origin: "http://localhost:3000",
   })
 );
 
@@ -30,8 +30,9 @@ app.get("/", (request, response) => {
 app.post("/quatro_user/login", db_user.loginAPI);
 app.post("/quatro_user/create", db_user.createUserAPI);
 app.post("/quatro_user/search", db_user.searchUserAPI);
-app.post("/quatro_user/update", db_auth, db_user.updateUserAPI);
-app.delete("/quatro_user/delete", db_auth, db_user.deleteUserAPI);
+app.post("/quatro_user/update", db_user.updateUserAPI);
+app.delete("/quatro_user/delete", db_user.deleteUserAPI);
+app.get("/quatro_user/getpassword", db_user.getPasswordAPI);
 //Product
 app.get("/quatro_product/get", db_product.searchProductAPI);
 app.post("/quatro_product/create", db_product.createProductAPI);
@@ -47,7 +48,6 @@ app.get("/quatro_address/get", db_address.searchAddressAPI);
 app.post("/quatro_address/create", db_address.createAddressAPI);
 app.post("/quatro_address/update_details", db_address.updateAddressDetailsAPI);
 app.delete("/quatro_address/delete", db_address.deleteAddressAPI);
-app.use(db_auth);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);

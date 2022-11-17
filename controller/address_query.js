@@ -33,7 +33,8 @@ const createAddress = async function (
   address_line_2,
   address_line_3,
   postcode,
-  state
+  state,
+  user_id
 ) {
   let query = {
     text: "insert into quatro_address(address_line_1, address_line_2, address_line_3, postcode, state, user_id) values($1,$2,$3,$4,$5,$6) returning address_id",
@@ -84,8 +85,8 @@ const updateAddressDetails = async function (
   address_line_1,
   address_line_2,
   address_line_3,
-  state,
   postcode,
+  state,
   address_id
 ) {
   let query_1 = {
@@ -111,8 +112,8 @@ const updateAddressDetails = async function (
       address_line_1,
       address_line_2,
       address_line_3,
-      state,
       postcode,
+      state,
       address_id,
     ],
   };
@@ -127,8 +128,8 @@ const updateAddressDetailsAPI = async (request, response) => {
     address_line_1,
     address_line_2,
     address_line_3,
-    state,
     postcode,
+    state,
     address_id,
   } = request.body;
 
@@ -137,8 +138,8 @@ const updateAddressDetailsAPI = async (request, response) => {
       address_line_1,
       address_line_2,
       address_line_3,
-      state,
       postcode,
+      state,
       address_id
     );
 

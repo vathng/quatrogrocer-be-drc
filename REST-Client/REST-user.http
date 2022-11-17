@@ -1,20 +1,19 @@
 # Get User
-GET http://localhost:3000/quatro_user
+GET http://localhost:3002/quatro_user
 
 ### 
-GET http://localhost:3000/quatro_user/John/Doe
+GET http://localhost:5000/quatro_user/John/Doe
 
 ### 
-POST http://localhost:3000/quatro_user/login
+POST http://localhost:3002/quatro_user/login
 Content-Type: application/json
 
 {
-    "email":"cleement@test.com",
-    "password":"dogshit"
+    "email":"jdoe@gmail.com",
+    "password":"test12345"
 }
 ### 
-POST http://localhost:3000/quatro_user/search
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJpYXQiOjE2NjgxNTM5OTIsImV4cCI6MTY2ODI0MDM5Mn0.-AivlL2yWRmf8HbmnxP2dRrcN6f4g_XtYdz06tyWshs
+POST http://localhost:5000/quatro_user/search
 Content-Type: application/json
 
 {
@@ -23,31 +22,31 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/quatro_user/create
+POST http://localhost:5000/quatro_user/create
 Content-Type: application/json
 
 { 
-    "email":"newuser@test.com",
+    "email":"vathng@test.com",
     "password":"test1234"
 }
 
 ###
-POST http://localhost:3000/quatro_user/update
+POST http://localhost:3002/quatro_user/update
 Content-Type: application/json
 
 {   
-    "first_name": "Marianne",
-    "last_name": "Wong",
-    "date_of_birth": "2000-02-03",
+    "first_name": "Ch",
+    "last_name": "Nooo",
+    "date_of_birth": "2000-08-02",
     "phone_number" : "0192345442",
-    "email":"mei7w@labuan.com",
+    "email":"",
     "password":"",
-    "user_id" : 4
+    "user_id" : 7
 }
 ###
-DELETE  http://localhost:3000/quatro_user/delete
+DELETE  http://localhost:3002/quatro_user/delete
 Content-Type: application/json
 
 {
-    "user_id":2
+    "user_id":5
 }

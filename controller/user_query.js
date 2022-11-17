@@ -28,7 +28,6 @@ const searchUser = async function (first_name, last_name) {
 
 const searchUserAPI = async (request, response) => {
   const { first_name, last_name } = request.body;
-  console.log(process.env.PGUSERNAME);
 
   try {
     let fl_name = await searchUser(first_name, last_name);
@@ -107,9 +106,9 @@ const createUserAPI = async (request, response) => {
   const { email, password } = request.body;
   try {
     let newUser = await createUser(email, password);
-    const newUserJwt = createToken(newUser.user_id);
+    //const newUserJwt = createToken(newUser.user_id);
 
-    response.status(200).json({ result: email, newUserJwt });
+    response.status(200).json({ result: email, message: "User Created" });
   } catch (error) {
     console.log("error:", error);
     response.status(404).json({ error: error.message });
@@ -122,6 +121,7 @@ const updateUser = async function (
   date_of_birth,
   phone_number,
   email,
+  oldPassword,
   password,
   user_id
 ) {
@@ -130,6 +130,25 @@ const updateUser = async function (
   if (isNaN(phone_number)) {
     throw error("Invalid phone number");
   }
+  let query_1 = {
+    text: "select email, password from quatro_user where user_id=$1",
+    values: [user_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let user = resultQuery_1.rows;
+
+  if (user.length === 0) {
+    throw Error("User doesnt exist");
+  }
+
+  console.log("OLD PASSWORD: ", user);
+  let validPassword = await bcrypt.compare(oldPassword, user[0]["password"]);
+
+  if (!validPassword) {
+    throw Error("Invalid Password");
+  }
+
   let query = {
     text: `update quatro_user set first_name = coalesce(nullif($1,''), first_name),
            last_name = coalesce(nullif($2,''), last_name),
@@ -152,6 +171,10 @@ const updateUser = async function (
   let resultQuery = await pool.query(query);
   let userUpdate = resultQuery.rows;
 
+  // if (!userUpdate?.user_id) {
+  //   throw Error("User doesnt exist");
+  // }
+
   return userUpdate[0];
 };
 
@@ -162,9 +185,11 @@ const updateUserAPI = async (request, response) => {
     date_of_birth,
     phone_number,
     email,
+    oldPassword,
     password,
     user_id,
   } = request.body;
+  console.log("TEST: ", password, oldPassword);
   try {
     let updateUserDB = await updateUser(
       first_name,
@@ -172,13 +197,43 @@ const updateUserAPI = async (request, response) => {
       date_of_birth,
       phone_number,
       email,
+      oldPassword,
       password,
       user_id
     );
-    const updateUserJwt = createToken(updateUserDB.user_id);
+    const updateUserJwt = createToken(updateUserDB?.user_id);
     response
       .status(200)
       .json({ result: email, updateUserJwt, message: "User updated" });
+  } catch (error) {
+    console.log("error:", error);
+    response.status(404).json({ error: error.message });
+  }
+};
+
+const getPassword = async function (password, user_id) {
+  let query = {
+    text: "select password from quatro_user where user_id = $1",
+    values: [user_id],
+  };
+
+  let resultQuery = await pool.query(query);
+  let getPass = resultQuery.rows;
+  console.log(password);
+
+  let validPassword = await bcrypt.compare(password, getPass[0]["password"]);
+
+  if (!validPassword) {
+    throw Error("Invalid Password");
+  }
+  return getPass;
+};
+
+const getPasswordAPI = async (request, response) => {
+  const { user_id, password } = request.body;
+  try {
+    let getPassUser = await getPassword(user_id, password);
+    response.status(200).json({ result: getPassUser });
   } catch (error) {
     console.log("error:", error);
     response.status(404).json({ error: error.message });
@@ -200,7 +255,7 @@ const deleteUserAPI = async (request, response) => {
   const { user_id } = request.body;
   try {
     let userDelete = await deleteUser(user_id);
-    response.status(200).json({ result: userDelete });
+    response.status(200).json({ result: userDelete, message: "User deleted" });
   } catch (error) {
     console.log("error:", error);
     response.status(404).json({ error: error.message });
@@ -213,4 +268,5 @@ module.exports = {
   createUserAPI,
   updateUserAPI,
   deleteUserAPI,
+  getPasswordAPI,
 };
