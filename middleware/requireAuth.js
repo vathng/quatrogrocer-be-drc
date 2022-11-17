@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-
 const Pool = require("pg").Pool;
 const pool = new Pool({
   user: process.env.PGUSERNAME,

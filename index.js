@@ -7,11 +7,14 @@ const db_user = require("./controller/user_query");
 const db_product = require("./controller/product_query");
 const db_address = require("./controller/address_query");
 const db_auth = require("./middleware/requireAuth");
+const jwt = require("express-jwt");
+const jsonwebtoken = require("jsonwebtoken");
 require("dotenv").config();
 
 app.use(
   cors({
     origin: "http://localhost:3000",
+    credentials: true,
   })
 );
 
@@ -30,7 +33,7 @@ app.get("/", (request, response) => {
 app.post("/quatro_user/login", db_user.loginAPI);
 app.post("/quatro_user/create", db_user.createUserAPI);
 app.post("/quatro_user/search", db_auth, db_user.searchUserAPI);
-app.post("/quatro_user/update", db_auth, db_user.updateUserAPI);
+app.post("/quatro_user/update", db_user.updateUserAPI);
 app.delete("/quatro_user/delete", db_user.deleteUserAPI);
 //Product
 app.get("/quatro_product/get", db_product.searchProductAPI);
