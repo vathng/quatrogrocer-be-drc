@@ -1,5 +1,5 @@
 # Get User
-GET http://localhost:3002/quatro_user
+GET http://localhost:5004/quatro_user
 
 ### 
 GET http://localhost:5000/quatro_user/John/Doe

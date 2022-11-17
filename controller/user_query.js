@@ -2,6 +2,8 @@ const bcrypt = require("bcrypt");
 const { Query } = require("pg");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+//validator implementation
+const validator = require("validator");
 
 const Pool = require("pg").Pool;
 const pool = new Pool({
@@ -51,7 +53,19 @@ const loginUser = async function (email, password) {
 
   let resultQuery = await pool.query(query);
   let user = resultQuery.rows;
+  //validation
 
+  if (!email || !password) {
+    throw Error("All fields must be filled");
+  }
+  if (!validator.isEmail(email)) {
+    throw Error("Email not valid");
+  }
+  if (!validator.isStrongPassword(password)) {
+    throw Error("Password not strong enough");
+  }
+
+  //------------------------
   if (user.length === 0) {
     throw Error("Email doesnt exist");
   }
