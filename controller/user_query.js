@@ -28,7 +28,6 @@ const searchUser = async function (first_name, last_name) {
 
 const searchUserAPI = async (request, response) => {
   const { first_name, last_name } = request.body;
-  console.log(process.env.PGUSERNAME);
 
   try {
     let fl_name = await searchUser(first_name, last_name);
@@ -124,6 +123,7 @@ const updateUser = async function (
   date_of_birth,
   phone_number,
   email,
+  oldPassword,
   password,
   user_id
 ) {
@@ -133,7 +133,7 @@ const updateUser = async function (
     throw error("Invalid phone number");
   }
   let query_1 = {
-    text: "select email from quatro_user where user_id=$1",
+    text: "select email, password from quatro_user where user_id=$1",
     values: [user_id],
   };
 
@@ -142,6 +142,13 @@ const updateUser = async function (
 
   if (user.length === 0) {
     throw Error("User doesnt exist");
+  }
+
+  console.log("OLD PASSWORD: ", user);
+  let validPassword = await bcrypt.compare(oldPassword, user[0]["password"]);
+
+  if (!validPassword) {
+    throw Error("Invalid Password");
   }
 
   let query = {
@@ -180,9 +187,11 @@ const updateUserAPI = async (request, response) => {
     date_of_birth,
     phone_number,
     email,
+    oldPassword,
     password,
     user_id,
   } = request.body;
+  console.log("TEST: ", password, oldPassword);
   try {
     let updateUserDB = await updateUser(
       first_name,
@@ -190,6 +199,7 @@ const updateUserAPI = async (request, response) => {
       date_of_birth,
       phone_number,
       email,
+      oldPassword,
       password,
       user_id
     );
@@ -197,6 +207,35 @@ const updateUserAPI = async (request, response) => {
     response
       .status(200)
       .json({ result: email, updateUserJwt, message: "User updated" });
+  } catch (error) {
+    console.log("error:", error);
+    response.status(404).json({ error: error.message });
+  }
+};
+
+const getPassword = async function (password, user_id) {
+  let query = {
+    text: "select password from quatro_user where user_id = $1",
+    values: [user_id],
+  };
+
+  let resultQuery = await pool.query(query);
+  let getPass = resultQuery.rows;
+  console.log(password);
+
+  let validPassword = await bcrypt.compare(password, getPass[0]["password"]);
+
+  if (!validPassword) {
+    throw Error("Invalid Password");
+  }
+  return getPass;
+};
+
+const getPasswordAPI = async (request, response) => {
+  const { user_id, password } = request.body;
+  try {
+    let getPassUser = await getPassword(user_id, password);
+    response.status(200).json({ result: getPassUser });
   } catch (error) {
     console.log("error:", error);
     response.status(404).json({ error: error.message });
@@ -231,4 +270,5 @@ module.exports = {
   createUserAPI,
   updateUserAPI,
   deleteUserAPI,
+  getPasswordAPI,
 };

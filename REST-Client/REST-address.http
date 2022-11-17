@@ -1,13 +1,13 @@
-GET http://localhost:3002/quatro_address/get
+GET http://localhost:5000/quatro_address/get
 
 
 ###
-POST http://localhost:3002/quatro_address/create
+POST http://localhost:5000/quatro_address/create
 Content-Type: application/json
 
 {
     "address_line_1": "No 12",
-    "address_line_2": "Persiaran Pakatan Jaya 10",
+    "address_line_2": "",
     "address_line_3": "Taman Pakatan Jaya",
     "postcode": "31150 Ulu Kinta",
     "state": "Perak",
@@ -15,20 +15,20 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3002/quatro_address/update_details
+POST http://localhost:5000/quatro_address/update_details
 Content-Type: application/json
 
 {
     "address_line_1": "No 2",
     "address_line_2": "Persiaran Pakatan Jaya 7",
     "address_line_3": "",
-    "postcode": "",
-    "state": "",
+    "state": "12345 Lubok Antu",
+    "postcode": "Kueq",
     "address_id": "2"
 }
 
 ###
-DELETE http://localhost:3002/quatro_address/delete
+DELETE http://localhost:5000/quatro_address/delete
 Content-Type: application/json
 
 {
