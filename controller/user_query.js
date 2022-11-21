@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 //validator implementation
 const validator = require("validator");
+const { passwordStrength } = require("check-password-strength");
 
 const Pool = require("pg").Pool;
 const pool = new Pool({
@@ -53,22 +54,17 @@ const loginUser = async function (email, password) {
 
   let resultQuery = await pool.query(query);
   let user = resultQuery.rows;
+
   //validation
 
   if (!email || !password) {
     throw Error("All fields must be filled");
   }
-  if (!validator.isEmail(email)) {
-    throw Error("Email not valid");
-  }
-  if (!validator.isStrongPassword(password)) {
-    throw Error("Password not strong enough");
-  }
-
-  //------------------------
   if (user.length === 0) {
     throw Error("Email doesnt exist");
   }
+
+  //------------------------
 
   let validPassword = await bcrypt.compare(password, user[0]["password"]);
 
@@ -102,6 +98,41 @@ const createUser = async function (email, password) {
 
   if (user.length !== 0) {
     throw Error("Email exist");
+  }
+
+  //if email input field is empty
+
+  if (!email && !password) {
+    throw Error("Email and password field cannot be empty");
+  }
+  if (!email || !email.trim()) {
+    throw Error("Email field cannot be empty");
+  }
+
+  if (!password || !password.trim()) {
+    throw Error("Password field cannot be empty");
+  }
+
+  if (!validator.isEmail(email)) {
+    throw Error("Email not valid");
+  }
+
+  if (password.length < 8) {
+    throw Error("Password should consists at least 8 characters");
+  }
+
+  if (
+    !validator.isStrongPassword(password, {
+      minLength: 8,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 1,
+    })
+  ) {
+    throw Error(
+      "Password should consists at least 1 lowercase, 1 uppercase, 1 number and 1 symbol "
+    );
   }
 
   const salt = await bcrypt.genSalt(10);
