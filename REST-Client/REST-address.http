@@ -22,9 +22,9 @@ Content-Type: application/json
     "address_line_1": "No 2",
     "address_line_2": "Persiaran Pakatan Jaya 7",
     "address_line_3": "",
-    "state": "12345 Lubok Antu",
-    "postcode": "Kueq",
-    "address_id": "2"
+    "postcode": "12345 Lubok Antu",
+    "state": "Kueq",
+    "address_id": "7"
 }
 
 ###

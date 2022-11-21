@@ -128,7 +128,7 @@ const updateProductDetailsAPI = async (request, response) => {
   } = request.body;
 
   try {
-    let updateProductDetails = await updateProductDetails(
+    let newProductDetails = await updateProductDetails(
       product_name,
       product_description,
       product_category,
@@ -138,7 +138,7 @@ const updateProductDetailsAPI = async (request, response) => {
 
     response
       .status(200)
-      .json({ result: updateProductDetails, message: "Product updated" });
+      .json({ result: newProductDetails, message: "Product updated" });
   } catch (error) {
     console.log("error:", error);
     response.status(404).json({ error: error.message });
