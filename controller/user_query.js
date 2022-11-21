@@ -69,7 +69,11 @@ const loginAPI = async (request, response) => {
   try {
     let user = await loginUser(email, password);
     let userJwt = createToken(user);
-    response.cookie("token", userJwt, { httpOnly: true, sameSite: "None" });
+    response.cookie("token", userJwt, {
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+    });
     response.status(200).json({ result: email, userJwt });
   } catch (error) {
     response.status(404).json({ error: error.message });
