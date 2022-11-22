@@ -28,7 +28,14 @@ Content-Type: application/json
 
 { 
     "email":"vathng@test.com",
-    "password":"!QAZ2wsx"
+
+    "password":"!QAZ2wsx",
+    "first_name": ,
+      "last_name":,
+      "date_of_birth":,
+      "gender":,
+      "phone_number":
+
 }
 
 ###

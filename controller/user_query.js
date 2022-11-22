@@ -79,15 +79,26 @@ const loginAPI = async (request, response) => {
   try {
     let user = await loginUser(email, password);
     let userJwt = createToken(user);
-    response.cookie("token", userJwt, { httpOnly: true, sameSite: "None" });
-    console.log("test", userJwt);
+    response.cookie("token", userJwt, {
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+    });
     response.status(200).json({ result: email, userJwt });
   } catch (error) {
     response.status(404).json({ error: error.message });
   }
 };
 
-const createUser = async function (email, password) {
+const createUser = async function (
+  email,
+  password,
+  first_name,
+  last_name,
+  date_of_birth,
+  gender,
+  phone_number
+) {
   let query_1 = {
     text: "select email, password from quatro_user where email=$1",
     values: [email],
@@ -99,6 +110,19 @@ const createUser = async function (email, password) {
   if (user.length !== 0) {
     throw Error("Email exist");
   }
+  // all input fields empty
+
+  // if (
+  //   !email &&
+  //   !password &&
+  //   !first_name &&
+  //   !last_name &&
+  //   !date_of_birth &&
+  //   !gender &&
+  //   !phone_number
+  // ) {
+  //   throw Error("All input fields cannot be empty");
+  // }
 
   //if email input field is empty
 
@@ -108,7 +132,11 @@ const createUser = async function (email, password) {
   if (!email || !email.trim()) {
     throw Error("Email field cannot be empty");
   }
+  //no dob
 
+  if (!date_of_birth) {
+    throw Error("Please fill in all the input fields");
+  }
   if (!password || !password.trim()) {
     throw Error("Password field cannot be empty");
   }
@@ -139,8 +167,16 @@ const createUser = async function (email, password) {
   const passHash = await bcrypt.hash(password, salt);
 
   let query = {
-    text: "insert into quatro_user(email,password,user_credit) values ($1,$2,100) returning user_id",
-    values: [email, passHash],
+    text: "insert into quatro_user(email,password,first_name,last_name,date_of_birth,gender,phone_number,user_credit) values ($1,$2,$3,$4,$5,$6,$7,100) returning user_id",
+    values: [
+      email,
+      passHash,
+      first_name,
+      last_name,
+      date_of_birth,
+      gender,
+      phone_number,
+    ],
   };
 
   let resultQuery = await pool.query(query);
@@ -150,10 +186,25 @@ const createUser = async function (email, password) {
 };
 
 const createUserAPI = async (request, response) => {
-  const { email, password } = request.body;
+  const {
+    email,
+    password,
+    first_name,
+    last_name,
+    date_of_birth,
+    gender,
+    phone_number,
+  } = request.body;
   try {
-    let newUser = await createUser(email, password);
-    //const newUserJwt = createToken(newUser.user_id);
+    let newUser = await createUser(
+      email,
+      password,
+      first_name,
+      last_name,
+      date_of_birth,
+      gender,
+      phone_number
+    );
 
     response.status(200).json({ result: email, message: "User Created" });
   } catch (error) {
