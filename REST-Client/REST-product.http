@@ -1,4 +1,4 @@
-GET http://localhost:5000/quatro_product/get
+GET http://localhost:5004/quatro_product/get
 
 
 ###
@@ -17,39 +17,39 @@ Content-Type: application/json
 
 
 ###
-POST http://localhost:3000/quatro_product/update_details
+POST http://localhost:5004/quatro_product/update_details
 Content-Type: application/json
 
 {
     "product_name":"",
-    "product_description" : "",
-    "product_category": "Tea, Coffee, Chocolate Drinks",
-    "product_image": "",
-    "product_id" : "55"
+    "product_description" :"",
+    "product_category": "Tea",
+    "product_image": "https://www.miizu.my/image/digitalgrocer/image/cache/data/all_product_images/product-204/3%20new-1080x1080.png",
+    "product_id" : "5"
 }
 
 ###
-POST http://localhost:5000/quatro_product/update_price
+POST http://localhost:5004/quatro_product/update_price
 Content-Type: application/json
 
 {
     "product_price": "3.79",
-    "product_id": "16"
+    "product_id": "59"
 }
 
 ###
-POST http://localhost:3000/quatro_product/update_quantity
+POST http://localhost:5004/quatro_product/update_quantity
 Content-Type: application/json
 
 {
     "product_quantity": "48",
-    "product_id": "7"
+    "product_id": "59"
 }
 
 ###
-DELETE http://localhost:3000/quatro_product/delete
+DELETE http://localhost:5004/quatro_product/delete
 Content-Type: application/json
 
 {
-    "product_id" : "2"
+    "product_id" : "59"
 }
