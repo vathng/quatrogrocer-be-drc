@@ -23,17 +23,17 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:5000/quatro_user/create
+POST http://localhost:5004/quatro_user/create
 Content-Type: application/json
 
 { 
-    "email":"vathng@test.com",
+    "email":"random@test.com",
     "password":"test1234",
-    "first_name": ,
-      "last_name":,
-      "date_of_birth":,
-      "gender":,
-      "phone_number":
+    "first_name": "",
+    "last_name": "",
+    "date_of_birth": "",
+    "gender": "",
+    "phone_number": ""
 }
 
 ###
