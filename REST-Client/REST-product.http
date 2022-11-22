@@ -21,11 +21,11 @@ POST http://localhost:5004/quatro_product/update_details
 Content-Type: application/json
 
 {
-    "product_name":"",
+    "product_name":"Maggi Tomyam",
     "product_description" : "",
-    "product_category": "Tea, Coffee, Chocolate Drinks",
+    "product_category": "",
     "product_image": "",
-    "product_id" : "55"
+    "product_id" : "1"
 }
 
 ###
