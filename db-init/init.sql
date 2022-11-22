@@ -40,4 +40,9 @@ product_price float not null,
 transaction_total float generated always as(product_quantity * product_price) stored not null,
 transaction_timestamp timestamp not null) ;
 
+create table quatro_cart(
+cart_id int not null, 
+user_id int not null, 
+product_id int not null, 
+product_quantity int not null);
 -- SQL

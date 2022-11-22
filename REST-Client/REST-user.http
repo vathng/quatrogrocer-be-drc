@@ -23,17 +23,17 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:5000/quatro_user/create
+POST http://localhost:5004/quatro_user/create
 Content-Type: application/json
 
 { 
-    "email":"vathng@test.com",
+    "email":"siyu@test.com",
     "password":"test1234",
-    "first_name": ,
-      "last_name":,
-      "date_of_birth":,
-      "gender":,
-      "phone_number":
+    "first_name":"Kali" ,
+    "last_name":"Donestk",
+    "date_of_birth":"1987-02-10",
+    "gender":"Male",
+    "phone_number": "0123321234"
 }
 
 ###
