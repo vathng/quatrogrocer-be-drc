@@ -20,17 +20,6 @@ create table quatro_product(
     product_image varchar
 );
 
-create table quatro_transaction(
-    transaction_id serial primary key,
-    product_id int not null,
-    user_id int not null, 
-    product_name varchar not null, 
-    product_quantity varchar not null,
-    product_price float not null,
-    transaction_total float not null, 
-    transaction_timestamp timestamp not null
-);
-
 create table quatro_address(
     address_id serial primary key,
     user_id int constraint user_id_address references quatro_user(user_id) on delete cascade,
@@ -40,4 +29,15 @@ create table quatro_address(
      postcode varchar not null, 
      state text not null 
 );
+
+create table quatro_transaction(
+transaction_id int not null,
+product_id int not null, 
+user_id int not null, 
+product_name varchar not null, 
+product_quantity int not null, 
+product_price float not null,
+transaction_total float generated always as(product_quantity * product_price) stored not null,
+transaction_timestamp timestamp not null) ;
+
 -- SQL

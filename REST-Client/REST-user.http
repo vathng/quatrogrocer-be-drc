@@ -27,7 +27,12 @@ Content-Type: application/json
 
 { 
     "email":"vathng@test.com",
-    "password":"test1234"
+    "password":"test1234",
+    "first_name": ,
+      "last_name":,
+      "date_of_birth":,
+      "gender":,
+      "phone_number":
 }
 
 ###
@@ -44,7 +49,7 @@ Content-Type: application/json
     "user_id" : 2
 }
 ###
-DELETE  http://localhost:3002/quatro_user/delete
+DELETE  http://localhost:5004/quatro_user/delete
 Content-Type: application/json
 
 {

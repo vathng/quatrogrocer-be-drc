@@ -45,7 +45,7 @@ const createToken = (user_id) => {
 
 const loginUser = async function (email, password) {
   let query = {
-    text: "select email, password from quatro_user where email=$1",
+    text: "select email, password, user_id from quatro_user where email=$1",
     values: [email],
   };
 
@@ -61,21 +61,34 @@ const loginUser = async function (email, password) {
   if (!validPassword) {
     throw Error("Invalid Password");
   }
-  return user[0];
+  return user[0].user_id;
 };
 
 const loginAPI = async (request, response) => {
   const { email, password } = request.body;
   try {
     let user = await loginUser(email, password);
-    let userJwt = createToken(user.user_id);
+    let userJwt = createToken(user);
+    response.cookie("token", userJwt, {
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+    });
     response.status(200).json({ result: email, userJwt });
   } catch (error) {
     response.status(404).json({ error: error.message });
   }
 };
 
-const createUser = async function (email, password) {
+const createUser = async function (
+  email,
+  password,
+  first_name,
+  last_name,
+  date_of_birth,
+  gender,
+  phone_number
+) {
   let query_1 = {
     text: "select email, password from quatro_user where email=$1",
     values: [email],
@@ -92,8 +105,16 @@ const createUser = async function (email, password) {
   const passHash = await bcrypt.hash(password, salt);
 
   let query = {
-    text: "insert into quatro_user(email,password,user_credit) values ($1,$2,100) returning user_id",
-    values: [email, passHash],
+    text: "insert into quatro_user(email,password,first_name,last_name,date_of_birth,gender,phone_number,user_credit) values ($1,$2,$3,$4,$5,$6,$7,100) returning user_id",
+    values: [
+      email,
+      passHash,
+      first_name,
+      last_name,
+      date_of_birth,
+      gender,
+      phone_number,
+    ],
   };
 
   let resultQuery = await pool.query(query);
@@ -103,10 +124,25 @@ const createUser = async function (email, password) {
 };
 
 const createUserAPI = async (request, response) => {
-  const { email, password } = request.body;
+  const {
+    email,
+    password,
+    first_name,
+    last_name,
+    date_of_birth,
+    gender,
+    phone_number,
+  } = request.body;
   try {
-    let newUser = await createUser(email, password);
-    //const newUserJwt = createToken(newUser.user_id);
+    let newUser = await createUser(
+      email,
+      password,
+      first_name,
+      last_name,
+      date_of_birth,
+      gender,
+      phone_number
+    );
 
     response.status(200).json({ result: email, message: "User Created" });
   } catch (error) {
@@ -126,7 +162,9 @@ const updateUser = async function (
   user_id
 ) {
   const salt = await bcrypt.genSalt(10);
+
   const passHash = await bcrypt.hash(password, salt);
+
   if (isNaN(phone_number)) {
     throw error("Invalid phone number");
   }
@@ -142,7 +180,6 @@ const updateUser = async function (
     throw Error("User doesnt exist");
   }
 
-  console.log("OLD PASSWORD: ", user);
   let validPassword = await bcrypt.compare(oldPassword, user[0]["password"]);
 
   if (!validPassword) {
@@ -171,10 +208,6 @@ const updateUser = async function (
   let resultQuery = await pool.query(query);
   let userUpdate = resultQuery.rows;
 
-  // if (!userUpdate?.user_id) {
-  //   throw Error("User doesnt exist");
-  // }
-
   return userUpdate[0];
 };
 
@@ -189,9 +222,9 @@ const updateUserAPI = async (request, response) => {
     password,
     user_id,
   } = request.body;
-  console.log("TEST: ", password, oldPassword);
+
   try {
-    let updateUserDB = await updateUser(
+    await updateUser(
       first_name,
       last_name,
       date_of_birth,
@@ -201,39 +234,10 @@ const updateUserAPI = async (request, response) => {
       password,
       user_id
     );
-    const updateUserJwt = createToken(updateUserDB?.user_id);
-    response
-      .status(200)
-      .json({ result: email, updateUserJwt, message: "User updated" });
-  } catch (error) {
-    console.log("error:", error);
-    response.status(404).json({ error: error.message });
-  }
-};
 
-const getPassword = async function (password, user_id) {
-  let query = {
-    text: "select password from quatro_user where user_id = $1",
-    values: [user_id],
-  };
+    //const updateUserJwt = createToken(updateUserDB?.user_id);
 
-  let resultQuery = await pool.query(query);
-  let getPass = resultQuery.rows;
-  console.log(password);
-
-  let validPassword = await bcrypt.compare(password, getPass[0]["password"]);
-
-  if (!validPassword) {
-    throw Error("Invalid Password");
-  }
-  return getPass;
-};
-
-const getPasswordAPI = async (request, response) => {
-  const { user_id, password } = request.body;
-  try {
-    let getPassUser = await getPassword(user_id, password);
-    response.status(200).json({ result: getPassUser });
+    response.status(200).json({ result: email, message: "User updated" });
   } catch (error) {
     console.log("error:", error);
     response.status(404).json({ error: error.message });
@@ -268,5 +272,4 @@ module.exports = {
   createUserAPI,
   updateUserAPI,
   deleteUserAPI,
-  getPasswordAPI,
 };
