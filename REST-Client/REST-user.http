@@ -2,7 +2,7 @@
 GET http://localhost:5000/quatro_user
 
 ### 
-GET http://localhost:5000/quatro_user/John/Doe
+GET http://localhost:5004/quatro_user/John/Doe
 
 ### 
 POST http://localhost:5000/quatro_user/login
@@ -13,7 +13,7 @@ Content-Type: application/json
     "password":"meow123"
 }
 ### 
-POST http://localhost:5000/quatro_user/search
+POST http://localhost:5004/quatro_user/search
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2Njg2NjQzNzksImV4cCI6MTY2ODc1MDc3OX0.xNHQpVFHt-dPbOmNCJomgPzjQGua5ZoRfb4u-EKrFEg
 Content-Type: application/json
 
@@ -23,7 +23,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:5000/quatro_user/create
+POST http://localhost:5004/quatro_user/create
 Content-Type: application/json
 
 {
@@ -34,8 +34,10 @@ Content-Type: application/json
 ###
 POST http://localhost:5000/quatro_user/update
 { 
+
     "email":"vathng@test.com",
-    "password":"test1234",
+
+    "password":"!QAZ2wsx",
     "first_name": ,
       "last_name":,
       "date_of_birth":,
@@ -63,5 +65,5 @@ DELETE  http://localhost:5000/quatro_user/delete
 Content-Type: application/json
 
 {
-    "user_id":5
+    "user_id":2
 }

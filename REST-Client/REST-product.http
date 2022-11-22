@@ -1,8 +1,7 @@
-GET http://localhost:5000/quatro_product/get
-
+GET http://localhost:5004/quatro_product/get
 
 ###
-POST http://localhost:5000/quatro_product/create
+POST http://localhost:5004/quatro_product/create
 Content-Type: application/json
 
 # {
@@ -41,15 +40,15 @@ POST http://localhost:3001/quatro_product/update_details
 Content-Type: application/json
 
 {
-    "product_name":"",
+    "product_name":"Maggi Tomyam",
     "product_description" : "",
-    "product_category": "Tea, Coffee, Chocolate Drinks",
+    "product_category": "",
     "product_image": "",
-    "product_id" : "55"
+    "product_id" : "1"
 }
 
 ###
-POST http://localhost:5000/quatro_product/update_price
+POST http://localhost:5004/quatro_product/update_price
 Content-Type: application/json
 
 {
@@ -58,7 +57,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3001/quatro_product/update_quantity
+POST http://localhost:5004/quatro_product/update_quantity
 Content-Type: application/json
 
 {
@@ -67,9 +66,9 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3001/quatro_product/delete
+DELETE http://localhost:5004/quatro_product/delete
 Content-Type: application/json
 
 {
-    "product_id" : "2"
+    "product_id" : 2
 }

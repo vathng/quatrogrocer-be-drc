@@ -6,6 +6,8 @@ const port = 5004;
 const db_user = require("./controller/user_query");
 const db_product = require("./controller/product_query");
 const db_address = require("./controller/address_query");
+const db_transac = require("./controller/transaction_query");
+const db_cart = require("./controller/cart_query");
 const db_auth = require("./middleware/requireAuth");
 const jwt = require("express-jwt");
 const jsonwebtoken = require("jsonwebtoken");
@@ -50,6 +52,12 @@ app.get("/quatro_address/get", db_address.searchAddressAPI);
 app.post("/quatro_address/create", db_address.createAddressAPI);
 app.post("/quatro_address/update_details", db_address.updateAddressDetailsAPI);
 app.delete("/quatro_address/delete", db_address.deleteAddressAPI);
+//Transaction
+app.get("/quatro_transaction/search", db_transac.searchTransactionAPI);
+app.post("/quatro_transaction/create", db_transac.createTransactionAPI);
+//Transaction
+app.post("/quatro_cart/create", db_cart.createCartAPI);
+app.delete("/quatro_cart/delete", db_cart.deleteCartAPI);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
