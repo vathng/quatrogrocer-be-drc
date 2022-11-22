@@ -2,7 +2,7 @@
 GET http://localhost:5004/quatro_user
 
 ### 
-GET http://localhost:5000/quatro_user/John/Doe
+GET http://localhost:5004/quatro_user/John/Doe
 
 ### 
 POST http://localhost:5004/quatro_user/login
@@ -13,7 +13,7 @@ Content-Type: application/json
     "password":"test12345"
 }
 ### 
-POST http://localhost:5000/quatro_user/search
+POST http://localhost:5004/quatro_user/search
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2Njg2NjQzNzksImV4cCI6MTY2ODc1MDc3OX0.xNHQpVFHt-dPbOmNCJomgPzjQGua5ZoRfb4u-EKrFEg
 Content-Type: application/json
 
@@ -27,13 +27,16 @@ POST http://localhost:5004/quatro_user/create
 Content-Type: application/json
 
 { 
-    "email":"siyu@test.com",
-    "password":"test1234",
-    "first_name":"Kali" ,
-    "last_name":"Donestk",
-    "date_of_birth":"1987-02-10",
-    "gender":"Male",
-    "phone_number": "0123321234"
+
+    "email":"vathng@test.com",
+
+    "password":"!QAZ2wsx",
+    "first_name": ,
+      "last_name":,
+      "date_of_birth":,
+      "gender":,
+      "phone_number":
+
 }
 
 ###
@@ -56,5 +59,5 @@ DELETE  http://localhost:5004/quatro_user/delete
 Content-Type: application/json
 
 {
-    "user_id":5
+    "user_id":2
 }
