@@ -31,14 +31,14 @@ create table quatro_address(
 );
 
 create table quatro_transaction(
-transaction_id int not null,
-product_id int not null, 
-user_id int not null, 
-product_name varchar not null, 
-product_quantity int not null, 
-product_price float not null,
-transaction_total float generated always as(product_quantity * product_price) stored not null,
-transaction_timestamp timestamp not null) ;
+transaction_id int,
+product_id int, 
+user_id int, 
+product_name varchar, 
+product_quantity int, 
+product_price float,
+transaction_total float generated always as(product_quantity * product_price) stored,
+transaction_timestamp timestamp) ;
 
 create table quatro_cart(
 cart_id int not null, 

@@ -68,7 +68,33 @@ const deleteCartAPI = async (request, response) => {
   }
 };
 
+const pushCart = async function (user_id, product_id, product_quantity) {
+  let query = {
+    text: "insert into quatro_transaction(user_id, product_id, product_quantity) select user_id, product_id, product_quantity from quatro_cart;",
+    values: [user_id, product_id, product_quantity],
+  };
+
+  let resultQuery = await pool.query(query);
+  let cartPush = resultQuery.rows;
+
+  return cartPush;
+};
+
+const pushCartAPI = async (request, response) => {
+  const { cart_id } = request.body;
+  try {
+    let cartPush = await pushCart(cart_id);
+    response
+      .status(200)
+      .json({ result: cartPush, message: "Successfully push from cart" });
+  } catch (error) {
+    console.log("error:", error);
+    response.status(404).json({ error: error.message });
+  }
+};
+
 module.exports = {
   deleteCartAPI,
   createCartAPI,
+  pushCartAPI,
 };

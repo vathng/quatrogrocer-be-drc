@@ -8,13 +8,13 @@ const pool = new Pool({
   port: process.env.PGPORT,
 });
 
-const getAllProduct = async function (q) {
+const getAllProduct = async function (product) {
   let query = {
     text:
       "select product_name, product_description, product_category, product_price, product_quantity, product_image from quatro_product " +
-      (q ? "where lower(product_name) like $1 " : "") +
+      (product ? "where lower(product_name) like $1 " : "") +
       "order by product_id asc ",
-    values: q ? [`%${q}%`.toLowerCase()] : [],
+    values: product ? [`%${product}%`.toLowerCase()] : [],
   };
 
   let resultQuery = await pool.query(query);

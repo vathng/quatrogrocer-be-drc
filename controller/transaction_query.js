@@ -92,7 +92,39 @@ const createTransactionAPI = async (request, response) => {
   }
 };
 
+const updateTransaction = async function (product_name, product_price) {
+  let query = {
+    text: "update quatro_transaction set product_name= (select quatro_product.product_name from quatro_product where quatro_transaction.product_id = quatro_product.product_id), product_price = (select quatro_product.product_price from quatro_product where quatro_transaction.product_id = quatro_product.product_id);",
+    values: [product_name, product_price],
+  };
+
+  let resultQuery = await pool.query(query);
+  let transactionUpdate = resultQuery.rows;
+
+  return transactionUpdate;
+};
+
+const updateTransactionAPI = async (request, response) => {
+  const { product_name, product_price } = request.body;
+  try {
+    let transactionUpdate = await updateTransaction(
+      product_name,
+      product_price
+    );
+    response
+      .status(200)
+      .json({
+        result: transactionUpdate,
+        message: "Successfully update in transaction",
+      });
+  } catch (error) {
+    console.log("error:", error);
+    response.status(404).json({ error: error.message });
+  }
+};
+
 module.exports = {
   searchTransactionAPI,
   createTransactionAPI,
+  updateTransactionAPI,
 };
