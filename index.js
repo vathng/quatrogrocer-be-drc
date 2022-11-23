@@ -46,6 +46,7 @@ app.post(
   "/quatro_product/update_quantity",
   db_product.updateProductQuantityAPI
 );
+app.post("/quatro_product/minus_quantity", db_product.minusProductQuantityAPI);
 app.delete("/quatro_product/delete", db_product.deleteProductAPI);
 //Address
 app.get("/quatro_address/get", db_address.searchAddressAPI);
