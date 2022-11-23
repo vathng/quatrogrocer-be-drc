@@ -43,9 +43,10 @@ const createTransaction = async function (
   user_id,
   product_name,
   product_quantity,
-  product_price,
-  transaction_timestamp
+  product_price
+  // transaction_timestamp
 ) {
+  let transaction_timestamp = new Date();
   let query = {
     text: "insert into quatro_transaction(transaction_id, product_id, user_id, product_name, product_quantity, product_price, transaction_timestamp) values($1,$2,$3,$4,$5,$6,$7) returning transaction_id",
     values: [
@@ -73,7 +74,7 @@ const createTransactionAPI = async (request, response) => {
     product_name,
     product_quantity,
     product_price,
-    transaction_timestamp,
+    // transaction_timestamp,
   } = request.body;
   try {
     let newTransaction = await createTransaction(
@@ -82,8 +83,8 @@ const createTransactionAPI = async (request, response) => {
       user_id,
       product_name,
       product_quantity,
-      product_price,
-      transaction_timestamp
+      product_price
+      // transaction_timestamp
     );
     response.status(200).json({ result: newTransaction, message: "Success" });
   } catch (error) {
@@ -92,10 +93,22 @@ const createTransactionAPI = async (request, response) => {
   }
 };
 
-const updateTransaction = async function (product_name, product_price) {
+const updateTransaction = async function (user_id) {
+  let transaction_timestamp = new Date();
   let query = {
-    text: "update quatro_transaction set product_name= (select quatro_product.product_name from quatro_product where quatro_transaction.product_id = quatro_product.product_id), product_price = (select quatro_product.product_price from quatro_product where quatro_transaction.product_id = quatro_product.product_id);",
-    values: [product_name, product_price],
+    text: `update quatro_transaction 
+            set 
+          product_name=
+            (select quatro_product.product_name 
+                from quatro_product 
+              where quatro_transaction.product_id = quatro_product.product_id)
+            , product_price=
+              (select quatro_product.product_price
+                from quatro_product 
+              where quatro_transaction.product_id = quatro_product.product_id)
+            , transaction_timestamp=$1 where user_id=$2;`,
+    values: [transaction_timestamp, user_id],
+    // values: [product_name, product_price, transaction_timestamp],
   };
 
   let resultQuery = await pool.query(query);
@@ -105,18 +118,13 @@ const updateTransaction = async function (product_name, product_price) {
 };
 
 const updateTransactionAPI = async (request, response) => {
-  const { product_name, product_price } = request.body;
+  const { user_id } = request.body;
   try {
-    let transactionUpdate = await updateTransaction(
-      product_name,
-      product_price
-    );
-    response
-      .status(200)
-      .json({
-        result: transactionUpdate,
-        message: "Successfully update in transaction",
-      });
+    let transactionUpdate = await updateTransaction(user_id);
+    response.status(200).json({
+      result: transactionUpdate,
+      message: "Successfully update in transaction",
+    });
   } catch (error) {
     console.log("error:", error);
     response.status(404).json({ error: error.message });

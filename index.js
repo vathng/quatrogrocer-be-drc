@@ -53,13 +53,14 @@ app.get("/quatro_address/get", db_address.searchAddressAPI);
 app.post("/quatro_address/create", db_address.createAddressAPI);
 app.post("/quatro_address/update_details", db_address.updateAddressDetailsAPI);
 app.delete("/quatro_address/delete", db_address.deleteAddressAPI);
-//Transaction
-app.get("/quatro_transaction/search", db_transac.searchTransactionAPI);
-app.post("/quatro_transaction/create", db_transac.createTransactionAPI);
-//Transaction
+//Cart
 app.post("/quatro_cart/create", db_cart.createCartAPI);
-app.delete("/quatro_cart/delete", db_cart.deleteCartAPI);
-
+app.post("/quatro_cart/delete", db_cart.deleteCartAPI);
+app.post("/quatro_cart/push", db_cart.pushCartAPI);
+//Transaction
+app.post("/quatro_transaction/create", db_transac.createTransactionAPI);
+// app.delete("/quatro_transsaction/delete", db_transac.de);
+app.post("/quatro_transaction/update", db_transac.updateTransactionAPI);
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
 });

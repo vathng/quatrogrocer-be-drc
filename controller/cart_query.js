@@ -68,10 +68,10 @@ const deleteCartAPI = async (request, response) => {
   }
 };
 
-const pushCart = async function (user_id, product_id, product_quantity) {
+const pushCart = async function (cart_id) {
   let query = {
-    text: "insert into quatro_transaction(user_id, product_id, product_quantity) select user_id, product_id, product_quantity from quatro_cart;",
-    values: [user_id, product_id, product_quantity],
+    text: "insert into quatro_transaction(user_id, product_id, product_quantity) select user_id, product_id, product_quantity from quatro_cart where cart_id = $1;",
+    values: [cart_id],
   };
 
   let resultQuery = await pool.query(query);
