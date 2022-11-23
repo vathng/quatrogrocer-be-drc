@@ -2,6 +2,9 @@ const bcrypt = require("bcrypt");
 const { Query } = require("pg");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+//validator implementation
+const validator = require("validator");
+const { passwordStrength } = require("check-password-strength");
 
 const Pool = require("pg").Pool;
 const pool = new Pool({
@@ -52,9 +55,16 @@ const loginUser = async function (email, password) {
   let resultQuery = await pool.query(query);
   let user = resultQuery.rows;
 
+  //validation
+
+  if (!email || !password) {
+    throw Error("All fields must be filled");
+  }
   if (user.length === 0) {
     throw Error("Email doesnt exist");
   }
+
+  //------------------------
 
   let validPassword = await bcrypt.compare(password, user[0]["password"]);
 
@@ -99,6 +109,58 @@ const createUser = async function (
 
   if (user.length !== 0) {
     throw Error("Email exist");
+  }
+  // all input fields empty
+
+  // if (
+  //   !email &&
+  //   !password &&
+  //   !first_name &&
+  //   !last_name &&
+  //   !date_of_birth &&
+  //   !gender &&
+  //   !phone_number
+  // ) {
+  //   throw Error("All input fields cannot be empty");
+  // }
+
+  //if email input field is empty
+
+  if (!email && !password) {
+    throw Error("Email and password field cannot be empty");
+  }
+  if (!email || !email.trim()) {
+    throw Error("Email field cannot be empty");
+  }
+  //no dob
+
+  if (!date_of_birth) {
+    throw Error("Please fill in all the input fields");
+  }
+  if (!password || !password.trim()) {
+    throw Error("Password field cannot be empty");
+  }
+
+  if (!validator.isEmail(email)) {
+    throw Error("Email not valid");
+  }
+
+  if (password.length < 8) {
+    throw Error("Password should consists at least 8 characters");
+  }
+
+  if (
+    !validator.isStrongPassword(password, {
+      minLength: 8,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 1,
+    })
+  ) {
+    throw Error(
+      "Password should consists at least 1 lowercase, 1 uppercase, 1 number and 1 symbol "
+    );
   }
 
   const salt = await bcrypt.genSalt(10);

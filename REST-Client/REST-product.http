@@ -2,7 +2,7 @@ GET http://localhost:5004/quatro_product/get
 
 
 ###
-POST http://localhost:5000/quatro_product/create
+POST http://localhost:5004/quatro_product/create
 Content-Type: application/json
 
 {
