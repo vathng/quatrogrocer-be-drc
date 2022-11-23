@@ -131,8 +131,47 @@ const updateTransactionAPI = async (request, response) => {
   }
 };
 
+const updateTransactionDiscount = async function (user_id) {
+  let transaction_timestamp = new Date();
+  let query = {
+    text: `update quatro_transaction 
+            set 
+          product_name=
+            (select quatro_product_discount.product_name 
+                from quatro_product_discount 
+              where quatro_transaction.product_id = quatro_product_discount.product_id)
+            , product_price=
+              (select quatro_product_discount.product_price
+                from quatro_product_discount 
+              where quatro_transaction.product_id = quatro_product_discount.product_id)
+            , transaction_timestamp=$1 where user_id=$2;`,
+    values: [transaction_timestamp, user_id],
+    // values: [product_name, product_price, transaction_timestamp],
+  };
+
+  let resultQuery = await pool.query(query);
+  let transactionDiscountUpdate = resultQuery.rows;
+
+  return transactionDiscountUpdate;
+};
+
+const updateTransactionDiscountAPI = async (request, response) => {
+  const { user_id } = request.body;
+  try {
+    let transactionDiscountUpdate = await updateTransactionDiscount(user_id);
+    response.status(200).json({
+      result: transactionDiscountUpdate,
+      message: "Successfully update in transaction",
+    });
+  } catch (error) {
+    console.log("error:", error);
+    response.status(404).json({ error: error.message });
+  }
+};
+
 module.exports = {
   searchTransactionAPI,
   createTransactionAPI,
   updateTransactionAPI,
+  updateTransactionDiscountAPI,
 };

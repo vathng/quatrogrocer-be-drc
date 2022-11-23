@@ -1,4 +1,4 @@
-GET http://localhost:5004/quatro_product/get
+
 
 ###
 POST http://localhost:5004/quatro_product/create

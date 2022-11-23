@@ -93,8 +93,98 @@ const pushCartAPI = async (request, response) => {
   }
 };
 
+const createDiscountCart = async function (
+  cart_id,
+  user_id,
+  product_id,
+  product_quantity
+) {
+  let query = {
+    text: "insert into quatro_cart(cart_id, user_id, product_id, product_quantity) values($1,$2,$3,$4) returning cart_id",
+    values: [cart_id, user_id, product_id, product_quantity],
+  };
+
+  let resultQuery = await pool.query(query);
+  let newCartDiscount = resultQuery.rows;
+
+  return newCartDiscount;
+};
+
+const createCartDiscountAPI = async (request, response) => {
+  const { cart_id, user_id, product_id, product_quantity } = request.body;
+  try {
+    let newCartDiscount = await createDiscountCart(
+      cart_id,
+      user_id,
+      product_id,
+      product_quantity
+    );
+    response
+      .status(200)
+      .json({ result: newCartDiscount, message: "Successfully added to cart" });
+  } catch (error) {
+    console.log("error:", error);
+    response.status(404).json({ error: error.message });
+  }
+};
+
+const deleteDiscountCart = async function (cart_id) {
+  let query = {
+    text: "delete from quatro_cart where cart_id = $1 ",
+    values: [cart_id],
+  };
+
+  let resultQuery = await pool.query(query);
+  let cartDeleteDiscount = resultQuery.rows;
+
+  return cartDeleteDiscount;
+};
+
+const deleteCartDiscountAPI = async (request, response) => {
+  const { cart_id } = request.body;
+  try {
+    let cartDeleteDiscount = await deleteDiscountCart(cart_id);
+    response.status(200).json({
+      result: cartDeleteDiscount,
+      message: "Successfully delete from cart",
+    });
+  } catch (error) {
+    console.log("error:", error);
+    response.status(404).json({ error: error.message });
+  }
+};
+
+const pushDiscountCart = async function (cart_id) {
+  let query = {
+    text: "insert into quatro_transaction(user_id, product_id, product_quantity) select user_id, product_id, product_quantity from quatro_cart where cart_id = $1;",
+    values: [cart_id],
+  };
+
+  let resultQuery = await pool.query(query);
+  let cartDiscountPush = resultQuery.rows;
+
+  return cartDiscountPush;
+};
+
+const pushDiscountCartAPI = async (request, response) => {
+  const { cart_id } = request.body;
+  try {
+    let cartDiscountPush = await pushDiscountCart(cart_id);
+    response.status(200).json({
+      result: cartDiscountPush,
+      message: "Successfully push from cart",
+    });
+  } catch (error) {
+    console.log("error:", error);
+    response.status(404).json({ error: error.message });
+  }
+};
+
 module.exports = {
   deleteCartAPI,
   createCartAPI,
   pushCartAPI,
+  deleteCartDiscountAPI,
+  createCartDiscountAPI,
+  pushDiscountCartAPI,
 };

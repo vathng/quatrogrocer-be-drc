@@ -265,6 +265,181 @@ const deleteProductAPI = async (request, response) => {
   }
 };
 
+const createDiscountProduct = async function (
+  product_name,
+  product_description,
+  product_category,
+  product_price,
+  product_quantity,
+  product_image
+) {
+  let query_1 = {
+    text: "select * from quatro_product_discount where product_name=$1",
+    values: [product_name],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let product = resultQuery_1.rows;
+
+  if (product.length !== 0) {
+    throw Error("Product exist");
+  }
+
+  let query = {
+    text: "insert into quatro_product(product_name, product_description, product_category, product_price, product_quantity, product_image) values($1,$2,$3,$4,$5,$6) returning product_id",
+    values: [
+      product_name,
+      product_description,
+      product_category,
+      product_price,
+      product_quantity,
+      product_image,
+    ],
+  };
+
+  let resultQuery = await pool.query(query);
+  let newProductDiscount = resultQuery.rows;
+
+  return newProductDiscount;
+};
+
+const createDiscountProductAPI = async (request, response) => {
+  const {
+    product_name,
+    product_description,
+    product_category,
+    product_price,
+    product_quantity,
+    product_image,
+  } = request.body;
+  try {
+    let newProductDiscount = await createDiscountProduct(
+      product_name,
+      product_description,
+      product_category,
+      product_price,
+      product_quantity,
+      product_image
+    );
+    response.status(200).json({ result: newProductDiscount });
+  } catch (error) {
+    console.log("error:", error);
+    response.status(404).json({ error: error.message });
+  }
+};
+
+const updateDiscountProductDetails = async function (
+  product_name,
+  product_description,
+  product_category,
+  product_image,
+  product_id
+) {
+  let query = {
+    text: `update quatro_product set product_name = coalesce(nullif($1,''), product_name),
+           product_description = coalesce(nullif($2,''), product_description),
+           product_category = coalesce(nullif($3,''), product_category),
+           product_image = coalesce(nullif($4,''), product_image)
+           where product_id = $5;`,
+    values: [
+      product_name,
+      product_description,
+      product_category,
+      product_image,
+      product_id,
+    ],
+  };
+  let resultQuery = await pool.query(query);
+  let updateProductDiscount = resultQuery.rows;
+
+  return updateProductDiscount;
+};
+
+const updateDiscountProductDetailsAPI = async (request, response) => {
+  const {
+    product_name,
+    product_description,
+    product_category,
+    product_image,
+    product_id,
+  } = request.body;
+
+  try {
+    let updateProductDiscount = await updateDiscountProductDetails(
+      product_name,
+      product_description,
+      product_category,
+      product_image,
+      product_id
+    );
+
+    response
+      .status(200)
+      .json({ result: updateProductDiscount, message: "Product updated" });
+  } catch (error) {
+    console.log("error:", error);
+    response.status(404).json({ error: error.message });
+  }
+};
+
+const minusDiscountProductQuantity = async function (
+  product_quantity,
+  product_id
+) {
+  let query = {
+    text: `update quatro_product_discount set product_quantity = product_quantity - $1 where product_id = $2;`,
+    values: [product_quantity, product_id],
+  };
+
+  let resultQuery = await pool.query(query);
+  let minusDiscountQuantity = resultQuery.rows;
+
+  return minusDiscountQuantity;
+};
+
+const minusDiscountProductQuantityAPI = async (request, response) => {
+  const { product_quantity, product_id } = request.body;
+
+  try {
+    let minusDiscountQuantity = await minusDiscountProductQuantity(
+      product_quantity,
+      product_id
+    );
+
+    response.status(200).json({
+      result: minusDiscountQuantity,
+      message: "Product quantity updated",
+    });
+  } catch (error) {
+    console.log("error:", error);
+    response.status(404).json({ error: error.message });
+  }
+};
+
+const deleteDiscountProduct = async function (product_id) {
+  let query = {
+    text: "delete from quatro_product_discount where product_id = $1",
+    values: [product_id],
+  };
+
+  let resultQuery = await pool.query(query);
+  let discountProductDelete = resultQuery.rows;
+  return discountProductDelete;
+};
+
+const deleteDiscountProductAPI = async (request, response) => {
+  const { product_id } = request.body;
+  try {
+    let discountProductDelete = await deleteDiscountProduct(product_id);
+    response
+      .status(200)
+      .json({ result: discountProductDelete, message: "Product deleted" });
+  } catch (error) {
+    console.log("error:", error);
+    response.status(404).json({ error: error.message });
+  }
+};
+
 module.exports = {
   searchProductAPI,
   createProductAPI,
@@ -273,4 +448,8 @@ module.exports = {
   updateProductQuantityAPI,
   minusProductQuantityAPI,
   deleteProductAPI,
+  createDiscountProductAPI,
+  updateDiscountProductDetailsAPI,
+  deleteDiscountProductAPI,
+  minusDiscountProductQuantityAPI,
 };
