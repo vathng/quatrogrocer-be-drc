@@ -54,5 +54,6 @@ create table quatro_cart(
 cart_id int not null, 
 user_id int not null, 
 product_id int, 
+discount_product_id int,
 product_quantity int not null);
 -- SQL
