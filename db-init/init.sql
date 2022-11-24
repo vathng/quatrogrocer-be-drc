@@ -21,13 +21,13 @@ create table quatro_product(
 );
 
 create table quatro_product_discount(
-    product_id serial primary key, 
-    product_name varchar not null,
-    product_description varchar not null, 
-    product_category varchar not null, 
-    product_price float not null, 
-    product_quantity int not null,
-    product_image varchar
+    discount_product_id serial primary key, 
+    discount_product_name varchar not null,
+    discount_product_description varchar not null, 
+    discount_product_category varchar not null, 
+    discount_product_price float not null, 
+    discount_product_quantity int not null,
+    discount_product_image varchar
 );
 
 create table quatro_address(
@@ -41,7 +41,6 @@ create table quatro_address(
 );
 
 create table quatro_transaction(
-transaction_id int,
 product_id int, 
 user_id int, 
 product_name varchar, 

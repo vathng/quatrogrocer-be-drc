@@ -59,11 +59,11 @@ app.post(
   db_product_discount.updateDiscountProductDetailsAPI
 );
 app.post(
-  "/quatro_product_discount",
+  "/quatro_product_discount/minus",
   db_product_discount.minusProductQuantityAPI
 );
 app.delete(
-  "/quatro_product_discount",
+  "/quatro_product_discount/delete",
   db_product_discount.deleteDiscountProductAPI
 );
 //Address
@@ -87,7 +87,10 @@ app.post(
   "/quatro_transaction/create_discount",
   db_transac.updateTransactionDiscountAPI
 );
-app.post("/quatro_transaction/update", db_transac.updateTransactionAPI);
+app.post(
+  "/quatro_transaction/update_discount",
+  db_transac.updateTransactionAPI
+);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);

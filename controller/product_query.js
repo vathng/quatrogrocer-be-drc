@@ -266,16 +266,16 @@ const deleteProductAPI = async (request, response) => {
 };
 
 const createDiscountProduct = async function (
-  product_name,
-  product_description,
-  product_category,
-  product_price,
-  product_quantity,
-  product_image
+  discount_product_name,
+  discount_product_description,
+  discount_product_category,
+  discount_product_price,
+  discount_product_quantity,
+  discount_product_image
 ) {
   let query_1 = {
-    text: "select * from quatro_product_discount where product_name=$1",
-    values: [product_name],
+    text: "select * from quatro_product_discount where discount_product_name=$1",
+    values: [discount_product_name],
   };
 
   let resultQuery_1 = await pool.query(query_1);
@@ -286,14 +286,14 @@ const createDiscountProduct = async function (
   }
 
   let query = {
-    text: "insert into quatro_product(product_name, product_description, product_category, product_price, product_quantity, product_image) values($1,$2,$3,$4,$5,$6) returning product_id",
+    text: "insert into quatro_product_discount(discount_product_name, discount_product_description, discount_product_category, discount_product_price, discount_product_quantity, discount_product_image) values($1,$2,$3,$4,$5,$6) returning discount_product_id",
     values: [
-      product_name,
-      product_description,
-      product_category,
-      product_price,
-      product_quantity,
-      product_image,
+      discount_product_name,
+      discount_product_description,
+      discount_product_category,
+      discount_product_price,
+      discount_product_quantity,
+      discount_product_image,
     ],
   };
 
@@ -305,21 +305,21 @@ const createDiscountProduct = async function (
 
 const createDiscountProductAPI = async (request, response) => {
   const {
-    product_name,
-    product_description,
-    product_category,
-    product_price,
-    product_quantity,
-    product_image,
+    discount_product_name,
+    discount_product_description,
+    discount_product_category,
+    discount_product_price,
+    discount_product_quantity,
+    discount_product_image,
   } = request.body;
   try {
     let newProductDiscount = await createDiscountProduct(
-      product_name,
-      product_description,
-      product_category,
-      product_price,
-      product_quantity,
-      product_image
+      discount_product_name,
+      discount_product_description,
+      discount_product_category,
+      discount_product_price,
+      discount_product_quantity,
+      discount_product_image
     );
     response.status(200).json({ result: newProductDiscount });
   } catch (error) {
@@ -329,24 +329,24 @@ const createDiscountProductAPI = async (request, response) => {
 };
 
 const updateDiscountProductDetails = async function (
-  product_name,
-  product_description,
-  product_category,
-  product_image,
-  product_id
+  discount_product_name,
+  discount_product_description,
+  discount_product_category,
+  discount_product_image,
+  discount_product_id
 ) {
   let query = {
-    text: `update quatro_product set product_name = coalesce(nullif($1,''), product_name),
-           product_description = coalesce(nullif($2,''), product_description),
-           product_category = coalesce(nullif($3,''), product_category),
-           product_image = coalesce(nullif($4,''), product_image)
-           where product_id = $5;`,
+    text: `update quatro_product_discount set discount_product_name = coalesce(nullif($1,''), product_name),
+           discount_product_description = coalesce(nullif($2,''), product_description),
+           discount_product_category = coalesce(nullif($3,''), product_category),
+           discount_product_image = coalesce(nullif($4,''), product_image)
+           where discount_product_id = $5;`,
     values: [
-      product_name,
-      product_description,
-      product_category,
-      product_image,
-      product_id,
+      discount_product_name,
+      discount_product_description,
+      discount_product_category,
+      discount_product_image,
+      discount_product_id,
     ],
   };
   let resultQuery = await pool.query(query);
@@ -357,20 +357,20 @@ const updateDiscountProductDetails = async function (
 
 const updateDiscountProductDetailsAPI = async (request, response) => {
   const {
-    product_name,
-    product_description,
-    product_category,
-    product_image,
-    product_id,
+    discount_product_name,
+    discount_product_description,
+    discount_product_category,
+    discount_product_image,
+    discount_product_id,
   } = request.body;
 
   try {
     let updateProductDiscount = await updateDiscountProductDetails(
-      product_name,
-      product_description,
-      product_category,
-      product_image,
-      product_id
+      discount_product_name,
+      discount_product_description,
+      discount_product_category,
+      discount_product_image,
+      discount_product_id
     );
 
     response
@@ -383,12 +383,12 @@ const updateDiscountProductDetailsAPI = async (request, response) => {
 };
 
 const minusDiscountProductQuantity = async function (
-  product_quantity,
-  product_id
+  discount_product_quantity,
+  discount_product_id
 ) {
   let query = {
-    text: `update quatro_product_discount set product_quantity = product_quantity - $1 where product_id = $2;`,
-    values: [product_quantity, product_id],
+    text: `update quatro_product_discount set discount_product_quantity = discount_product_quantity - $1 where discount_product_id = $2;`,
+    values: [discount_product_quantity, discount_product_id],
   };
 
   let resultQuery = await pool.query(query);
@@ -398,12 +398,12 @@ const minusDiscountProductQuantity = async function (
 };
 
 const minusDiscountProductQuantityAPI = async (request, response) => {
-  const { product_quantity, product_id } = request.body;
+  const { discount_product_quantity, discount_product_id } = request.body;
 
   try {
     let minusDiscountQuantity = await minusDiscountProductQuantity(
-      product_quantity,
-      product_id
+      discount_product_quantity,
+      discount_product_id
     );
 
     response.status(200).json({
@@ -418,7 +418,7 @@ const minusDiscountProductQuantityAPI = async (request, response) => {
 
 const deleteDiscountProduct = async function (product_id) {
   let query = {
-    text: "delete from quatro_product_discount where product_id = $1",
+    text: "delete from quatro_product_discount where discount_product_id = $1",
     values: [product_id],
   };
 
@@ -428,9 +428,11 @@ const deleteDiscountProduct = async function (product_id) {
 };
 
 const deleteDiscountProductAPI = async (request, response) => {
-  const { product_id } = request.body;
+  const { discount_product_id } = request.body;
   try {
-    let discountProductDelete = await deleteDiscountProduct(product_id);
+    let discountProductDelete = await deleteDiscountProduct(
+      discount_product_id
+    );
     response
       .status(200)
       .json({ result: discountProductDelete, message: "Product deleted" });

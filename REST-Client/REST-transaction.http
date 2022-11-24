@@ -20,3 +20,11 @@ Content-Type: application/json
 {
  "user_id" : "7"
 }
+
+###
+POST http://localhost:5004/quatro_transaction/update_discount
+Content-Type: application/json
+
+{
+ "user_id" : "7"
+}
