@@ -5,6 +5,7 @@ const app = express();
 const port = 5004;
 const db_user = require("./controller/user_query");
 const db_product = require("./controller/product_query");
+const db_product_discount = require("./controller/product_query");
 const db_address = require("./controller/address_query");
 const db_transac = require("./controller/transaction_query");
 const db_cart = require("./controller/cart_query");
@@ -46,18 +47,50 @@ app.post(
   "/quatro_product/update_quantity",
   db_product.updateProductQuantityAPI
 );
+app.post("/quatro_product/minus_quantity", db_product.minusProductQuantityAPI);
 app.delete("/quatro_product/delete", db_product.deleteProductAPI);
+//Discount Product
+app.post(
+  "/quatro_product_discount/create",
+  db_product_discount.createDiscountProductAPI
+);
+app.post(
+  "/quatro_product_discount/update",
+  db_product_discount.updateDiscountProductDetailsAPI
+);
+app.post(
+  "/quatro_product_discount/minus",
+  db_product_discount.minusProductQuantityAPI
+);
+app.delete(
+  "/quatro_product_discount/delete",
+  db_product_discount.deleteDiscountProductAPI
+);
 //Address
 app.get("/quatro_address/get", db_address.searchAddressAPI);
 app.post("/quatro_address/create", db_address.createAddressAPI);
 app.post("/quatro_address/update_details", db_address.updateAddressDetailsAPI);
 app.delete("/quatro_address/delete", db_address.deleteAddressAPI);
-//Transaction
-app.get("/quatro_transaction/search", db_transac.searchTransactionAPI);
-app.post("/quatro_transaction/create", db_transac.createTransactionAPI);
-//Transaction
+//Cart
 app.post("/quatro_cart/create", db_cart.createCartAPI);
-app.delete("/quatro_cart/delete", db_cart.deleteCartAPI);
+app.post("/quatro_cart/delete", db_cart.deleteCartAPI);
+app.post("/quatro_cart/push", db_cart.pushCartAPI);
+//Discount Cart
+app.post("/quatro_cart/create_discount", db_cart.createCartDiscountAPI);
+app.post("/quatro_cart/delete_discount", db_cart.deleteCartDiscountAPI);
+app.post("/quatro_cart/push_discount", db_cart.pushDiscountCartAPI);
+//Transaction
+app.post("/quatro_transaction/create", db_transac.createTransactionAPI);
+app.post("/quatro_transaction/update", db_transac.updateTransactionAPI);
+//Discount Transaction
+app.post(
+  "/quatro_transaction/create_discount",
+  db_transac.updateTransactionDiscountAPI
+);
+app.post(
+  "/quatro_transaction/update_discount",
+  db_transac.updateTransactionDiscountAPI
+);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);

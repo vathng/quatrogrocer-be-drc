@@ -3,9 +3,9 @@ POST http://localhost:5004/quatro_transaction/create
 Content-Type: application/json
 
 {
-      "transaction_id": "1",
-      "product_id": "4",
-      "user_id": "1",
+      "transaction_id": "2",
+      "product_id": "5",
+      "user_id": "3",
       "product_name": "Kicap Pedas Manis Mahsuri",
       "product_quantity": "2",
       "product_price": "6.2",
@@ -13,4 +13,18 @@ Content-Type: application/json
 }
 
 
+###
+POST http://localhost:5004/quatro_transaction/update
+Content-Type: application/json
 
+{
+ "user_id" : "7"
+}
+
+###
+POST http://localhost:5004/quatro_transaction/update_discount
+Content-Type: application/json
+
+{
+ "user_id" : "7"
+}
