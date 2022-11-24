@@ -1,12 +1,13 @@
 
 
+
 ###
 POST http://localhost:5004/quatro_product/create
 Content-Type: application/json
 
 {
-    "product_name":"Mineral Water",
-    "product_description" : "Sky juice",
+    "product_name":"Water",
+    "product_description" : "Sky",
     "product_category": "Drinks",
     "product_price": 2.50,
     "product_quantity": "100",
@@ -20,11 +21,14 @@ POST http://localhost:5004/quatro_product/update_details
 Content-Type: application/json
 
 {
-    "product_name":"Maggi Tomyam",
-    "product_description" : "",
-    "product_category": "",
-    "product_image": "",
-    "product_id" : "1"
+
+    "product_name":"",
+    "product_description" :"",
+    "product_category": "Tea",
+    "product_image": "https://www.miizu.my/image/digitalgrocer/image/cache/data/all_product_images/product-204/3%20new-1080x1080.png",
+    "product_id" : "5"
+
+
 }
 
 ###
@@ -33,7 +37,7 @@ Content-Type: application/json
 
 {
     "product_price": "3.79",
-    "product_id": "16"
+    "product_id": "59"
 }
 
 update quatro_product set product_quantity = product_quantity - $1 where product_id = $2
@@ -62,5 +66,5 @@ DELETE http://localhost:5004/quatro_product/delete
 Content-Type: application/json
 
 {
-    "product_id" : 2
+    "product_id" : "59"
 }
