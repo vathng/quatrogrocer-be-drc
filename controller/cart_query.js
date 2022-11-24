@@ -96,12 +96,12 @@ const pushCartAPI = async (request, response) => {
 const createDiscountCart = async function (
   cart_id,
   user_id,
-  product_id,
+  discount_product_id,
   product_quantity
 ) {
   let query = {
-    text: "insert into quatro_cart(cart_id, user_id, product_id, product_quantity) values($1,$2,$3,$4) returning cart_id",
-    values: [cart_id, user_id, product_id, product_quantity],
+    text: "insert into quatro_cart(cart_id, user_id, discount_product_id, product_quantity) values($1,$2,$3,$4) returning cart_id",
+    values: [cart_id, user_id, discount_product_id, product_quantity],
   };
 
   let resultQuery = await pool.query(query);
@@ -111,12 +111,13 @@ const createDiscountCart = async function (
 };
 
 const createCartDiscountAPI = async (request, response) => {
-  const { cart_id, user_id, product_id, product_quantity } = request.body;
+  const { cart_id, user_id, discount_product_id, product_quantity } =
+    request.body;
   try {
     let newCartDiscount = await createDiscountCart(
       cart_id,
       user_id,
-      product_id,
+      discount_product_id,
       product_quantity
     );
     response
@@ -156,7 +157,7 @@ const deleteCartDiscountAPI = async (request, response) => {
 
 const pushDiscountCart = async function (cart_id) {
   let query = {
-    text: "insert into quatro_transaction(user_id, product_id, product_quantity) select user_id, product_id, product_quantity from quatro_cart where cart_id = $1;",
+    text: "insert into quatro_transaction(user_id, discount_product_id, product_quantity) select user_id, discount_product_id, product_quantity from quatro_cart where cart_id = $1;",
     values: [cart_id],
   };
 

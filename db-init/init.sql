@@ -41,7 +41,8 @@ create table quatro_address(
 );
 
 create table quatro_transaction(
-product_id int, 
+product_id int,
+discount_product_id int, 
 user_id int, 
 product_name varchar, 
 product_quantity int, 
@@ -52,6 +53,6 @@ transaction_timestamp timestamp) ;
 create table quatro_cart(
 cart_id int not null, 
 user_id int not null, 
-product_id int not null, 
+product_id int, 
 product_quantity int not null);
 -- SQL

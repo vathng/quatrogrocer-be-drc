@@ -89,7 +89,7 @@ app.post(
 );
 app.post(
   "/quatro_transaction/update_discount",
-  db_transac.updateTransactionAPI
+  db_transac.updateTransactionDiscountAPI
 );
 
 app.listen(port, () => {

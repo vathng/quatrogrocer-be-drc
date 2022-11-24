@@ -138,11 +138,11 @@ const updateTransactionDiscount = async function (user_id) {
           product_name=
             (select quatro_product_discount.discount_product_name 
                 from quatro_product_discount 
-              where quatro_transaction.product_id = quatro_product_discount.discount_product_id)
+              where quatro_transaction.discount_product_id = quatro_product_discount.discount_product_id)
             , product_price=
               (select quatro_product_discount.discount_product_price
                 from quatro_product_discount 
-              where quatro_transaction.product_id = quatro_product_discount.discount_product_id)
+              where quatro_transaction.discount_product_id = quatro_product_discount.discount_product_id)
             , transaction_timestamp=$1 where user_id=$2;`,
     values: [transaction_timestamp, user_id],
   };
