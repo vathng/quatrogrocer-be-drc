@@ -6,7 +6,6 @@ create table quatro_user(
     last_name varchar(30),
     date_of_birth varchar(30),
     gender varchar,
-    phone_number varchar(30),
     user_credit float
 );
 
