@@ -92,8 +92,7 @@ const createUser = async function (
   first_name,
   last_name,
   date_of_birth,
-  gender,
-  phone_number
+  gender
 ) {
   let query_1 = {
     text: "select email, password from quatro_user where email=$1",
@@ -109,6 +108,7 @@ const createUser = async function (
     throw Error("Email exist");
   }
 
+
   if (
     first_name == "" ||
     !regName.test(first_name) ||
@@ -117,6 +117,7 @@ const createUser = async function (
   ) {
     throw Error("Name should contain alphabets only");
   }
+
 
   if (!gender) {
     throw Error("Please select gender option");
@@ -160,15 +161,7 @@ const createUser = async function (
 
   let query = {
     text: "insert into quatro_user(email,password,first_name,last_name,date_of_birth,gender,phone_number,user_credit) values ($1,$2,$3,$4,$5,$6,$7,100) returning user_id",
-    values: [
-      email,
-      passHash,
-      first_name,
-      last_name,
-      date_of_birth,
-      gender,
-      phone_number,
-    ],
+    values: [email, passHash, first_name, last_name, date_of_birth, gender],
   };
 
   let resultQuery = await pool.query(query);
@@ -178,15 +171,8 @@ const createUser = async function (
 };
 
 const createUserAPI = async (request, response) => {
-  const {
-    email,
-    password,
-    first_name,
-    last_name,
-    date_of_birth,
-    gender,
-    phone_number,
-  } = request.body;
+  const { email, password, first_name, last_name, date_of_birth, gender } =
+    request.body;
   try {
     let newUser = await createUser(
       email,
@@ -194,8 +180,7 @@ const createUserAPI = async (request, response) => {
       first_name,
       last_name,
       date_of_birth,
-      gender,
-      phone_number
+      gender
     );
 
     response.status(200).json({ result: email, message: "User Created" });
@@ -209,7 +194,6 @@ const updateUser = async function (
   first_name,
   last_name,
   date_of_birth,
-  phone_number,
   email,
   oldPassword,
   password,
@@ -244,19 +228,10 @@ const updateUser = async function (
     text: `update quatro_user set first_name = coalesce(nullif($1,''), first_name),
            last_name = coalesce(nullif($2,''), last_name),
            date_of_birth = coalesce(nullif($3,''), date_of_birth),
-           phone_number = coalesce(nullif($4,''), phone_number),
-           email = coalesce(nullif($5,''), email),
-           password = coalesce(nullif($6,''), password)
-           where user_id = $7`,
-    values: [
-      first_name,
-      last_name,
-      date_of_birth,
-      phone_number,
-      email,
-      passHash,
-      user_id,
-    ],
+           email = coalesce(nullif($4,''), email),
+           password = coalesce(nullif($5,''), password),
+           where user_id = $6`,
+    values: [first_name, last_name, date_of_birth, email, passHash, user_id],
   };
 
   let resultQuery = await pool.query(query);
@@ -270,7 +245,6 @@ const updateUserAPI = async (request, response) => {
     first_name,
     last_name,
     date_of_birth,
-    phone_number,
     email,
     oldPassword,
     password,
@@ -282,7 +256,6 @@ const updateUserAPI = async (request, response) => {
       first_name,
       last_name,
       date_of_birth,
-      phone_number,
       email,
       oldPassword,
       password,
