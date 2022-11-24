@@ -25,7 +25,7 @@ const getAllProduct = async function (product) {
 
 const searchProductAPI = async (request, response) => {
   try {
-    let searchProductName = await getAllProduct(request.query.q);
+    let searchProductName = await getAllProduct(request.query.product);
     response.status(200).json({ result: searchProductName });
   } catch (error) {
     response.status(404).json({ error: error.message });
