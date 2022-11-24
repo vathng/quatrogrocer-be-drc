@@ -85,6 +85,7 @@ const createTransactionAPI = async (request, response) => {
       product_price,
       transaction_timestamp
     );
+    // response.status(200).json({ result: "newTransaction", message: "Success" });
     response.status(200).json({ result: newTransaction, message: "Success" });
   } catch (error) {
     console.log("error:", error);
