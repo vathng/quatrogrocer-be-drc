@@ -6,12 +6,12 @@ POST http://localhost:5004/quatro_address/create
 Content-Type: application/json
 
 {
-    "address_line_1": "No 12",
-    "address_line_2": "",
-    "address_line_3": "Taman Pakatan Jaya",
-    "postcode": "31150 Ulu Kinta",
-    "state": "Perak",
-    "user_id": "1"
+    "address_line_1": "",
+    "address_line_2": "Taman Mewah",
+    "address_line_3": "Dengkil",
+    "postcode": "four thousand",
+    "state": "Selangor",
+    "user_id": "4"
 }
 
 ###
@@ -19,12 +19,12 @@ POST http://localhost:5004/quatro_address/update_details
 Content-Type: application/json
 
 {
-    "address_line_1": "No 2",
-    "address_line_2": "Persiaran Jaya 7",
-    "address_line_3": "21 Street",
-    "postcode": "12345 Gae",
-    "state": "Pop",
-    "address_id": "7"
+    "address_line_1": "No 18",
+    "address_line_2": "Taman Bukit Mewah",
+    "address_line_3": "Seremban",
+    "postcode": "70000",
+    "state": "Negeri Sembilan",
+    "address_id": "5"
 }
 
 ###
@@ -32,5 +32,5 @@ DELETE http://localhost:5004/quatro_address/delete
 Content-Type: application/json
 
 {
-    "address_id" : "9"
+    "address_id" : "4"
 }
