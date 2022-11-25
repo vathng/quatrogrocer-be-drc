@@ -8,10 +8,10 @@ const pool = new Pool({
   port: process.env.PGPORT,
 });
 
-const minusCreditUpdate = async function (user_id, user_credit) {
+const minusCreditUpdate = async function (user_credit, user_id) {
   let query = {
     text: `update quatro_user set user_credit = user_credit - $1 where user_id = $2;`,
-    values: [user_id, user_credit],
+    values: [user_credit, user_id],
   };
 
   let resultQuery = await pool.query(query);
@@ -21,10 +21,10 @@ const minusCreditUpdate = async function (user_id, user_credit) {
 };
 
 const minusCreditUpdateAPI = async (request, response) => {
-  const { user_id, user_credit } = request.body;
+  const { user_credit, user_id } = request.body;
 
   try {
-    let minusCredit = await minusCreditUpdate(user_id, user_credit);
+    let minusCredit = await minusCreditUpdate(user_credit, user_id);
 
     response.status(200).json({
       result: minusCredit,
@@ -36,10 +36,10 @@ const minusCreditUpdateAPI = async (request, response) => {
   }
 };
 
-const addCreditUpdate = async function (user_id, user_credit) {
+const addCreditUpdate = async function (user_credit, user_id) {
   let query = {
     text: `update quatro_user set user_credit = user_credit + $1 where user_id = $2;`,
-    values: [user_id, user_credit],
+    values: [user_credit, user_id],
   };
 
   let resultQuery = await pool.query(query);
@@ -49,10 +49,10 @@ const addCreditUpdate = async function (user_id, user_credit) {
 };
 
 const addCreditUpdateAPI = async (request, response) => {
-  const { user_id, user_credit } = request.body;
+  const { user_credit, user_id } = request.body;
 
   try {
-    let plusCredit = await addCreditUpdate(user_id, user_credit);
+    let plusCredit = await addCreditUpdate(user_credit, user_id);
 
     response.status(200).json({
       result: plusCredit,
