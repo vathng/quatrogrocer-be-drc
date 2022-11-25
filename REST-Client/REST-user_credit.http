@@ -1,0 +1,17 @@
+###
+POST http://localhost:5004/quatro_credit/minus_credit
+Content-Type: application/json
+
+{
+   "user_credit" : "3",
+   "user_id" : "4"
+}
+
+###
+POST http://localhost:5004/quatro_credit/add_credit
+Content-Type: application/json
+
+{
+   "user_credit" : "3",
+   "user_id" : "4"
+}

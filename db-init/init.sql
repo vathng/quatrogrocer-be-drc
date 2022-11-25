@@ -50,7 +50,6 @@ transaction_total float generated always as(product_quantity * product_price) st
 transaction_timestamp timestamp) ;
 
 create table quatro_cart(
-cart_id int not null, 
 user_id int not null, 
 product_id int, 
 discount_product_id int,

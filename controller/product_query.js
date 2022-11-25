@@ -11,7 +11,7 @@ const pool = new Pool({
 const getAllProduct = async function (product) {
   let query = {
     text:
-      "select product_name, product_description, product_category, product_price, product_quantity, product_image from quatro_product " +
+      "select product_id, product_name, product_description, product_category, product_price, product_quantity, product_image from quatro_product " +
       (product ? "where lower(product_name) like $1 " : "") +
       "order by product_id asc ",
     values: product ? [`%${product}%`.toLowerCase()] : [],
@@ -25,8 +25,8 @@ const getAllProduct = async function (product) {
 
 const searchProductAPI = async (request, response) => {
   try {
-    let searchProductName = await getAllProduct(request.query.q);
-    response.status(200).json({ result: searchProductName });
+    let GetProduct = await getAllProduct(request.query.product);
+    response.status(200).json({ result: GetProduct });
   } catch (error) {
     response.status(404).json({ error: error.message });
   }
