@@ -1,113 +1,138 @@
-POST http://localhost:5004/quatro_product/create
+POST http://localhost:5004/quatro_product_discount/create
 Content-Type: application/json
 
 {
-    "product_name":"RIBENA PET REGULAR 450ML",
-    "product_description" : "Water,Sucrose,Blackcurrant Juice (5%),Vitamin C,Preservative (Potassium Sorbate),Acidity Regulator (Citric Acid),Colour (Grape Skin Extract),Contains Permitted Preservative, Colouring Substance and Acidity Regulator as Food Conditioner.",
-    "product_category": "Juice",
-    "product_price": 3.20,
-    "product_quantity": "100",
-    "product_image": "https://cf.shopee.com.my/file/6232d0d7ddb7b1866412864cd151f905"
+    "discount_product_name":"RIBENA PET REGULAR 450ML",
+    "discount_product_description" : "Water,Sucrose,Blackcurrant Juice (5%),Vitamin C,Preservative (Potassium Sorbate),Acidity Regulator (Citric Acid),Colour (Grape Skin Extract),Contains Permitted Preservative, Colouring Substance and Acidity Regulator as Food Conditioner.",
+    "discount_product_category": "Juice",
+    "discount_product_price": 3.20,
+    "discount_product_quantity": "100",
+    "discount_product_image": "https://cf.shopee.com.my/file/6232d0d7ddb7b1866412864cd151f905"
 }
 
 ###
 
-POST http://localhost:5004/quatro_product/create
+POST http://localhost:5004/quatro_product_discount/create
 Content-Type: application/json
 
 {
-    "product_name":"MILO FUZE 3IN1 REGULAR 8SX33G",
-    "product_description" : "NestlÃ© Milo Activ-Go 3 In 1 Chocolate Malt Drink 8 Stick Packs x 33g",
-    "product_category": "Tea, Coffee, Chocolate Drink",
-    "product_price": 8.75,
-    "product_quantity": "100",
-    "product_image": "https://cdn.shopify.com/s/files/1/0431/6200/9762/products/056104-1-1_1024x.jpg?v=1635459893"
+    "discount_product_name":"MILO FUZE 3IN1 REGULAR 8SX33G",
+    "discount_product_description" : "NestlÃ© Milo Activ-Go 3 In 1 Chocolate Malt Drink 8 Stick Packs x 33g",
+    "discount_product_category": "Tea, Coffee, Chocolate Drink",
+    "discount_product_price": 8.75,
+    "discount_product_quantity": "100",
+    "discount_product_image": "https://cdn.shopify.com/s/files/1/0431/6200/9762/products/056104-1-1_1024x.jpg?v=1635459893"
 }
 
 ###
 
+POST http://localhost:5004/quatro_product_discount/create
+Content-Type: application/json
+
 {
-    "product_name":"BOH TEA 500G",
-    "product_description" : "BOH Cameron Highlands Tea Leaves 500g 100% Tea Leaves",
-    "product_category": "Tea, Coffee, Chocolate Drink",
-    "product_price": 10.85,
-    "product_quantity": "100",
-    "product_image": "https://bohtea.com/wp-content/uploads/2019/12/DaunTeh_500G_1front.jpg"
+    "discount_product_name":"BOH TEA 500G",
+    "discount_product_description" : "BOH Cameron Highlands Tea Leaves 500g 100% Tea Leaves.",
+    "discount_product_category": "Tea, Coffee, Chocolate Drink",
+    "discount_product_price": 10.85,
+    "discount_product_quantity": "100",
+    "discount_product_image": "https://bohtea.com/wp-content/uploads/2019/12/DaunTeh_500G_1front.jpg"
 }
 
 ###
 
+POST http://localhost:5004/quatro_product_discount/create
+Content-Type: application/json
+
 {
-    "product_name":"LAYS CLAS CHEESY CHEDDAR 184.2G",
-    "product_description" : "Lay's Cheddar & Sour Cream 184.2g",
-    "product_category": "Snacks",
-    "product_price": 11.99,
-    "product_quantity": "100",
-    "product_image": "https://cf.shopee.com.my/file/15dc80907bda897a7fa4f58b08d033d5"
+    "discount_product_name":"LAYS CLAS CHEESY CHEDDAR 184.2G",
+    "discount_product_description" : "Lay's Cheddar & Sour Cream 184.2g",
+    "discount_product_category": "Snacks",
+    "discount_product_price": 11.99,
+    "discount_product_quantity": "100",
+    "discount_product_image": "https://cf.shopee.com.my/file/15dc80907bda897a7fa4f58b08d033d5"
 }
 
 ###
 
+POST http://localhost:5004/quatro_product_discount/create
+Content-Type: application/json
+
 {
-    "product_name":"AH HUAT W/C EXTRA RICH 15SX40G",
-    "product_description" : "Ah Huat Extra Rich White Coffee 15 x 40g",
-    "product_category": "Tea, Coffee, Chocolate Drinks",
-    "product_price": 12.99,
-    "product_quantity": "100",
-    "product_image": "https://my-test-11.slatic.net/p/dbf9615b3db9bf286557c71b7b1160f8.jpg"
+    "discount_product_name":"AH HUAT W/C EXTRA RICH 15SX40G",
+    "discount_product_description" : "Ah Huat Extra Rich White Coffee 15 x 40g",
+    "discount_product_category": "Tea, Coffee, Chocolate Drinks",
+    "discount_product_price": 12.99,
+    "discount_product_quantity": "100",
+    "discount_product_image": "https://my-test-11.slatic.net/p/dbf9615b3db9bf286557c71b7b1160f8.jpg"
 }
 
 ###
 
+POST http://localhost:5004/quatro_product_discount/create
+Content-Type: application/json
+
 {
-    "product_name":"MUNCHYS OATKRUNCH DARK CHOC 390G",
-    "product_description" : "Munchy's Oat Krunch Dark Chocolate Crackers 16 Packs 416g",
-    "product_category": "Snacks",
-    "product_price": 8.39,
-    "product_quantity": "100",
-    "product_image": "https://www.zuppa.com.my/zuppamarket/wp-content/uploads/Munchys-Oat-Krunch-Dark-Chocolate-416g.jpg"
+    "discount_product_name":"MUNCHYS OATKRUNCH DARK CHOC 390G",
+    "discount_product_description" : "Munchy's Oat Krunch Dark Chocolate Crackers 16 Packs 416g",
+    "discount_product_category": "Snacks",
+    "discount_product_price": 8.39,
+    "discount_product_quantity": "100",
+    "discount_product_image": "https://www.zuppa.com.my/zuppamarket/wp-content/uploads/Munchys-Oat-Krunch-Dark-Chocolate-416g.jpg"
 }
 
 ###
 
+POST http://localhost:5004/quatro_product_discount/create
+Content-Type: application/json
+
 {
-    "product_name":"MILO DAIRY FREE ALMOND RTD 1L",
-    "product_description" : "Extract of Malt Barley And Starch, Soya Protein (2.4%), Sugar, Cocoa Powder, Palm Olein, Almond Protein (0.6%), Stabilsers.",
-    "product_category": "Tea, Coffee, Chocolate Drinks",
-    "product_price": 9.29,
-    "product_quantity": "100",
-    "product_image": "https://cf.shopee.com.my/file/59b4a6bbe694031cbf4f52d31f29f1dd"
+    "discount_product_name":"MILO DAIRY FREE ALMOND RTD 1L",
+    "discount_product_description" : "Extract of Malt Barley And Starch, Soya Protein (2.4%), Sugar, Cocoa Powder, Palm Olein, Almond Protein (0.6%), Stabilsers.",
+    "discount_product_category": "Tea, Coffee, Chocolate Drinks",
+    "discount_product_price": 9.29,
+    "discount_product_quantity": "100",
+    "discount_product_image": "https://cf.shopee.com.my/file/59b4a6bbe694031cbf4f52d31f29f1dd"
 }
 
 ###
 
+POST http://localhost:5004/quatro_product_discount/create
+Content-Type: application/json
+
 {
-    "product_name":"LACTEL TEMPTATION NATURAL YOGURT 500G",
-    "product_description" : "Lactel Temptation Natural Yogurt 500G",
-    "product_category": "Dairy",
-    "product_price": 4.59,
-    "product_quantity": "100",
-    "product_image": "https://www.luluhypermarket.com/medias/1294848-01.jpg-1200Wx1200H?context=bWFzdGVyfGltYWdlc3wzMjAwOTR8aW1hZ2UvanBlZ3xoZDEvaGFhLzEyNzc3MTE5MzE4MDQ2LzEyOTQ4NDgtMDEuanBnXzEyMDBXeDEyMDBIfDNiM2FiZTc4YjBiNTk0ZGM0MzRlYmRmYzY1ODBkMmRjOWQxZTM0NTJkMjA0NTJjZTI1NzJiOTlmZTkyY2RiNmQ"
+    "discount_product_name":"LACTEL TEMPTATION NATURAL YOGURT 500G",
+    "discount_product_description" : "Lactel Temptation Natural Yogurt 500G",
+    "discount_product_category": "Dairy",
+    "discount_product_price": 4.59,
+    "discount_product_quantity": "100",
+    "discount_product_image": "https://www.luluhypermarket.com/medias/1294848-01.jpg-1200Wx1200H?context=bWFzdGVyfGltYWdlc3wzMjAwOTR8aW1hZ2UvanBlZ3xoZDEvaGFhLzEyNzc3MTE5MzE4MDQ2LzEyOTQ4NDgtMDEuanBnXzEyMDBXeDEyMDBIfDNiM2FiZTc4YjBiNTk0ZGM0MzRlYmRmYzY1ODBkMmRjOWQxZTM0NTJkMjA0NTJjZTI1NzJiOTlmZTkyY2RiNmQ"
 }
 
 ###
 
+POST http://localhost:5004/quatro_product_discount/create
+Content-Type: application/json
+
 {
-    "product_name":"VITAGEN ASSORTED 5X125ML",
-    "product_description" : "Vitagen Assorted 5X125ML",
-    "product_category": "Dairy",
-    "product_price": 4.60,
-    "product_quantity": "100",
-    "product_image": "https://mygroser.s3.ap-southeast-1.amazonaws.com/productImages/1000X1000/1643341177177-Assorted%20Flavour.png"
+    "discount_product_name":"VITAGEN ASSORTED 5X125ML",
+    "discount_product_description" : "Vitagen Assorted 5X125ML",
+    "discount_product_category": "Dairy",
+    "discount_product_price": 4.60,
+    "discount_product_quantity": "100",
+    "discount_product_image": "https://mygroser.s3.ap-southeast-1.amazonaws.com/productImages/1000X1000/1643341177177-Assorted%20Flavour.png"
 }
 
 ###
 
+POST http://localhost:5004/quatro_product_discount/create
+Content-Type: application/json
+
 {
-    "product_name":"GARDENS CHILLI SAUCE 500G",
-    "product_description" : "Sugar, chili, vinegar, contains stabiliser and acidity regulator as permitted food conditioner, salt tomato paste.",
-    "product_category": "Sauce & Dressing",
-    "product_price": 4.19,
-    "product_quantity": "100",
-    "product_image": "https://cf.shopee.com.my/file/9e4b4455a28fcac19266d3b56e34ff45"
+    "discount_product_name":"GARDENS CHILLI SAUCE 500G",
+    "discount_product_description" : "Sugar, chili, vinegar, contains stabiliser and acidity regulator as permitted food conditioner, salt tomato paste.",
+    "discount_product_category": "Sauce & Dressing",
+    "discount_product_price": 4.19,
+    "discount_product_quantity": "100",
+    "discount_product_image": "https://cf.shopee.com.my/file/9e4b4455a28fcac19266d3b56e34ff45"
 }
+
