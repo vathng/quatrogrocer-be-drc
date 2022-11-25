@@ -51,6 +51,10 @@ app.post(
 app.post("/quatro_product/minus_quantity", db_product.minusProductQuantityAPI);
 app.delete("/quatro_product/delete", db_product.deleteProductAPI);
 //Discount Product
+app.get(
+  "/quatro_product_discount/get",
+  db_product_discount.getDiscountProductAPI
+);
 app.post(
   "/quatro_product_discount/create",
   db_product_discount.createDiscountProductAPI
