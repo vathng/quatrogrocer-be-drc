@@ -201,11 +201,11 @@ const updateUser = async function (
 ) {
   const salt = await bcrypt.genSalt(10);
 
-  console.log(`passws ${salt} ${password}`);
+  // console.log(`passws ${salt} ${password}`);
   const passHash = await bcrypt.hash(password, salt);
-  if (isNaN(phone_number)) {
-    throw new Error("Invalid phone number");
-  }
+  // if (isNaN(phone_number)) {
+  // throw new Error("Invalid phone number");
+  // }
   let query_1 = {
     text: "select email, password from quatro_user where user_id=$1",
     values: [user_id],
@@ -226,7 +226,7 @@ const updateUser = async function (
   }
 
   if (!validPassword) {
-    throw Error("Invalid Password");
+    throw Error("Old Password is incorrect");
   }
 
   let query = {
