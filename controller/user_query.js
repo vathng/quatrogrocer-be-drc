@@ -108,7 +108,6 @@ const createUser = async function (
     throw Error("Email exist");
   }
 
-
   if (
     first_name == "" ||
     !regName.test(first_name) ||
@@ -117,7 +116,6 @@ const createUser = async function (
   ) {
     throw Error("Name should contain alphabets only");
   }
-
 
   if (!gender) {
     throw Error("Please select gender option");
@@ -160,7 +158,7 @@ const createUser = async function (
   const passHash = await bcrypt.hash(password, salt);
 
   let query = {
-    text: "insert into quatro_user(email,password,first_name,last_name,date_of_birth,gender,phone_number,user_credit) values ($1,$2,$3,$4,$5,$6,$7,100) returning user_id",
+    text: "insert into quatro_user(email,password,first_name,last_name,date_of_birth,gender,user_credit) values ($1,$2,$3,$4,$5,$6,100) returning user_id",
     values: [email, passHash, first_name, last_name, date_of_birth, gender],
   };
 
@@ -218,7 +216,12 @@ const updateUser = async function (
     throw Error("User doesnt exist");
   }
 
-  let validPassword = await bcrypt.compare(oldPassword, user[0]["password"]);
+  let validPassword = true;
+
+  if (oldPassword) {
+    //empty
+    validPassword = await bcrypt.compare(oldPassword, user[0]["password"]);
+  }
 
   if (!validPassword) {
     throw Error("Invalid Password");
@@ -229,7 +232,7 @@ const updateUser = async function (
            last_name = coalesce(nullif($2,''), last_name),
            date_of_birth = coalesce(nullif($3,''), date_of_birth),
            email = coalesce(nullif($4,''), email),
-           password = coalesce(nullif($5,''), password),
+           password = coalesce(nullif($5,''), password)
            where user_id = $6`,
     values: [first_name, last_name, date_of_birth, email, passHash, user_id],
   };
