@@ -8,21 +8,35 @@ const pool = new Pool({
   port: process.env.PGPORT,
 });
 
-const getAllAddress = async function () {
+const getAddress = async function (user_id) {
+  let query_1 = {
+    text: "select address_id from quatro_address where user_id=$1",
+    values: [user_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let address = resultQuery_1.rows;
+
+  if (address.length === 0) {
+    throw Error("Address doesn't exist");
+  }
+
   let query = {
-    text: "select address_line_1, address_line_2, address_line_3, postcode, state from quatro_address",
+    text: "select address_line_1, address_line_2, address_line_3, postcode, state from quatro_address where user_id = $1",
+    values: [user_id],
   };
 
   let resultQuery = await pool.query(query);
 
-  let getAddress = resultQuery.rows;
-  return getAddress;
+  let getAddressUser = resultQuery.rows;
+  return getAddressUser;
 };
 
-const searchAddressAPI = async (request, response) => {
+const getAddressAPI = async (request, response) => {
+  const { user_id } = request.body;
   try {
-    let searchAddressUser = await getAllAddress();
-    response.status(200).json({ result: searchAddressUser });
+    let getAddressUser = await getAddress(user_id);
+    response.status(200).json({ result: getAddressUser });
   } catch (error) {
     response.status(404).json({ error: error.message });
   }
@@ -36,18 +50,6 @@ const createAddress = async function (
   state,
   user_id
 ) {
-  let query_1 = {
-    text: "select user_id from quatro_user where user_id=$1",
-    values: [user_id],
-  };
-
-  let resultQuery_1 = await pool.query(query_1);
-  let user = resultQuery_1.rows;
-
-  if (user.length === 0) {
-    throw Error("User doesn't exist");
-  }
-
   let query = {
     text: "insert into quatro_address(address_line_1, address_line_2, address_line_3, postcode, state, user_id) values($1,$2,$3,$4,$5,$6) returning address_id",
     values: [
@@ -200,7 +202,7 @@ const deleteAddressAPI = async (request, response) => {
 };
 
 module.exports = {
-  searchAddressAPI,
+  getAddressAPI,
   createAddressAPI,
   updateAddressDetailsAPI,
   deleteAddressAPI,

@@ -72,7 +72,7 @@ app.delete(
   db_product_discount.deleteDiscountProductAPI
 );
 //Address
-app.get("/quatro_address/get", db_address.searchAddressAPI);
+app.get("/quatro_address/get", db_address.getAddressAPI);
 app.post("/quatro_address/create", db_address.createAddressAPI);
 app.post("/quatro_address/update_details", db_address.updateAddressDetailsAPI);
 app.delete("/quatro_address/delete", db_address.deleteAddressAPI);
