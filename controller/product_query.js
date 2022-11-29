@@ -53,6 +53,7 @@ const getDiscountProductAPI = async (request, response) => {
       request.query.product_discount
     );
     response.status(200).json({ result: GetProductDiscount });
+
   } catch (error) {
     response.status(404).json({ error: error.message });
   }
