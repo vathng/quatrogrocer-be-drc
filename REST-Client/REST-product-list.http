@@ -7,7 +7,7 @@ Content-Type: application/json
     "product_category": "Drinks",
     "product_price": 2.50,
     "product_quantity": "100",
-    "product_image": "https://cdn1-production-images-kly.akamaized.net/QzTTZqGXM5PqL9REm9okFMn-r20=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/2702436/original/016317800_1547270165-shutterstock_314020379.jpg"
+    "product_image": "https://www.miizu.my/image/digitalgrocer/image/cache/data/all_product_images/product-204/3%20new-1080x1080.png"
 }
 
 ###
@@ -158,7 +158,7 @@ Content-Type: application/json
 {
     "product_name":"Dragon Fruit 1pcs",
     "product_description":"Dragon fruit is a food that grows on a climbing cactus called hylocereus, which you'll find in tropical regions around the world. It’s rich in antioxidants like flavonoids, phenolic acid, and betacyanin. These natural substances protect your cells from damage by free radicals -- molecules that can lead to diseases like cancer and premature aging. Sweet and tropical flavour, honey jackfruit generally has a better taste when eaten fresh.",
-    "product_category":"Fruit",
+    "product_category":"Fruits",
     "product_price": 5.50,
     "product_quantity":"100",
     "product_image": "https://dusun.b-cdn.net/wp-content/uploads/2021/09/3-count-image-of-dragon-fruit-white-fruit-28658616893484_600x600.jpg"
@@ -172,7 +172,7 @@ Content-Type: application/json
 {
     "product_name":"Nangka Madu/Honey Jack 350g",
     "product_description":"Sweet and tropical flavour, honey jackfruit generally has a better taste when eaten fresh.",
-    "product_category":"Fruit",
+    "product_category":"Fruits",
     "product_price": 6.59,
     "product_quantity":"100",
     "product_image": "https://810freshmart.com/wp-content/uploads/2020/10/Limpek-honey-jackfruit.gif"
@@ -186,7 +186,7 @@ Content-Type: application/json
 {
     "product_name":"Pineapple Sarawak 1pcs",
     "product_description":"Supersweet. Rich of vitamin C. Juicy and tasty.",
-    "product_category":"Fruit",
+    "product_category":"Fruits",
     "product_price": 6.59,
     "product_quantity":"100",
     "product_image": "http://www.kedaiku.nas.my/image/cache/catalog/Kedai%20Runcit/Produk/Fresh%20Food/Fresh%20Fruit/Tropical%20Fruits/Nanas%20Sarawak%20M%201%20Piece-500x500.jpg"
@@ -200,7 +200,7 @@ Content-Type: application/json
 {
     "product_name":"Banana Mas-KG",
     "product_description":"Pisang Mas bananas are an excellent source of fiber to regulate the digestive tract, vitamin C to strengthen the immune system, and potassium to balance fluid levels within the body.",
-    "product_category":"Fruit",
+    "product_category":"Fruits",
     "product_price": 5.69,
     "product_quantity":"100",
     "product_image": "https://marketplace.seldec.my/images/thumbnails/1320/1080/detailed/35/berangan.jpeg"
@@ -298,7 +298,7 @@ Content-Type: application/json
 {
     "product_name":"Lively Raspberry Lemon Balm Tea 450ML",
     "product_description":"Calm with the wonder of lemon balm. Known as the 'Elixir of Life', the lemon balm herb has been consumed by many cultures over the ages for the relaxing effects of its refreshing citrusy notes. 100% recyclable.",
-    "product_category":"Beverage",
+    "product_category":"Beverages",
     "product_price": 3.50,
     "product_quantity":"100",
     "product_image": "https://www.nestle.com.my/sites/g/files/pydnoa251/files/lively-tea-calm-thumb.jpg"
@@ -312,7 +312,7 @@ Content-Type: application/json
 {
     "product_name":"FN Seasons Ice Lemon Tea 1L",
     "product_description":"Sedimentation and colour change may occur due to natural ingredients used. Water,Sugar,Citric Acid,Flavourings,Black Tea Extract (contains Tea Polyphenols* 28mg/ 100ml Seasons Ice Lemon Tea),Ascorbic Acid,Lemon Juice,Naturally contains Antioxidant*.",
-    "product_category":"Beverage",
+    "product_category":"Beverages",
     "product_price": 3.50,
     "product_quantity":"100",
     "product_image": "https://d11vuao38tfjvv.cloudfront.net/files/fc4d3bf59470fd659d90901594551d5f3c07be7ba4faace22c7bedadc317b8d6.jpg"
@@ -326,7 +326,7 @@ Content-Type: application/json
 {
     "product_name":"OYOSHI Original Green Tea 1L",
     "product_description":"Sedimentation and colour change may occur due to natural ingredients used. Brewed Jasmine Green Tea,Fructose,Ascorbic Acid,Contains Acidity Regulator (INS452) as Permitted Food Conditioner and Permitted Flavouring Substance,Additives derived from Plant and Synthetic Origin.",
-    "product_category":"Beverage",
+    "product_category":"Beverages",
     "product_price": 3.99,
     "product_quantity":"100",
     "product_image": "https://d11vuao38tfjvv.cloudfront.net/files/fc4d3bf59470fd659d90901594551d5f3c07be7ba4faace22c7bedadc317b8d6.jpg"
@@ -340,7 +340,7 @@ Content-Type: application/json
 {
     "product_name":"Lively Pear Schisandra Tea 450ml",
     "product_description":"Used as a traditional Chinese remedy over the centuries, Schisandra berries are believed to promote longevity by helping the body to restore its natural balance of Yin and Yang. 100% recyclable.",
-    "product_category":"Beverage",
+    "product_category":"Beverages",
     "product_price": 3.50,
     "product_quantity":"100",
     "product_image": "https://www.nestle.com.my/sites/g/files/pydnoa251/files/lively-tea-sustain-thumb.jpg"
@@ -354,7 +354,7 @@ Content-Type: application/json
 {
     "product_name":"Lively Orange Guarana Tea 450ml",
     "product_description":"For centuries, the Guarani tribes of the Amazon have been brewing Guarana into drinks that they believe help to improve focus and sharpen the senses. We often have those moments when we need clear focus ta tackle our day's priority. Lively Tea FOCUS with Guarana extra is an enlivening brew of earthy black tea with tangy orange peel notes. 100% recyclable.",
-    "product_category":"Beverage",
+    "product_category":"Beverages",
     "product_price": 3.50,
     "product_quantity":"100",
     "product_image": "https://www.nestle.com.my/sites/g/files/pydnoa251/files/lively-tea-focus-thumb.jpg"
@@ -368,7 +368,7 @@ Content-Type: application/json
 {
     "product_name":"Lipton Ice Lemon Tea 1.5L",
     "product_description":" Enjoy the unlimited refreshment with Lipton Ice Lemon Tea. Its classic iced black tea is infused with the burst of zesty lemon, for an exceptional iced tea taste. Tasty and refreshing.",
-    "product_category":"Beverage",
+    "product_category":"Beverages",
     "product_price": 4.80,
     "product_quantity":"100",
     "product_image": "https://www.aceminimart.sg/wp-content/uploads/LIPTON-ICE-LEMON-TEA-450ML.jpg"
@@ -1180,7 +1180,7 @@ Content-Type: application/json
 {
     "product_name": "Kelloggs Corn Flakes Jumbo 500G",
     "product_description":"Every Bite of these crispy ,golden flakes is just as delicious as the first.You'll be on your way to a great day when you pour a bowl of Kellogg's Corn Flakes cereal into your breakfast.",
-    "product_category":"Cereals",
+    "product_category":"Cereal",
     "product_price": 12.90,
     "product_quantity":"100",   
     "product_image": "https://cf.shopee.com.my/file/acba2945acc59a5f1bcc1cc5b32c42e5"
@@ -1194,7 +1194,7 @@ Content-Type: application/json
 {
     "product_name": "Nestum All Family Cereal Original 500G",
     "product_description":"Wholemeal Wheat,Rice,Malt Extract (contains Barley),Sugar,Corn Grits,Minerals,Salt,Vitamins,Maltodextrin,Contains Stabiliser as Permitted Food Conditioner,Contains Permitted Flavouring (Vanillin),All Additives are of Synthetic Origin.",
-    "product_category":"Cereals",
+    "product_category":"Cereal",
     "product_price": 7.80,
     "product_quantity":"100",   
     "product_image": "https://d11vuao38tfjvv.cloudfront.net/files/0d77cefd7660feaa1403f3d2108e5a355fe11ce87b8b612944852fda4263fa92.jpg"
@@ -1208,7 +1208,7 @@ Content-Type: application/json
 {
     "product_name": "Nestle KoKo Krunch 330G",
     "product_description":"Breakfast cereal with great, chocolate-y taste to kickstart your kids' school day. • With carbohydrates and fibre to provide your kids energy.",
-    "product_category":"Cereals",
+    "product_category":"Cereal",
     "product_price": 10.60,
     "product_quantity":"100",   
     "product_image": "https://www.desasegar.com.my/storage/media/filemanager/breakfast/Nestle%20Koko%20Krunch%20330g.png"
@@ -1222,7 +1222,7 @@ Content-Type: application/json
 {
     "product_name": "Nestle Fitness Cereal 330G",
     "product_description":"If you are what you eat, you might want to get munching now! Eat your way to a healthier, stronger body with FITNESSE Cereal for a bowl of complete and healthy breakfast. With whole grain as its main ingredients, this simply delicious and naturally gorgeous cereal has 10 vitamins and minerals, including calcium and iron.",
-    "product_category":"Cereals",
+    "product_category":"Cereal",
     "product_price": 15.20,
     "product_quantity":"100",   
     "product_image": "https://www.nestle-cereals.com/global/sites/g/files/qirczx806/files/styles/1_1_768px_width/public/2022-07/Fitness.png?itok=tEcMPdsC"

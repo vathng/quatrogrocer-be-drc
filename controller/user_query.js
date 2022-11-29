@@ -158,7 +158,9 @@ const createUser = async function (
   const passHash = await bcrypt.hash(password, salt);
 
   let query = {
+
     text: "insert into quatro_user(email,password,first_name,last_name,date_of_birth,gender,user_credit) values ($1,$2,$3,$4,$5,$6,100) returning user_id",
+
     values: [email, passHash, first_name, last_name, date_of_birth, gender],
   };
 

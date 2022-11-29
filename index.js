@@ -9,6 +9,7 @@ const db_product_discount = require("./controller/product_query");
 const db_address = require("./controller/address_query");
 const db_transac = require("./controller/transaction_query");
 const db_cart = require("./controller/cart_query");
+const db_credit = require("./controller/money_query");
 const db_auth = require("./middleware/requireAuth");
 const jwt = require("express-jwt");
 const jsonwebtoken = require("jsonwebtoken");
@@ -50,6 +51,10 @@ app.post(
 app.post("/quatro_product/minus_quantity", db_product.minusProductQuantityAPI);
 app.delete("/quatro_product/delete", db_product.deleteProductAPI);
 //Discount Product
+app.get(
+  "/quatro_product_discount/get",
+  db_product_discount.getDiscountProductAPI
+);
 app.post(
   "/quatro_product_discount/create",
   db_product_discount.createDiscountProductAPI
@@ -91,6 +96,9 @@ app.post(
   "/quatro_transaction/update_discount",
   db_transac.updateTransactionDiscountAPI
 );
+//User Credit
+app.post("/quatro_user/minus_credit", db_credit.minusCreditUpdateAPI);
+app.post("/quatro_user/add_credit", db_credit.addCreditUpdateAPI);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);

@@ -11,7 +11,7 @@ const pool = new Pool({
 const getAllProduct = async function (product) {
   let query = {
     text:
-      "select product_name, product_description, product_category, product_price, product_quantity, product_image from quatro_product " +
+      "select product_id, product_name, product_description, product_category, product_price, product_quantity, product_image from quatro_product " +
       (product ? "where lower(product_name) like $1 " : "") +
       "order by product_id asc ",
     values: product ? [`%${product}%`.toLowerCase()] : [],
@@ -25,8 +25,35 @@ const getAllProduct = async function (product) {
 
 const searchProductAPI = async (request, response) => {
   try {
-    let searchProductName = await getAllProduct(request.query.product);
-    response.status(200).json({ result: searchProductName });
+    let GetProduct = await getAllProduct(request.query.product);
+    response.status(200).json({ result: GetProduct });
+  } catch (error) {
+    response.status(404).json({ error: error.message });
+  }
+};
+
+const getDiscountProduct = async function (product_discount) {
+  let query = {
+    text:
+      "select discount_product_id, discount_product_name, discount_product_description, discount_product_category, discount_product_price, discount_product_quantity, discount_product_image from quatro_product_discount " +
+      (product_discount ? "where lower(discount_product_name) like $1 " : "") +
+      "order by discount_product_id asc ",
+    values: product_discount ? [`%${product_discount}%`.toLowerCase()] : [],
+  };
+
+  let resultQuery = await pool.query(query);
+
+  let GetProductDiscount = resultQuery.rows;
+  return GetProductDiscount;
+};
+
+const getDiscountProductAPI = async (request, response) => {
+  try {
+    let GetProductDiscount = await getDiscountProduct(
+      request.query.product_discount
+    );
+    response.status(200).json({ result: GetProductDiscount });
+
   } catch (error) {
     response.status(404).json({ error: error.message });
   }
@@ -454,4 +481,5 @@ module.exports = {
   updateDiscountProductDetailsAPI,
   deleteDiscountProductAPI,
   minusDiscountProductQuantityAPI,
+  getDiscountProductAPI,
 };

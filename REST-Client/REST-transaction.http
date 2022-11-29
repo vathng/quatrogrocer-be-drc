@@ -18,7 +18,7 @@ POST http://localhost:5004/quatro_transaction/update
 Content-Type: application/json
 
 {
- "user_id" : "7"
+ "user_id" : "3"
 }
 
 ###
@@ -26,5 +26,7 @@ POST http://localhost:5004/quatro_transaction/update_discount
 Content-Type: application/json
 
 {
- "user_id" : "7"
+ "user_id" : "2"
 }
+
+

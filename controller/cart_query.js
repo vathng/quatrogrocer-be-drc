@@ -8,15 +8,10 @@ const pool = new Pool({
   port: process.env.PGPORT,
 });
 
-const createCart = async function (
-  cart_id,
-  user_id,
-  product_id,
-  product_quantity
-) {
+const createCart = async function (user_id, product_id, product_quantity) {
   let query = {
-    text: "insert into quatro_cart(cart_id, user_id, product_id, product_quantity) values($1,$2,$3,$4) returning cart_id",
-    values: [cart_id, user_id, product_id, product_quantity],
+    text: "insert into quatro_cart(user_id, product_id, product_quantity) values($1,$2,$3) returning user_id",
+    values: [user_id, product_id, product_quantity],
   };
 
   let resultQuery = await pool.query(query);
@@ -26,14 +21,9 @@ const createCart = async function (
 };
 
 const createCartAPI = async (request, response) => {
-  const { cart_id, user_id, product_id, product_quantity } = request.body;
+  const { user_id, product_id, product_quantity } = request.body;
   try {
-    let newCart = await createCart(
-      cart_id,
-      user_id,
-      product_id,
-      product_quantity
-    );
+    let newCart = await createCart(user_id, product_id, product_quantity);
     response
       .status(200)
       .json({ result: newCart, message: "Successfully added to cart" });
@@ -43,10 +33,10 @@ const createCartAPI = async (request, response) => {
   }
 };
 
-const deleteCart = async function (cart_id) {
+const deleteCart = async function (product_id) {
   let query = {
-    text: "delete from quatro_cart where cart_id = $1 ",
-    values: [cart_id],
+    text: "delete from quatro_cart where product_id = $1 ",
+    values: [product_id],
   };
 
   let resultQuery = await pool.query(query);
@@ -56,22 +46,22 @@ const deleteCart = async function (cart_id) {
 };
 
 const deleteCartAPI = async (request, response) => {
-  const { cart_id } = request.body;
+  const { product_id } = request.body;
   try {
-    let cartDelete = await deleteCart(cart_id);
+    let cartDelete = await deleteCart(product_id);
     response
       .status(200)
-      .json({ result: deleteCart, message: "Successfully delete from cart" });
+      .json({ result: cartDelete, message: "Successfully delete from cart" });
   } catch (error) {
     console.log("error:", error);
     response.status(404).json({ error: error.message });
   }
 };
 
-const pushCart = async function (cart_id) {
+const pushCart = async function (user_id) {
   let query = {
-    text: "insert into quatro_transaction(user_id, product_id, product_quantity) select user_id, product_id, product_quantity from quatro_cart where cart_id = $1;",
-    values: [cart_id],
+    text: "insert into quatro_transaction(user_id, product_id, product_quantity) select user_id, product_id, product_quantity from quatro_cart where user_id = $1;",
+    values: [user_id],
   };
 
   let resultQuery = await pool.query(query);
@@ -81,9 +71,9 @@ const pushCart = async function (cart_id) {
 };
 
 const pushCartAPI = async (request, response) => {
-  const { cart_id } = request.body;
+  const { user_id } = request.body;
   try {
-    let cartPush = await pushCart(cart_id);
+    let cartPush = await pushCart(user_id);
     response
       .status(200)
       .json({ result: cartPush, message: "Successfully push from cart" });
@@ -94,14 +84,13 @@ const pushCartAPI = async (request, response) => {
 };
 
 const createDiscountCart = async function (
-  cart_id,
   user_id,
   discount_product_id,
   product_quantity
 ) {
   let query = {
-    text: "insert into quatro_cart(cart_id, user_id, discount_product_id, product_quantity) values($1,$2,$3,$4) returning cart_id",
-    values: [cart_id, user_id, discount_product_id, product_quantity],
+    text: "insert into quatro_cart(user_id, discount_product_id, product_quantity) values($1,$2,$3) returning user_id",
+    values: [user_id, discount_product_id, product_quantity],
   };
 
   let resultQuery = await pool.query(query);
@@ -111,11 +100,9 @@ const createDiscountCart = async function (
 };
 
 const createCartDiscountAPI = async (request, response) => {
-  const { cart_id, user_id, discount_product_id, product_quantity } =
-    request.body;
+  const { user_id, discount_product_id, product_quantity } = request.body;
   try {
     let newCartDiscount = await createDiscountCart(
-      cart_id,
       user_id,
       discount_product_id,
       product_quantity
@@ -129,10 +116,10 @@ const createCartDiscountAPI = async (request, response) => {
   }
 };
 
-const deleteDiscountCart = async function (cart_id) {
+const deleteDiscountCart = async function (discount_product_id) {
   let query = {
-    text: "delete from quatro_cart where cart_id = $1 ",
-    values: [cart_id],
+    text: "delete from quatro_cart where discount_product_id = $1 ",
+    values: [discount_product_id],
   };
 
   let resultQuery = await pool.query(query);
@@ -142,9 +129,9 @@ const deleteDiscountCart = async function (cart_id) {
 };
 
 const deleteCartDiscountAPI = async (request, response) => {
-  const { cart_id } = request.body;
+  const { discount_product_id } = request.body;
   try {
-    let cartDeleteDiscount = await deleteDiscountCart(cart_id);
+    let cartDeleteDiscount = await deleteDiscountCart(discount_product_id);
     response.status(200).json({
       result: cartDeleteDiscount,
       message: "Successfully delete from cart",
@@ -155,10 +142,10 @@ const deleteCartDiscountAPI = async (request, response) => {
   }
 };
 
-const pushDiscountCart = async function (cart_id) {
+const pushDiscountCart = async function (user_id) {
   let query = {
-    text: "insert into quatro_transaction(user_id, discount_product_id, product_quantity) select user_id, discount_product_id, product_quantity from quatro_cart where cart_id = $1;",
-    values: [cart_id],
+    text: "insert into quatro_transaction(user_id, discount_product_id, product_quantity) select user_id, discount_product_id, product_quantity from quatro_cart where user_id = $1;",
+    values: [user_id],
   };
 
   let resultQuery = await pool.query(query);
@@ -168,9 +155,9 @@ const pushDiscountCart = async function (cart_id) {
 };
 
 const pushDiscountCartAPI = async (request, response) => {
-  const { cart_id } = request.body;
+  const { user_id } = request.body;
   try {
-    let cartDiscountPush = await pushDiscountCart(cart_id);
+    let cartDiscountPush = await pushDiscountCart(user_id);
     response.status(200).json({
       result: cartDiscountPush,
       message: "Successfully push from cart",
