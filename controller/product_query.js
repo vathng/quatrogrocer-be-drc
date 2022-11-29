@@ -541,7 +541,7 @@ const deleteDiscountProduct = async function (discount_product_id) {
 
   let query = {
     text: "delete from quatro_product_discount where discount_product_id = $1",
-    values: [product_id],
+    values: [discount_product_id],
   };
 
   let resultQuery = await pool.query(query);

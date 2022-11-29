@@ -8,7 +8,7 @@ const pool = new Pool({
   port: process.env.PGPORT,
 });
 
-const getTransaction = async function (user_id, transaction_timestamp) {
+const getTransaction = async function (user_id) {
   let query_1 = {
     text: "select user_id from quatro_transaction where user_id=$1",
     values: [user_id],
@@ -22,8 +22,8 @@ const getTransaction = async function (user_id, transaction_timestamp) {
   }
 
   let query = {
-    text: "select * from quatro_transaction where user_id=$1 and transaction_timestamp=$2",
-    values: [user_id, transaction_timestamp],
+    text: "select * from quatro_transaction where user_id=$1 and payment_status=false",
+    values: [user_id],
   };
 
   let resultQuery = await pool.query(query);
@@ -35,14 +35,11 @@ const getTransaction = async function (user_id, transaction_timestamp) {
   return transactionSearch;
 };
 
-const searchTransactionAPI = async (request, response) => {
-  const { user_id, transaction_timestamp } = request.body;
+const getTransactionAPI = async (request, response) => {
+  const { user_id } = request.body;
 
   try {
-    let transactionSearch = await searchTransaction(
-      user_id,
-      transaction_timestamp
-    );
+    let transactionSearch = await getTransaction(user_id);
     response.status(200).json({ result: transactionSearch });
   } catch (error) {
     response.status(404).json({ error: error.message });
@@ -257,7 +254,7 @@ const updatePaymentAPI = async (request, response) => {
 };
 
 module.exports = {
-  searchTransactionAPI,
+  getTransactionAPI,
   createTransactionAPI,
   updateTransactionAPI,
   updateTransactionDiscountAPI,
