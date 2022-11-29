@@ -8,7 +8,19 @@ const pool = new Pool({
   port: process.env.PGPORT,
 });
 
-const searchTransaction = async function (user_id, transaction_timestamp) {
+const getTransaction = async function (user_id, transaction_timestamp) {
+  let query_1 = {
+    text: "select user_id from quatro_transaction where user_id=$1",
+    values: [user_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let userTransaction = resultQuery_1.rows;
+
+  if (userTransaction.length === 0) {
+    throw Error("User doesn't exist");
+  }
+
   let query = {
     text: "select * from quatro_transaction where user_id=$1 and transaction_timestamp=$2",
     values: [user_id, transaction_timestamp],

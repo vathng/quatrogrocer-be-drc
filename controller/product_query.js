@@ -53,7 +53,6 @@ const getDiscountProductAPI = async (request, response) => {
       request.query.product_discount
     );
     response.status(200).json({ result: GetProductDiscount });
-
   } catch (error) {
     response.status(404).json({ error: error.message });
   }
@@ -527,7 +526,7 @@ const minusDiscountProductQuantityAPI = async (request, response) => {
   }
 };
 
-const deleteDiscountProduct = async function (product_id) {
+const deleteDiscountProduct = async function (discount_product_id) {
   let query_1 = {
     text: "select discount_product_id from quatro_product_discount where discount_product_id=$1",
     values: [discount_product_id],

@@ -1,4 +1,9 @@
 GET http://localhost:5004/quatro_address/get
+Content-Type: application/json
+
+{
+    "user_id": "1"
+}
 
 
 ###
@@ -6,7 +11,7 @@ POST http://localhost:5004/quatro_address/create
 Content-Type: application/json
 
 {
-    "address_line_1": "",
+    "address_line_1": "No 1",
     "address_line_2": "Taman Mewah",
     "address_line_3": "Dengkil",
     "postcode": "four thousand",
