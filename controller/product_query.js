@@ -129,6 +129,18 @@ const updateProductDetails = async function (
   product_image,
   product_id
 ) {
+  let query_1 = {
+    text: "select product_id from quatro_product where product_id=$1",
+    values: [product_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let product = resultQuery_1.rows;
+
+  if (product.length === 0) {
+    throw Error("Product doesnt exist");
+  }
+
   let query = {
     text: `update quatro_product set product_name = coalesce(nullif($1,''), product_name),
            product_description = coalesce(nullif($2,''), product_description),
@@ -177,6 +189,18 @@ const updateProductDetailsAPI = async (request, response) => {
 };
 
 const updateProductPrice = async function (product_price, product_id) {
+  let query_1 = {
+    text: "select product_id from quatro_product where product_id=$1",
+    values: [product_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let product1 = resultQuery_1.rows;
+
+  if (product1.length === 0) {
+    throw Error("Product doesn't exist");
+  }
+
   let query = {
     text: `update quatro_product set product_price = $1 where product_id = $2;`,
     values: [product_price, product_id],
@@ -207,6 +231,18 @@ const updateProductPriceAPI = async (request, response) => {
 };
 
 const updateProductQuantity = async function (product_quantity, product_id) {
+  let query_1 = {
+    text: "select product_id from quatro_product where product_id=$1",
+    values: [product_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let product1 = resultQuery_1.rows;
+
+  if (product1.length === 0) {
+    throw Error("Product doesn't exist");
+  }
+
   let query = {
     text: `update quatro_product set product_quantity = $1 where product_id = $2;`,
     values: [product_quantity, product_id],
@@ -238,6 +274,18 @@ const updateProductQuantityAPI = async (request, response) => {
 };
 
 const minusProductQuantity = async function (product_quantity, product_id) {
+  let query_1 = {
+    text: "select product_id from quatro_product where product_id=$1",
+    values: [product_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let product1 = resultQuery_1.rows;
+
+  if (product1.length === 0) {
+    throw Error("Product doesn't exist");
+  }
+
   let query = {
     text: `update quatro_product set product_quantity = product_quantity - $1 where product_id = $2;`,
     values: [product_quantity, product_id],
@@ -269,6 +317,18 @@ const minusProductQuantityAPI = async (request, response) => {
 };
 
 const deleteProduct = async function (product_id) {
+  let query_1 = {
+    text: "select product_id from quatro_product where product_id=$1",
+    values: [product_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let product1 = resultQuery_1.rows;
+
+  if (product1.length === 0) {
+    throw Error("Product doesn't exist");
+  }
+
   let query = {
     text: "delete from quatro_product where product_id = $1",
     values: [product_id],
@@ -362,6 +422,18 @@ const updateDiscountProductDetails = async function (
   discount_product_image,
   discount_product_id
 ) {
+  let query_1 = {
+    text: "select discount_product_id from quatro_product_discount where discount_product_id=$1",
+    values: [discount_product_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let product1 = resultQuery_1.rows;
+
+  if (product1.length === 0) {
+    throw Error("Product doesn't exist");
+  }
+
   let query = {
     text: `update quatro_product_discount set discount_product_name = coalesce(nullif($1,''), product_name),
            discount_product_description = coalesce(nullif($2,''), product_description),
@@ -413,6 +485,18 @@ const minusDiscountProductQuantity = async function (
   discount_product_quantity,
   discount_product_id
 ) {
+  let query_1 = {
+    text: "select discount_product_id from quatro_product_discount where discount_product_id=$1",
+    values: [discount_product_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let product1 = resultQuery_1.rows;
+
+  if (product1.length === 0) {
+    throw Error("Product doesn't exist");
+  }
+
   let query = {
     text: `update quatro_product_discount set discount_product_quantity = discount_product_quantity - $1 where discount_product_id = $2;`,
     values: [discount_product_quantity, discount_product_id],
@@ -444,6 +528,18 @@ const minusDiscountProductQuantityAPI = async (request, response) => {
 };
 
 const deleteDiscountProduct = async function (product_id) {
+  let query_1 = {
+    text: "select discount_product_id from quatro_product_discount where discount_product_id=$1",
+    values: [discount_product_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let product1 = resultQuery_1.rows;
+
+  if (product1.length === 0) {
+    throw Error("Product doesn't exist");
+  }
+
   let query = {
     text: "delete from quatro_product_discount where discount_product_id = $1",
     values: [product_id],

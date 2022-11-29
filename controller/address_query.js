@@ -36,6 +36,18 @@ const createAddress = async function (
   state,
   user_id
 ) {
+  let query_1 = {
+    text: "select user_id from quatro_user where user_id=$1",
+    values: [user_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let user = resultQuery_1.rows;
+
+  if (user.length === 0) {
+    throw Error("User doesn't exist");
+  }
+
   let query = {
     text: "insert into quatro_address(address_line_1, address_line_2, address_line_3, postcode, state, user_id) values($1,$2,$3,$4,$5,$6) returning address_id",
     values: [
@@ -153,6 +165,17 @@ const updateAddressDetailsAPI = async (request, response) => {
 };
 
 const deleteAddress = async function (address_id) {
+  let query_1 = {
+    text: "select address_id from quatro_address where address_id=$1",
+    values: [address_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let address1 = resultQuery_1.rows;
+
+  if (address1.length === 0) {
+    throw Error("Address doesn't exist");
+  }
   let query = {
     text: "delete from quatro_address where address_id = $1",
     values: [address_id],

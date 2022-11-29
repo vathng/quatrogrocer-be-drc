@@ -158,7 +158,6 @@ const createUser = async function (
   const passHash = await bcrypt.hash(password, salt);
 
   let query = {
-
     text: "insert into quatro_user(email,password,first_name,last_name,date_of_birth,gender,user_credit) values ($1,$2,$3,$4,$5,$6,100) returning user_id",
 
     values: [email, passHash, first_name, last_name, date_of_birth, gender],
@@ -195,6 +194,7 @@ const updateUser = async function (
   last_name,
   date_of_birth,
   email,
+  phone_number,
   oldPassword,
   password,
   user_id
@@ -203,9 +203,9 @@ const updateUser = async function (
 
   console.log(`passws ${salt} ${password}`);
   const passHash = await bcrypt.hash(password, salt);
-  // if (isNaN(phone_number)) {
-  //   throw new Error("Invalid phone number");
-  // }
+  if (isNaN(phone_number)) {
+    throw new Error("Invalid phone number");
+  }
   let query_1 = {
     text: "select email, password from quatro_user where user_id=$1",
     values: [user_id],
@@ -234,9 +234,18 @@ const updateUser = async function (
            last_name = coalesce(nullif($2,''), last_name),
            date_of_birth = coalesce(nullif($3,''), date_of_birth),
            email = coalesce(nullif($4,''), email),
-           password = coalesce(nullif($5,''), password)
-           where user_id = $6`,
-    values: [first_name, last_name, date_of_birth, email, passHash, user_id],
+           phone_number = coalesce(nullif($5,''), phone_number),
+           password = coalesce(nullif($6,''), password)
+           where user_id = $7`,
+    values: [
+      first_name,
+      last_name,
+      date_of_birth,
+      email,
+      phone_number,
+      passHash,
+      user_id,
+    ],
   };
 
   let resultQuery = await pool.query(query);
@@ -251,6 +260,7 @@ const updateUserAPI = async (request, response) => {
     last_name,
     date_of_birth,
     email,
+    phone_number,
     oldPassword,
     password,
     user_id,
@@ -262,6 +272,7 @@ const updateUserAPI = async (request, response) => {
       last_name,
       date_of_birth,
       email,
+      phone_number,
       oldPassword,
       password,
       user_id
@@ -277,6 +288,18 @@ const updateUserAPI = async (request, response) => {
 };
 
 const deleteUser = async function (user_id) {
+  let query_1 = {
+    text: "select user_id from quatro_user where user_id=$1",
+    values: [user_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let user = resultQuery_1.rows;
+
+  if (user.length === 0) {
+    throw Error("User doesn't exist");
+  }
+
   let query = {
     text: "delete from quatro_user where user_id = $1",
     values: [user_id],
