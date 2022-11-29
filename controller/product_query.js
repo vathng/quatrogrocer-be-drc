@@ -434,10 +434,10 @@ const updateDiscountProductDetails = async function (
   }
 
   let query = {
-    text: `update quatro_product_discount set discount_product_name = coalesce(nullif($1,''), product_name),
-           discount_product_description = coalesce(nullif($2,''), product_description),
-           discount_product_category = coalesce(nullif($3,''), product_category),
-           discount_product_image = coalesce(nullif($4,''), product_image)
+    text: `update quatro_product_discount set discount_product_name = coalesce(nullif($1,''), discount_product_name),
+           discount_product_description = coalesce(nullif($2,''), discount_product_description),
+           discount_product_category = coalesce(nullif($3,''), discount_product_category),
+           discount_product_image = coalesce(nullif($4,''), discount_product_image)
            where discount_product_id = $5;`,
     values: [
       discount_product_name,
