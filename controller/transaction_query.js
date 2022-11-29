@@ -96,6 +96,19 @@ const createTransactionAPI = async (request, response) => {
 
 const updateTransaction = async function (user_id) {
   let transaction_timestamp = new Date();
+
+  let query_1 = {
+    text: "select user_id from quatro_user where user_id=$1",
+    values: [user_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let user = resultQuery_1.rows;
+
+  if (user.length === 0) {
+    throw Error("User doesnt exist");
+  }
+
   let query = {
     text: `update quatro_transaction 
             set 
@@ -107,7 +120,13 @@ const updateTransaction = async function (user_id) {
               (select quatro_product.product_price
                 from quatro_product 
               where quatro_transaction.product_id = quatro_product.product_id)
-            , transaction_timestamp=$1 where user_id=$2;`,
+            , 
+            product_image=
+            (select quatro_product.product_image 
+                from quatro_product 
+              where quatro_transaction.product_id = quatro_product.product_id)
+            ,
+            payment_status = false, transaction_timestamp=$1 where user_id=$2;`,
     values: [transaction_timestamp, user_id],
   };
 
@@ -133,6 +152,19 @@ const updateTransactionAPI = async (request, response) => {
 
 const updateTransactionDiscount = async function (user_id) {
   let transaction_timestamp = new Date();
+
+  let query_1 = {
+    text: "select user_id from quatro_user where user_id=$1",
+    values: [user_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let user = resultQuery_1.rows;
+
+  if (uuser.length === 0) {
+    throw Error("User doesnt exist");
+  }
+
   let query = {
     text: `update quatro_transaction 
             set 
@@ -144,7 +176,13 @@ const updateTransactionDiscount = async function (user_id) {
               (select quatro_product_discount.discount_product_price
                 from quatro_product_discount 
               where quatro_transaction.discount_product_id = quatro_product_discount.discount_product_id)
-            , transaction_timestamp=$1 where user_id=$2;`,
+            , 
+            product_image=
+            (select quatro_product_discount.discount_product_image 
+                from quatro_product_discount 
+              where quatro_transaction.discount_product_id = quatro_product_discount.discount_product_id)
+            ,
+            payment_status = false, transaction_timestamp=$1 where user_id=$2;`,
     values: [transaction_timestamp, user_id],
   };
 

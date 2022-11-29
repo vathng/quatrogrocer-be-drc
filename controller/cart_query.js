@@ -9,6 +9,18 @@ const pool = new Pool({
 });
 
 const createCart = async function (user_id, product_id, product_quantity) {
+  let query_1 = {
+    text: "select user_id from quatro_user where user_id=$1",
+    values: [user_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let user = resultQuery_1.rows;
+
+  if (user.length === 0) {
+    throw Error("User doesn't exist");
+  }
+
   let query = {
     text: "insert into quatro_cart(user_id, product_id, product_quantity) values($1,$2,$3) returning user_id",
     values: [user_id, product_id, product_quantity],
@@ -33,10 +45,22 @@ const createCartAPI = async (request, response) => {
   }
 };
 
-const deleteCart = async function (product_id) {
+const deleteCart = async function (user_id) {
+  let query_1 = {
+    text: "select user_id from quatro_cart where user_id=$1",
+    values: [user_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let user = resultQuery_1.rows;
+
+  if (user.length === 0) {
+    throw Error("User doesn't exist");
+  }
+
   let query = {
-    text: "delete from quatro_cart where product_id = $1 ",
-    values: [product_id],
+    text: "delete from quatro_cart where user_id = $1 ",
+    values: [user_id],
   };
 
   let resultQuery = await pool.query(query);
@@ -46,9 +70,9 @@ const deleteCart = async function (product_id) {
 };
 
 const deleteCartAPI = async (request, response) => {
-  const { product_id } = request.body;
+  const { user_id } = request.body;
   try {
-    let cartDelete = await deleteCart(product_id);
+    let cartDelete = await deleteCart(user_id);
     response
       .status(200)
       .json({ result: cartDelete, message: "Successfully delete from cart" });
@@ -59,6 +83,18 @@ const deleteCartAPI = async (request, response) => {
 };
 
 const pushCart = async function (user_id) {
+  let query_1 = {
+    text: "select user_id from quatro_user where user_id=$1",
+    values: [user_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let user1 = resultQuery_1.rows;
+
+  if (user.length === 0) {
+    throw Error("Cart doesn't exist");
+  }
+
   let query = {
     text: "insert into quatro_transaction(user_id, product_id, product_quantity) select user_id, product_id, product_quantity from quatro_cart where user_id = $1;",
     values: [user_id],
@@ -88,6 +124,18 @@ const createDiscountCart = async function (
   discount_product_id,
   product_quantity
 ) {
+  let query_1 = {
+    text: "select user_id from quatro_user where user_id=$1",
+    values: [user_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let user = resultQuery_1.rows;
+
+  if (user.length === 0) {
+    throw Error("User doesn't exist");
+  }
+
   let query = {
     text: "insert into quatro_cart(user_id, discount_product_id, product_quantity) values($1,$2,$3) returning user_id",
     values: [user_id, discount_product_id, product_quantity],
@@ -117,6 +165,18 @@ const createCartDiscountAPI = async (request, response) => {
 };
 
 const deleteDiscountCart = async function (discount_product_id) {
+  let query_1 = {
+    text: "select user_id from quatro_user where user_id=$1",
+    values: [user_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let user = resultQuery_1.rows;
+
+  if (user.length === 0) {
+    throw Error("Cart doesn't exist");
+  }
+
   let query = {
     text: "delete from quatro_cart where discount_product_id = $1 ",
     values: [discount_product_id],
@@ -143,6 +203,18 @@ const deleteCartDiscountAPI = async (request, response) => {
 };
 
 const pushDiscountCart = async function (user_id) {
+  let query_1 = {
+    text: "select user_id from quatro_user where user_id=$1",
+    values: [user_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let user = resultQuery_1.rows;
+
+  if (user.length === 0) {
+    throw Error("Cart doesn't exist");
+  }
+
   let query = {
     text: "insert into quatro_transaction(user_id, discount_product_id, product_quantity) select user_id, discount_product_id, product_quantity from quatro_cart where user_id = $1;",
     values: [user_id],
