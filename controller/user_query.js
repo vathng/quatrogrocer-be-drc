@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 //validator implementation
 const validator = require("validator");
-const { passwordStrength } = require("check-password-strength");
 
 const Pool = require("pg").Pool;
 const pool = new Pool({
@@ -55,9 +54,6 @@ const loginUser = async function (email, password) {
 
   //validation
 
-  if (!email || !password) {
-    throw Error("All fields must be filled");
-  }
   if (user.length === 0) {
     throw Error("Email doesnt exist");
   }
@@ -67,7 +63,7 @@ const loginUser = async function (email, password) {
   let validPassword = await bcrypt.compare(password, user[0]["password"]);
 
   if (!validPassword) {
-    throw Error("Invalid Password");
+    throw Error("Incorrect Password");
   }
   return user[0].user_id;
 };
@@ -103,22 +99,33 @@ const createUser = async function (
 
   let resultQuery_1 = await pool.query(query_1);
   let user = resultQuery_1.rows;
+  var regName = /^[A-Za-z'\s]*$/;
+  // var regName= /^([a-z]+[,.]?[ ]?|[a-z]+['-]?)+$/;
 
   if (user.length !== 0) {
     throw Error("Email exist");
   }
 
+  if (
+    first_name == "" ||
+    !regName.test(first_name) ||
+    last_name == "" ||
+    !regName.test(last_name)
+  ) {
+    throw Error("Name should contain alphabets only");
+  }
+
+  if (!gender) {
+    throw Error("Please select gender option");
+  }
   if (!email && !password) {
     throw Error("Email and password field cannot be empty");
   }
+
   if (!email || !email.trim()) {
     throw Error("Email field cannot be empty");
   }
-  //no dob
 
-  if (!date_of_birth) {
-    throw Error("Please fill in all the input fields");
-  }
   if (!password || !password.trim()) {
     throw Error("Password field cannot be empty");
   }
@@ -184,12 +191,14 @@ const updateUser = async function (
   last_name,
   date_of_birth,
   email,
+  phone_number,
   oldPassword,
   password,
   user_id
 ) {
   const salt = await bcrypt.genSalt(10);
 
+  console.log(`passws ${salt} ${password}`);
   const passHash = await bcrypt.hash(password, salt);
 
   // if (isNaN(phone_number)) {
@@ -207,7 +216,12 @@ const updateUser = async function (
     throw Error("User doesnt exist");
   }
 
-  let validPassword = await bcrypt.compare(oldPassword, user[0]["password"]);
+  let validPassword = true;
+
+  if (oldPassword) {
+    //empty
+    validPassword = await bcrypt.compare(oldPassword, user[0]["password"]);
+  }
 
   if (!validPassword) {
     throw Error("Invalid Password");
@@ -234,6 +248,7 @@ const updateUserAPI = async (request, response) => {
     last_name,
     date_of_birth,
     email,
+    phone_number,
     oldPassword,
     password,
     user_id,
@@ -245,6 +260,7 @@ const updateUserAPI = async (request, response) => {
       last_name,
       date_of_birth,
       email,
+      phone_number,
       oldPassword,
       password,
       user_id
@@ -260,6 +276,18 @@ const updateUserAPI = async (request, response) => {
 };
 
 const deleteUser = async function (user_id) {
+  let query_1 = {
+    text: "select user_id from quatro_user where user_id=$1",
+    values: [user_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let user = resultQuery_1.rows;
+
+  if (user.length === 0) {
+    throw Error("User doesn't exist");
+  }
+
   let query = {
     text: "delete from quatro_user where user_id = $1",
     values: [user_id],

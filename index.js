@@ -53,7 +53,7 @@ app.delete("/quatro_product/delete", db_product.deleteProductAPI);
 //Discount Product
 app.get(
   "/quatro_product_discount/get",
-  db_product_discount.searchDiscountProductAPI
+  db_product_discount.getDiscountProductAPI
 );
 app.post(
   "/quatro_product_discount/create",
@@ -72,7 +72,7 @@ app.delete(
   db_product_discount.deleteDiscountProductAPI
 );
 //Address
-app.get("/quatro_address/get", db_address.searchAddressAPI);
+app.get("/quatro_address/get", db_address.getAddressAPI);
 app.post("/quatro_address/create", db_address.createAddressAPI);
 app.post("/quatro_address/update_details", db_address.updateAddressDetailsAPI);
 app.delete("/quatro_address/delete", db_address.deleteAddressAPI);
@@ -99,6 +99,10 @@ app.post(
 //User Credit
 app.post("/quatro_user/minus_credit", db_credit.minusCreditUpdateAPI);
 app.post("/quatro_user/add_credit", db_credit.addCreditUpdateAPI);
+//Update payment status
+app.post("/quatro_transaction/update_payment", db_transac.updatePaymentAPI);
+//Get from cart
+app.get("/quatro_transaction/get_details/:id", db_transac.getTransactionAPI);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);

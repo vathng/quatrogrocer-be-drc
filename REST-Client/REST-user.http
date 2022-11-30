@@ -53,9 +53,11 @@ Content-Type: application/json
     "last_name": "Nooo",
     "date_of_birth": "2000-08-02",
     "phone_number" : "0192345442",
-    "email":"",
-    "password":"",
-    "user_id" : 2
+    "email":"hfcfhfc@test.com",
+    "oldPassword":"test1234",
+    "password":"!QAZ2wsx",
+    "user_id" : 3
+
 }
 ###
 DELETE  http://localhost:5000/quatro_user/delete

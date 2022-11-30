@@ -8,21 +8,34 @@ const pool = new Pool({
   port: process.env.PGPORT,
 });
 
-const getAllAddress = async function (user_id) {
+const getAddress = async function (user_id) {
+  let query_1 = {
+    text: "select address_id from quatro_address where user_id=$1",
+    values: [user_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let address = resultQuery_1.rows;
+
+  if (address.length === 0) {
+    throw Error("Address doesn't exist");
+  }
+
   let query = {
-    text: "select address_line_1, address_line_2, address_line_3, postcode, state from quatro_address where user_id = $1 order by address_id asc ",
+    text: "select address_line_1, address_line_2, address_line_3, postcode, state from quatro_address where user_id = $1 order by address_id asc",
     values: [user_id],
   };
 
   let resultQuery = await pool.query(query);
 
-  let getAddress = resultQuery.rows;
-  return getAddress;
+  let getAddressUser = resultQuery.rows;
+  return getAddressUser;
 };
 
-const searchAddressAPI = async (request, response) => {
+const getAddressAPI = async (request, response) => {
+  const { user_id } = request.body;
   try {
-    let searchAddressUser = await getAllAddress(request.query.user_id);
+    let searchAddressUser = await getAddress(request.query.user_id);
     response.status(200).json({ result: searchAddressUser });
   } catch (error) {
     response.status(404).json({ error: error.message });
@@ -154,6 +167,17 @@ const updateAddressDetailsAPI = async (request, response) => {
 };
 
 const deleteAddress = async function (address_id) {
+  let query_1 = {
+    text: "select address_id from quatro_address where address_id=$1",
+    values: [address_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let address1 = resultQuery_1.rows;
+
+  if (address1.length === 0) {
+    throw Error("Address doesn't exist");
+  }
   let query = {
     text: "delete from quatro_address where address_id = $1",
     values: [address_id],
@@ -178,7 +202,7 @@ const deleteAddressAPI = async (request, response) => {
 };
 
 module.exports = {
-  searchAddressAPI,
+  getAddressAPI,
   createAddressAPI,
   updateAddressDetailsAPI,
   deleteAddressAPI,
