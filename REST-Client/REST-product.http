@@ -5,6 +5,13 @@
 POST http://localhost:5004/quatro_product/create
 Content-Type: application/json
 
+# {
+#     "product_name":"Ayam Kampung",
+#     "product_description" : "Ayam ternakan kampung Janda Baik",
+#     "product_category": "Raw Materials",
+#     "product_price": "16.00",
+#     "product_quantity": "11",
+# }
 {
     "product_name":"Water",
     "product_description" : "Sky",
@@ -17,7 +24,20 @@ Content-Type: application/json
 
 
 ###
-POST http://localhost:5004/quatro_product/update_details
+POST http://localhost:3001/quatro_product/create
+Content-Type: application/json
+
+{
+    "product_name":"Tropicana Apple Juice 320ml",
+    "product_description" : "Apple Juice to your daily routine for a delicious and convenient source of vitamin C. Refreshing apple juice with a deliciously sweet taste",
+    "product_category": "Juice",
+    "product_price": "3.45",
+    "product_quantity": "100",
+    "product_image": "https://m.media-amazon.com/images/I/61cPgyyfqEL._SL1500_.jpg"
+}
+
+###
+POST http://localhost:3001/quatro_product/update_details
 Content-Type: application/json
 
 {
@@ -56,8 +76,8 @@ POST http://localhost:5004/quatro_product/minus_quantity
 Content-Type: application/json
 
 {
-    "product_quantity": "5",
-    "product_id": "16"
+    "product_quantity": "1",
+    "product_id": "3"
 }
 
 
@@ -66,5 +86,14 @@ DELETE http://localhost:5004/quatro_product/delete
 Content-Type: application/json
 
 {
-    "product_id" : "101"
+    "product_id" : "1"
+}
+
+
+###
+DELETE http://localhost:5004/quatro_product_discount/delete
+Content-Type: application/json
+
+{
+    "discount_product_id" : "1"
 }

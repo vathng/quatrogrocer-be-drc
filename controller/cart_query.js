@@ -91,7 +91,7 @@ const pushCart = async function (user_id) {
   let resultQuery_1 = await pool.query(query_1);
   let user1 = resultQuery_1.rows;
 
-  if (user.length === 0) {
+  if (user1.length === 0) {
     throw Error("Cart doesn't exist");
   }
 

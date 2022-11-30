@@ -8,10 +8,22 @@ const pool = new Pool({
   port: process.env.PGPORT,
 });
 
-const searchTransaction = async function (user_id, transaction_timestamp) {
+const getTransaction = async function (user_id) {
+  let query_1 = {
+    text: "select user_id from quatro_transaction where user_id=$1",
+    values: [user_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let userTransaction = resultQuery_1.rows;
+
+  if (userTransaction.length === 0) {
+    throw Error("User doesn't exist");
+  }
+
   let query = {
-    text: "select * from quatro_transaction where user_id=$1 and transaction_timestamp=$2",
-    values: [user_id, transaction_timestamp],
+    text: "select * from quatro_transaction where user_id=$1 and payment_status=true",
+    values: [user_id],
   };
 
   let resultQuery = await pool.query(query);
@@ -23,14 +35,12 @@ const searchTransaction = async function (user_id, transaction_timestamp) {
   return transactionSearch;
 };
 
-const searchTransactionAPI = async (request, response) => {
-  const { user_id, transaction_timestamp } = request.body;
+const getTransactionAPI = async (request, response) => {
+  // const { user_id } = request.body;
+  let user_id = request.params.id;
 
   try {
-    let transactionSearch = await searchTransaction(
-      user_id,
-      transaction_timestamp
-    );
+    let transactionSearch = await getTransaction(user_id);
     response.status(200).json({ result: transactionSearch });
   } catch (error) {
     response.status(404).json({ error: error.message });
@@ -206,9 +216,48 @@ const updateTransactionDiscountAPI = async (request, response) => {
   }
 };
 
+const updatePaymentStatus = async function (user_id) {
+  let query_1 = {
+    text: "select user_id from quatro_transaction where user_id=$1",
+    values: [user_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let user = resultQuery_1.rows;
+
+  if (user.length === 0) {
+    throw Error("User doesnt exist");
+  }
+
+  let query = {
+    text: `update quatro_transaction set payment_status = true where user_id = $1 and product_id = $2`,
+    values: [user_id, product_id],
+  };
+
+  let resultQuery = await pool.query(query);
+  let paymentUpdate = resultQuery.rows;
+
+  return paymentUpdate;
+};
+
+const updatePaymentAPI = async (request, response) => {
+  const { user_id, product_id } = request.body;
+  try {
+    let paymentUpdate = await updatePaymentStatus(user_id, product_id);
+    response.status(200).json({
+      result: paymentUpdate,
+      message: "Payment status updated successfully",
+    });
+  } catch (error) {
+    console.log("error:", error);
+    response.status(404).json({ error: error.message });
+  }
+};
+
 module.exports = {
-  searchTransactionAPI,
+  getTransactionAPI,
   createTransactionAPI,
   updateTransactionAPI,
   updateTransactionDiscountAPI,
+  updatePaymentAPI,
 };

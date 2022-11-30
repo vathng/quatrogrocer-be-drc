@@ -1,23 +1,23 @@
 # Get User
-GET http://localhost:5004/quatro_user
+GET http://localhost:5000/quatro_user
 
 ### 
 GET http://localhost:5004/quatro_user/Cheng/Ng
 
 ### 
-POST http://localhost:5004/quatro_user/login
+POST http://localhost:5000/quatro_user/login
 Content-Type: application/json
 
 {
-    "email":"vathng@test.com",
-    "password":"test1234"
+    "email":"meow@meow.com",
+    "password":"meow123"
 }
 ### 
 POST http://localhost:5004/quatro_user/search
 Content-Type: application/json
 
 {
-    "first_name":"John",
+    "first_name":"Marianne",
     "last_name":"Wong"
 }
 
@@ -26,6 +26,9 @@ POST http://localhost:5004/quatro_user/create
 Content-Type: application/json
 
 { 
+    "email":"meow@meow.com",
+    "password":"meow1234"
+}
 
     "email":"vathcheng@test.com",
     "password":"Abc12345!",
@@ -52,7 +55,7 @@ Content-Type: application/json
 
 }
 ###
-DELETE  http://localhost:5004/quatro_user/delete
+DELETE  http://localhost:5000/quatro_user/delete
 Content-Type: application/json
 
 {

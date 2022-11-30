@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 var cors = require("cors");
 const app = express();
-const port = 5004;
+const port = 5000;
 const db_user = require("./controller/user_query");
 const db_product = require("./controller/product_query");
 const db_product_discount = require("./controller/product_query");
@@ -36,7 +36,7 @@ app.get("/", (request, response) => {
 //User
 app.post("/quatro_user/login", db_user.loginAPI);
 app.post("/quatro_user/create", db_user.createUserAPI);
-app.post("/quatro_user/search", db_auth, db_user.searchUserAPI);
+app.post("/quatro_user/search", db_user.searchUserAPI);
 app.post("/quatro_user/update", db_user.updateUserAPI);
 app.delete("/quatro_user/delete", db_user.deleteUserAPI);
 //Product
@@ -72,7 +72,7 @@ app.delete(
   db_product_discount.deleteDiscountProductAPI
 );
 //Address
-app.get("/quatro_address/get", db_address.searchAddressAPI);
+app.get("/quatro_address/get", db_address.getAddressAPI);
 app.post("/quatro_address/create", db_address.createAddressAPI);
 app.post("/quatro_address/update_details", db_address.updateAddressDetailsAPI);
 app.delete("/quatro_address/delete", db_address.deleteAddressAPI);
@@ -99,6 +99,10 @@ app.post(
 //User Credit
 app.post("/quatro_user/minus_credit", db_credit.minusCreditUpdateAPI);
 app.post("/quatro_user/add_credit", db_credit.addCreditUpdateAPI);
+//Update payment status
+app.post("/quatro_transaction/update_payment", db_transac.updatePaymentAPI);
+//Get from cart
+app.get("/quatro_transaction/get_details/:id", db_transac.getTransactionAPI);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
