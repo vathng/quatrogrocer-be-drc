@@ -76,6 +76,14 @@ app.get("/quatro_address/get", db_address.getAddressAPI);
 app.post("/quatro_address/create", db_address.createAddressAPI);
 app.post("/quatro_address/update_details", db_address.updateAddressDetailsAPI);
 app.delete("/quatro_address/delete", db_address.deleteAddressAPI);
+app.post(
+  "/quatro_address/set_default_address",
+  db_address.setDefaultAddressAPI
+);
+app.post(
+  "/quatro_address/set_nondefault_address",
+  db_address.undefaultAddressAPI
+);
 //Cart
 app.post("/quatro_cart/create", db_cart.createCartAPI);
 app.post("/quatro_cart/delete", db_cart.deleteCartAPI);

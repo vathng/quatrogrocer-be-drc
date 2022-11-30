@@ -201,9 +201,82 @@ const deleteAddressAPI = async (request, response) => {
   }
 };
 
+const setDefaultAddress = async function (address_id) {
+  let query_1 = {
+    text: "select address_id from quatro_address where address_id=$1",
+    values: [address_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let address1 = resultQuery_1.rows;
+
+  if (address1.length === 0) {
+    throw Error("Address doesn't exist");
+  }
+  let query = {
+    text: "update quatro_address set default_address = true where address_id=$1",
+    values: [address_id],
+  };
+
+  let resultQuery = await pool.query(query);
+  let addressDefault = resultQuery.rows;
+  return addressDefault;
+};
+
+const setDefaultAddressAPI = async (request, response) => {
+  const { address_id } = request.body;
+  try {
+    let addressDefault = await setDefaultAddress(address_id);
+    response
+      .status(200)
+      .json({ result: addressDefault, message: "Address set to default" });
+  } catch (error) {
+    console.log("error:", error);
+    response.status(404).json({ error: error.message });
+  }
+};
+
+const undefaultAddress = async function (address_id) {
+  let query_1 = {
+    text: "select address_id from quatro_address where address_id=$1",
+    values: [address_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let address1 = resultQuery_1.rows;
+
+  if (address1.length === 0) {
+    throw Error("Address doesn't exist");
+  }
+  let query = {
+    text: "update quatro_address set default_address = false where address_id=$1",
+    values: [address_id],
+  };
+
+  let resultQuery = await pool.query(query);
+  let addressUndefault = resultQuery.rows;
+  return addressUndefault;
+};
+
+const undefaultAddressAPI = async (request, response) => {
+  const { address_id } = request.body;
+  try {
+    let addressUndefault = await undefaultAddress(address_id);
+    response.status(200).json({
+      result: addressUndefault,
+      message: "Address set to not default",
+    });
+  } catch (error) {
+    console.log("error:", error);
+    response.status(404).json({ error: error.message });
+  }
+};
+
 module.exports = {
   getAddressAPI,
   createAddressAPI,
   updateAddressDetailsAPI,
   deleteAddressAPI,
+  setDefaultAddressAPI,
+  undefaultAddressAPI,
 };

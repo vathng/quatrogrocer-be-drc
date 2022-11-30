@@ -96,7 +96,7 @@ const pushCart = async function (user_id) {
   }
 
   let query = {
-    text: "insert into quatro_transaction(user_id, product_id, product_quantity) select user_id, product_id, product_quantity from quatro_cart where user_id = $1;",
+    text: "insert into quatro_transaction(user_id, product_id, discount_product_id, product_quantity) select user_id, product_id, discount_product_id, product_quantity from quatro_cart where user_id = $1;",
     values: [user_id],
   };
 
