@@ -53,7 +53,6 @@ const getDiscountProductAPI = async (request, response) => {
       request.query.product_discount
     );
     response.status(200).json({ result: GetProductDiscount });
-
   } catch (error) {
     response.status(404).json({ error: error.message });
   }
@@ -435,10 +434,10 @@ const updateDiscountProductDetails = async function (
   }
 
   let query = {
-    text: `update quatro_product_discount set discount_product_name = coalesce(nullif($1,''), product_name),
-           discount_product_description = coalesce(nullif($2,''), product_description),
-           discount_product_category = coalesce(nullif($3,''), product_category),
-           discount_product_image = coalesce(nullif($4,''), product_image)
+    text: `update quatro_product_discount set discount_product_name = coalesce(nullif($1,''), discount_product_name),
+           discount_product_description = coalesce(nullif($2,''), discount_product_description),
+           discount_product_category = coalesce(nullif($3,''), discount_product_category),
+           discount_product_image = coalesce(nullif($4,''), discount_product_image)
            where discount_product_id = $5;`,
     values: [
       discount_product_name,
@@ -527,7 +526,7 @@ const minusDiscountProductQuantityAPI = async (request, response) => {
   }
 };
 
-const deleteDiscountProduct = async function (product_id) {
+const deleteDiscountProduct = async function (discount_product_id) {
   let query_1 = {
     text: "select discount_product_id from quatro_product_discount where discount_product_id=$1",
     values: [discount_product_id],
@@ -542,7 +541,7 @@ const deleteDiscountProduct = async function (product_id) {
 
   let query = {
     text: "delete from quatro_product_discount where discount_product_id = $1",
-    values: [product_id],
+    values: [discount_product_id],
   };
 
   let resultQuery = await pool.query(query);
