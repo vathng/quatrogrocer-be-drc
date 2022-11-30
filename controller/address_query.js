@@ -8,9 +8,10 @@ const pool = new Pool({
   port: process.env.PGPORT,
 });
 
-const getAllAddress = async function () {
+const getAllAddress = async function (user_id) {
   let query = {
-    text: "select address_line_1, address_line_2, address_line_3, postcode, state from quatro_address",
+    text: "select address_line_1, address_line_2, address_line_3, postcode, state from quatro_address where user_id = $1 order by address_id asc ",
+    values: [user_id],
   };
 
   let resultQuery = await pool.query(query);
@@ -21,7 +22,7 @@ const getAllAddress = async function () {
 
 const searchAddressAPI = async (request, response) => {
   try {
-    let searchAddressUser = await getAllAddress();
+    let searchAddressUser = await getAllAddress(request.query.user_id);
     response.status(200).json({ result: searchAddressUser });
   } catch (error) {
     response.status(404).json({ error: error.message });

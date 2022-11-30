@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 var cors = require("cors");
 const app = express();
-const port = 5004;
+const port = 5000;
 const db_user = require("./controller/user_query");
 const db_product = require("./controller/product_query");
 const db_product_discount = require("./controller/product_query");
@@ -36,7 +36,7 @@ app.get("/", (request, response) => {
 //User
 app.post("/quatro_user/login", db_user.loginAPI);
 app.post("/quatro_user/create", db_user.createUserAPI);
-app.post("/quatro_user/search", db_auth, db_user.searchUserAPI);
+app.post("/quatro_user/search", db_user.searchUserAPI);
 app.post("/quatro_user/update", db_user.updateUserAPI);
 app.delete("/quatro_user/delete", db_user.deleteUserAPI);
 //Product
@@ -51,6 +51,10 @@ app.post(
 app.post("/quatro_product/minus_quantity", db_product.minusProductQuantityAPI);
 app.delete("/quatro_product/delete", db_product.deleteProductAPI);
 //Discount Product
+app.get(
+  "/quatro_product_discount/get",
+  db_product_discount.searchDiscountProductAPI
+);
 app.post(
   "/quatro_product_discount/create",
   db_product_discount.createDiscountProductAPI
