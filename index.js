@@ -102,7 +102,7 @@ app.post("/quatro_user/add_credit", db_credit.addCreditUpdateAPI);
 //Update payment status
 app.post("/quatro_transaction/update_payment", db_transac.updatePaymentAPI);
 //Get from cart
-app.get("/quatro_transaction/get_details", db_transac.getTransactionAPI);
+app.get("/quatro_transaction/get_details/:id", db_transac.getTransactionAPI);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);

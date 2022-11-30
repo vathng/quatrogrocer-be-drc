@@ -22,7 +22,7 @@ const getTransaction = async function (user_id) {
   }
 
   let query = {
-    text: "select * from quatro_transaction where user_id=$1 and payment_status=false",
+    text: "select * from quatro_transaction where user_id=$1 and payment_status=true",
     values: [user_id],
   };
 
@@ -36,7 +36,8 @@ const getTransaction = async function (user_id) {
 };
 
 const getTransactionAPI = async (request, response) => {
-  const { user_id } = request.body;
+  // const { user_id } = request.body;
+  let user_id = request.params.id;
 
   try {
     let transactionSearch = await getTransaction(user_id);
@@ -229,8 +230,8 @@ const updatePaymentStatus = async function (user_id) {
   }
 
   let query = {
-    text: `update quatro_transaction set payment_status = true where user_id = $1`,
-    values: [user_id],
+    text: `update quatro_transaction set payment_status = true where user_id = $1 and product_id = $2`,
+    values: [user_id, product_id],
   };
 
   let resultQuery = await pool.query(query);
@@ -240,9 +241,9 @@ const updatePaymentStatus = async function (user_id) {
 };
 
 const updatePaymentAPI = async (request, response) => {
-  const { user_id } = request.body;
+  const { user_id, product_id } = request.body;
   try {
-    let paymentUpdate = await updatePaymentStatus(user_id);
+    let paymentUpdate = await updatePaymentStatus(user_id, product_id);
     response.status(200).json({
       result: paymentUpdate,
       message: "Payment status updated successfully",
