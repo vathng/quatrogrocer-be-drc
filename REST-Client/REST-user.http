@@ -27,14 +27,13 @@ Content-Type: application/json
 
 { 
 
-    "email":"vathng@test.com",
-
-    "password":"!QAZ2wsx",
-    "first_name": ,
-      "last_name":,
-      "date_of_birth":,
-      "gender":,
-      "phone_number":
+    "email":"vathcheng@test.com",
+    "password":"Abc12345!",
+    "first_name":"Ng",
+    "last_name":"Cheng",
+    "date_of_birth":"1-1-2000",
+    "gender":"male",
+    "phone_number":"0123675489"
 }
 
 ###
@@ -42,15 +41,14 @@ POST http://localhost:5004/quatro_user/update
 Content-Type: application/json
 
 {   
-    "first_name": "Ch",
-    "last_name": "Nooo",
-    "date_of_birth": "2000-08-02",
-    "phone_number" : "0192345442",
-
-    "email":"hfcfhfc@test.com",
-    "oldPassword":"!QAZ2wsx",
-    "password":"test1234",
-    "user_id" : 39
+    "first_name": "Vath",
+    "last_name": "Ng",
+    "date_of_birth": "07-03-1999",
+    "phone_number" : "",
+    "email":"",
+    "oldPassword":"Abc12345!",
+    "password":"!QAZ2wsx",
+    "user_id" : 7
 
 }
 ###
