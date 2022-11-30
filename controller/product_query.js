@@ -351,6 +351,30 @@ const deleteProductAPI = async (request, response) => {
   }
 };
 
+const getDiscountProduct = async function (product) {
+  let query = {
+    text:
+      "select discount_product_id, discount_product_name, discount_product_description, discount_product_category, discount_product_price, discount_product_quantity, discount_product_image from quatro_product_discount " +
+      (product ? "where lower(discount_product_name) like $1 " : "") +
+      "order by discount_product_id asc ",
+    values: product ? [`%${product}%`.toLowerCase()] : [],
+  };
+
+  let resultQuery = await pool.query(query);
+
+  let GetProduct = resultQuery.rows;
+  return GetProduct;
+};
+
+const searchDiscountProductAPI = async (request, response) => {
+  try {
+    let GetProduct = await getDiscountProduct(request.query.product);
+    response.status(200).json({ result: GetProduct });
+  } catch (error) {
+    response.status(404).json({ error: error.message });
+  }
+};
+
 const createDiscountProduct = async function (
   discount_product_name,
   discount_product_description,
@@ -572,6 +596,7 @@ module.exports = {
   updateProductQuantityAPI,
   minusProductQuantityAPI,
   deleteProductAPI,
+  searchDiscountProductAPI,
   createDiscountProductAPI,
   updateDiscountProductDetailsAPI,
   deleteDiscountProductAPI,

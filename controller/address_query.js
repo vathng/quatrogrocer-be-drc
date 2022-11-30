@@ -22,7 +22,7 @@ const getAddress = async function (user_id) {
   }
 
   let query = {
-    text: "select address_line_1, address_line_2, address_line_3, postcode, state from quatro_address where user_id = $1",
+    text: "select address_line_1, address_line_2, address_line_3, postcode, state from quatro_address where user_id = $1 order by address_id asc",
     values: [user_id],
   };
 
@@ -35,8 +35,8 @@ const getAddress = async function (user_id) {
 const getAddressAPI = async (request, response) => {
   const { user_id } = request.body;
   try {
-    let getAddressUser = await getAddress(user_id);
-    response.status(200).json({ result: getAddressUser });
+    let searchAddressUser = await getAddress(request.query.user_id);
+    response.status(200).json({ result: searchAddressUser });
   } catch (error) {
     response.status(404).json({ error: error.message });
   }
