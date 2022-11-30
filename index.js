@@ -82,7 +82,7 @@ app.post("/quatro_cart/delete", db_cart.deleteCartAPI);
 app.post("/quatro_cart/push", db_cart.pushCartAPI);
 //Discount Cart
 app.post("/quatro_cart/create_discount", db_cart.createCartDiscountAPI);
-app.post("/quatro_cart/delete_discount", db_cart.deleteCartDiscountAPI);
+app.delete("/quatro_cart/delete_discount", db_cart.deleteCartDiscountAPI);
 app.post("/quatro_cart/push_discount", db_cart.pushDiscountCartAPI);
 //Transaction
 app.post("/quatro_transaction/create", db_transac.createTransactionAPI);
