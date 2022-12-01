@@ -107,9 +107,9 @@ const createUser = async function (
   }
 
   if (
-    first_name == "" ||
+    !first_name.trim() ||
     !regName.test(first_name) ||
-    last_name == "" ||
+    !last_name.trim() ||
     !regName.test(last_name)
   ) {
     throw Error("Name should contain alphabets only");
