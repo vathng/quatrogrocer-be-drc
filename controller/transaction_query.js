@@ -127,31 +127,31 @@ const updateTransaction = async function (user_id) {
               from quatro_product_discount 
               where quatro_transaction.discount_product_id = quatro_product_discount.discount_product_id)
               ,
+              discount_product_price =
+              (select quatro_product_discount.discount_product_price 
+              from quatro_product_discount 
+              where quatro_transaction.discount_product_id = quatro_product_discount.discount_product_id)
+              ,
               product_name =
               (select quatro_product.product_name 
               from quatro_product 
               where quatro_transaction.product_id = quatro_product.product_id)
-              ,
+              , 
               product_price =
               (select quatro_product.product_price
               from quatro_product 
               where quatro_transaction.product_id = quatro_product.product_id)
-              , 
-              discount_product_price =
-              (select quatro_product_discount.discount_product_price
-              from quatro_product_discount 
-              where quatro_transaction.product_id = quatro_product_discount.discount_product_id)
-              ,
+              ,  
               product_image =
               (select quatro_product.product_image 
               from quatro_product
               where quatro_transaction.product_id = quatro_product.product_id)
-              ,
+              , 
               discount_product_image =
               (select quatro_product_discount.discount_product_image 
               from quatro_product_discount 
-              where quatro_transaction.product_id = quatro_product_discount.discount_product_id)
-              ,
+              where quatro_transaction.discount_product_id = quatro_product_discount.discount_product_id)
+              , 
               payment_status = false, transaction_timestamp = $1 where user_id = $2;`,
     values: [transaction_timestamp, user_id],
   };
@@ -168,62 +168,6 @@ const updateTransactionAPI = async (request, response) => {
     let transactionUpdate = await updateTransaction(user_id);
     response.status(200).json({
       result: transactionUpdate,
-      message: "Successfully update in transaction",
-    });
-  } catch (error) {
-    console.log("error:", error);
-    response.status(404).json({ error: error.message });
-  }
-};
-
-const updateTransactionDiscount = async function (user_id) {
-  let transaction_timestamp = new Date();
-
-  let query_1 = {
-    text: "select user_id from quatro_user where user_id=$1",
-    values: [user_id],
-  };
-
-  let resultQuery_1 = await pool.query(query_1);
-  let user = resultQuery_1.rows;
-
-  if (uuser.length === 0) {
-    throw Error("User doesnt exist");
-  }
-
-  let query = {
-    text: `update quatro_transaction 
-            set 
-          product_name=
-            (select quatro_product_discount.discount_product_name 
-                from quatro_product_discount 
-              where quatro_transaction.discount_product_id = quatro_product_discount.discount_product_id)
-            , product_price=
-              (select quatro_product_discount.discount_product_price
-                from quatro_product_discount 
-              where quatro_transaction.discount_product_id = quatro_product_discount.discount_product_id)
-            , 
-            product_image=
-            (select quatro_product_discount.discount_product_image 
-                from quatro_product_discount 
-              where quatro_transaction.discount_product_id = quatro_product_discount.discount_product_id)
-            ,
-            payment_status = false, transaction_timestamp=$1 where user_id=$2;`,
-    values: [transaction_timestamp, user_id],
-  };
-
-  let resultQuery = await pool.query(query);
-  let transactionDiscountUpdate = resultQuery.rows;
-
-  return transactionDiscountUpdate;
-};
-
-const updateTransactionDiscountAPI = async (request, response) => {
-  const { user_id } = request.body;
-  try {
-    let transactionDiscountUpdate = await updateTransactionDiscount(user_id);
-    response.status(200).json({
-      result: transactionDiscountUpdate,
       message: "Successfully update in transaction",
     });
   } catch (error) {
@@ -274,6 +218,5 @@ module.exports = {
   getTransactionAPI,
   createTransactionAPI,
   updateTransactionAPI,
-  updateTransactionDiscountAPI,
   updatePaymentAPI,
 };

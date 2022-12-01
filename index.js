@@ -96,15 +96,6 @@ app.post("/quatro_cart/push_discount", db_cart.pushDiscountCartAPI);
 //Transaction
 app.post("/quatro_transaction/create", db_transac.createTransactionAPI);
 app.post("/quatro_transaction/update", db_transac.updateTransactionAPI);
-//Discount Transaction
-app.post(
-  "/quatro_transaction/create_discount",
-  db_transac.updateTransactionDiscountAPI
-);
-app.post(
-  "/quatro_transaction/update_discount",
-  db_transac.updateTransactionDiscountAPI
-);
 //User Credit
 app.post("/quatro_user/minus_credit", db_credit.minusCreditUpdateAPI);
 app.post("/quatro_user/add_credit", db_credit.addCreditUpdateAPI);
