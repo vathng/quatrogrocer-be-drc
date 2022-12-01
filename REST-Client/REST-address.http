@@ -1,0 +1,41 @@
+GET http://localhost:5004/quatro_address/get
+Content-Type: application/json
+
+{
+    "user_id": "1"
+}
+
+
+###
+POST http://localhost:5004/quatro_address/create
+Content-Type: application/json
+
+{
+    "address_line_1": "No 1",
+    "address_line_2": "Taman Mewah",
+    "address_line_3": "Dengkil",
+    "postcode": "four thousand",
+    "state": "Selangor",
+    "user_id": "4"
+}
+
+###
+POST http://localhost:5004/quatro_address/update_details
+Content-Type: application/json
+
+{
+    "address_line_1": "No 18",
+    "address_line_2": "Taman Bukit Mewah",
+    "address_line_3": "Seremban",
+    "postcode": "70000",
+    "state": "Negeri Sembilan",
+    "address_id": "10"
+}
+
+###
+DELETE http://localhost:5004/quatro_address/delete
+Content-Type: application/json
+
+{
+    "address_id" : "4"
+}

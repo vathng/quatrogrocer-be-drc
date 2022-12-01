@@ -6,7 +6,7 @@ function App() {
     getUsers();
   }, []);
   function getUsers() {
-    fetch("http://localhost:3000")
+    fetch("http://localhost:3001")
       .then((response) => {
         return response.text();
       })
@@ -17,7 +17,7 @@ function App() {
   function createUser() {
     let email = prompt("Enter email");
     let password = prompt("Enter Password");
-    fetch("http://localhost:3000/quatro_user", {
+    fetch("http://localhost:3001/quatro_user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +35,7 @@ function App() {
   }
   function deleteUser() {
     let id = prompt("Enter User id");
-    fetch(`http://localhost:3000/quatro_user/${id}`, {
+    fetch(`http://localhost:3001/quatro_user/${id}`, {
       method: "DELETE",
     })
       .then((response) => {

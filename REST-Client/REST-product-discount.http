@@ -1,0 +1,55 @@
+###
+GET http://localhost:5004/quatro_product_discount/get
+Content-Type: application/json
+
+{
+    
+}
+
+
+
+
+###
+POST http://localhost:5004/quatro_product_discount/create
+Content-Type: application/json
+
+{
+    "discount_product_name":"Aaa",
+    "discount_product_description" : "sdsd",
+    "discount_product_category": "Drinks",
+    "discount_product_price": 2.50,
+    "discount_product_quantity": "100",
+    "discount_product_image": "https://cdn1-production-images-kly.akamaized.net/QzTTZqGXM5PqL9REm9okFMn-r20=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/2702436/original/016317800_1547270165-shutterstock_314020379.jpg"
+}
+
+
+
+###
+POST http://localhost:5004/quatro_product_discount/update
+Content-Type: application/json
+
+{
+    "discount_product_name":"Maggi Tomyam",
+    "discount_product_description" : "",
+    "discount_product_category": "",
+    "discount_product_image": "",
+    "discount_product_id" : "1"
+}
+
+###
+POST http://localhost:5004/quatro_product_discount/minus
+Content-Type: application/json
+
+{
+    "discount_product_quantity": "5",
+    "discount_product_id": "16"
+}
+
+
+###
+DELETE http://localhost:5004/quatro_product/delete
+Content-Type: application/json
+
+{
+    "discount_product_id" : 2
+}
