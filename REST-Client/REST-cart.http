@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
    "user_id" : "5",
-   "product_id" :"18" ,
+   "product_id" :"3" ,
    "product_quantity" : "2"
 }
 
@@ -30,7 +30,7 @@ Content-Type: application/json
 
 {
    "user_id" : "5",
-   "discount_product_id" : "2",
+   "discount_product_id" : "3",
    "product_quantity" : "4"
 }
 

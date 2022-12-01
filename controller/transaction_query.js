@@ -122,21 +122,37 @@ const updateTransaction = async function (user_id) {
   let query = {
     text: `update quatro_transaction 
             set 
-          product_name=
-            (select quatro_product.product_name 
-                from quatro_product 
+              discount_product_name =
+              (select quatro_product_discount.discount_product_name 
+              from quatro_product_discount 
+              where quatro_transaction.discount_product_id = quatro_product_discount.discount_product_id)
+              ,
+              product_name =
+              (select quatro_product.product_name 
+              from quatro_product 
               where quatro_transaction.product_id = quatro_product.product_id)
-            , product_price=
+              ,
+              product_price =
               (select quatro_product.product_price
-                from quatro_product 
+              from quatro_product 
               where quatro_transaction.product_id = quatro_product.product_id)
-            , 
-            product_image=
-            (select quatro_product.product_image 
-                from quatro_product 
+              , 
+              discount_product_price =
+              (select quatro_product_discount.discount_product_price
+              from quatro_product_discount 
+              where quatro_transaction.product_id = quatro_product_discount.discount_product_id)
+              ,
+              product_image =
+              (select quatro_product.product_image 
+              from quatro_product
               where quatro_transaction.product_id = quatro_product.product_id)
-            ,
-            payment_status = false, transaction_timestamp=$1 where user_id=$2;`,
+              ,
+              discount_product_image =
+              (select quatro_product_discount.discount_product_image 
+              from quatro_product_discount 
+              where quatro_transaction.product_id = quatro_product_discount.discount_product_id)
+              ,
+              payment_status = false, transaction_timestamp = $1 where user_id = $2;`,
     values: [transaction_timestamp, user_id],
   };
 
