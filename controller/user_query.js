@@ -107,9 +107,9 @@ const createUser = async function (
   }
 
   if (
-    first_name == "" ||
+    !first_name.trim() ||
     !regName.test(first_name) ||
-    last_name == "" ||
+    !last_name.trim() ||
     !regName.test(last_name)
   ) {
     throw Error("Name should contain alphabets only");
@@ -257,11 +257,10 @@ const updateUserAPI = async (request, response) => {
 const updatePassword = async function (oldPassword, password, user_id) {
   const salt = await bcrypt.genSalt(10);
 
-  console.log(`passws ${salt} ${password}`);
+  // console.log(`passws ${salt} ${password}`);
   const passHash = await bcrypt.hash(password, salt);
-
   // if (isNaN(phone_number)) {
-  //   throw error("Invalid phone number");
+  // throw new Error("Invalid phone number");
   // }
   let query_1 = {
     text: "select email, password from quatro_user where user_id=$1",
@@ -283,7 +282,7 @@ const updatePassword = async function (oldPassword, password, user_id) {
   }
 
   if (!validPassword) {
-    throw Error("Invalid Password");
+    throw Error("Old Password is incorrect");
   }
 
   let query = {
