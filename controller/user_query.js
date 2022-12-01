@@ -15,7 +15,7 @@ const pool = new Pool({
 
 const searchUser = async function (user_id) {
   let query = {
-    text: "select email, first_name, last_name, date_of_birth, gender, phone_number, user_credit from quatro_user where user_id = $1 ",
+    text: "select email, first_name, last_name, date_of_birth, gender, user_credit from quatro_user where user_id = $1 ",
     values: [user_id],
   };
 
@@ -191,11 +191,70 @@ const updateUser = async function (
   last_name,
   date_of_birth,
   email,
-  phone_number,
   oldPassword,
-  password,
   user_id
 ) {
+  let query_1 = {
+    text: "select email, password from quatro_user where user_id=$1",
+    values: [user_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let user = resultQuery_1.rows;
+
+  if (user.length === 0) {
+    throw Error("User doesnt exist");
+  }
+
+  let validPassword = false;
+
+  if (oldPassword) {
+    //empty
+    validPassword = await bcrypt.compare(oldPassword, user[0]["password"]);
+  }
+
+  if (!validPassword) {
+    throw Error("Invalid Password");
+  }
+
+  let query = {
+    text: `update quatro_user set first_name = coalesce(nullif($1,''), first_name),
+           last_name = coalesce(nullif($2,''), last_name),
+           date_of_birth = coalesce(nullif($3,''), date_of_birth),
+           email = coalesce(nullif($4,''), email) where user_id = $5`,
+    values: [first_name, last_name, date_of_birth, email, user_id],
+  };
+
+  let resultQuery = await pool.query(query);
+  let userUpdate = resultQuery.rows;
+
+  return userUpdate[0];
+};
+
+const updateUserAPI = async (request, response) => {
+  const { first_name, last_name, date_of_birth, email, oldPassword, user_id } =
+    request.body;
+
+  try {
+    await updateUser(
+      first_name,
+      last_name,
+      date_of_birth,
+      email,
+      oldPassword,
+      user_id
+    );
+
+    //const updateUserJwt = createToken(updateUserDB?.user_id);
+
+    response.status(200).json({ result: email, message: "User updated" });
+  } catch (error) {
+    console.log("error:", error);
+    response.status(404).json({ error: error.message });
+  }
+};
+
+const updatePassword = async function (oldPassword, password, user_id) {
   const salt = await bcrypt.genSalt(10);
 
   console.log(`passws ${salt} ${password}`);
@@ -228,43 +287,21 @@ const updateUser = async function (
   }
 
   let query = {
-    text: `update quatro_user set first_name = coalesce(nullif($1,''), first_name),
-           last_name = coalesce(nullif($2,''), last_name),
-           date_of_birth = coalesce(nullif($3,''), date_of_birth),
-           email = coalesce(nullif($4,''), email),
-           password = coalesce(nullif($5,''), password) where user_id = $6`,
-    values: [first_name, last_name, date_of_birth, email, passHash, user_id],
+    text: `update quatro_user set password = coalesce(nullif($1,''), password) where user_id = $2`,
+    values: [passHash, user_id],
   };
 
   let resultQuery = await pool.query(query);
-  let userUpdate = resultQuery.rows;
+  let passwordUpdate = resultQuery.rows;
 
-  return userUpdate[0];
+  return passwordUpdate[0];
 };
 
-const updateUserAPI = async (request, response) => {
-  const {
-    first_name,
-    last_name,
-    date_of_birth,
-    email,
-    phone_number,
-    oldPassword,
-    password,
-    user_id,
-  } = request.body;
+const updatePasswordAPI = async (request, response) => {
+  const { oldPassword, password, user_id } = request.body;
 
   try {
-    await updateUser(
-      first_name,
-      last_name,
-      date_of_birth,
-      email,
-      phone_number,
-      oldPassword,
-      password,
-      user_id
-    );
+    await updatePassword(oldPassword, password, user_id);
 
     //const updateUserJwt = createToken(updateUserDB?.user_id);
 
@@ -314,5 +351,6 @@ module.exports = {
   loginAPI,
   createUserAPI,
   updateUserAPI,
+  updatePasswordAPI,
   deleteUserAPI,
 };
