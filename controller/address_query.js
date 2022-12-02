@@ -50,6 +50,95 @@ const createAddress = async function (
   state,
   user_id
 ) {
+  let existQuery = {
+    text: "select address_line_1, address_line_2, address_line_3, postcode, state, user_id from quatro_address where address_line_1=$1 and address_line_2=$2 and address_line_3=$3 and postcode =$4 and state =$5 and user_id=$6",
+    values: [
+      address_line_1,
+      address_line_2,
+      address_line_3,
+      postcode,
+      state,
+      user_id,
+    ],
+  };
+  let resultExistQuery = await pool.query(existQuery);
+  let existAddress = resultExistQuery.rows;
+
+  var regAddress = /^[a-zA-Z0-9.-\s]/;
+  var regPostcode = /^\d{5}$/;
+  const states = [
+    "WP Kuala Lumpur",
+    "Kuala Lumpur",
+    "Johor",
+    "Kedah",
+    "Kelantan",
+    "Melaka",
+    "Negeri Sembilan",
+    "Pahang",
+    "Penang",
+    "Perak",
+    "Perlis",
+    "Sabah",
+    "Sarawak",
+    "Selangor",
+    "Terengganu",
+    "WP Labuan",
+    "Labuan",
+    "WP Putrajaya",
+    "Putrajaya",
+  ];
+  const upperStates = states.map((e) => {
+    return e.toUpperCase();
+  });
+
+  if (
+    !address_line_1.trim() ||
+    !address_line_2.trim() ||
+    !postcode.trim() ||
+    !state.trim()
+  ) {
+    throw Error(
+      "At least require input for address line 1 , address line 2,  postcode and state"
+    );
+  }
+
+  if (address_line_1) {
+    if (!regAddress.test(address_line_1)) {
+      throw Error("*Address line 1 not in correct format");
+    }
+  }
+
+  if (address_line_2) {
+    if (!regAddress.test(address_line_2)) {
+      throw Error("*Address line 2 not in correct format");
+    }
+  }
+
+  if (address_line_3) {
+    if (!regAddress.test(address_line_3)) {
+      throw Error("*Address line 3 not in correct format");
+    }
+  }
+
+  if (postcode) {
+    if (postcode.length != 5) {
+      throw Error("*Postcode accepts 5 digits only");
+    }
+    if (!regPostcode.test(postcode)) {
+      throw Error("*Postcode accepts digits only");
+    }
+  }
+
+  if (state) {
+    state = state.toUpperCase();
+    if (!upperStates.includes(state)) {
+      throw Error("*State's input is invalid");
+    }
+  }
+
+  if (existAddress.length !== 0) {
+    throw Error("Address already exists in database");
+  }
   let query = {
     text: "insert into quatro_address(address_line_1, address_line_2, address_line_3, postcode, state, user_id) values($1,$2,$3,$4,$5,$6) returning address_id",
     values: [
@@ -64,7 +153,6 @@ const createAddress = async function (
 
   let resultQuery = await pool.query(query);
   let newAddress = resultQuery.rows;
-
   return newAddress;
 };
 

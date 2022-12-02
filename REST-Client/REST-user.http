@@ -56,7 +56,7 @@ Content-Type: application/json
     "email":"hfcfhfc@test.com",
     "oldPassword":"test1234",
     "password":"!QAZ2wsx",
-    "user_id" : 3
+    "user_id" : 55
 
 }
 ###
