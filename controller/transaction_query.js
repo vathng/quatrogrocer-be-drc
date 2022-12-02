@@ -47,6 +47,44 @@ const getTransactionAPI = async (request, response) => {
   }
 };
 
+const getCheckoutCart = async function (user_id) {
+  let query_1 = {
+    text: "select user_id from quatro_transaction where user_id=$1",
+    values: [user_id],
+  };
+
+  let resultQuery_1 = await pool.query(query_1);
+  let userCheckout = resultQuery_1.rows;
+
+  if (userCheckout.length === 0) {
+    throw Error("User doesn't exist");
+  }
+
+  let query = {
+    text: "select * from quatro_transaction where user_id=$1 and payment_status=false",
+    values: [user_id],
+  };
+
+  let resultQuery = await pool.query(query);
+  let checkoutCartSearch = resultQuery.rows;
+
+  if (checkoutCartSearch.length === 0) {
+    throw Error("Transaction doesnt exist");
+  }
+  return checkoutCartSearch;
+};
+
+const getCheckoutCartAPI = async (request, response) => {
+  let { user_id } = request.body;
+
+  try {
+    let checkoutCartSearch = await getCheckoutCart(user_id);
+    response.status(200).json({ result: checkoutCartSearch });
+  } catch (error) {
+    response.status(404).json({ error: error.message });
+  }
+};
+
 const createTransaction = async function (
   transaction_id,
   product_id,
@@ -216,6 +254,7 @@ const updatePaymentAPI = async (request, response) => {
 
 module.exports = {
   getTransactionAPI,
+  getCheckoutCartAPI,
   createTransactionAPI,
   updateTransactionAPI,
   updatePaymentAPI,
