@@ -212,7 +212,7 @@ const updateAddressDetails = async function (
     text: `update quatro_address set address_line_1 = coalesce(nullif($1,''), address_line_1),
            address_line_2 = coalesce(nullif($2,''), address_line_2),
            address_line_3 = coalesce(nullif($3,''), address_line_3),
-           postcode = coalesce(cast(nullif($4,0) as integer), postcode),
+           postcode = coalesce(nullif($4,0), postcode),
            state = coalesce(nullif($5,''), state)
            where address_id = $6;`,
     values: [
