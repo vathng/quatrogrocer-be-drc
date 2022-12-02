@@ -6,7 +6,7 @@ function App() {
     getUsers();
   }, []);
   function getUsers() {
-    fetch("http://quaatrogroce.one")
+    fetch("http://quaatrogrocer.one")
       .then((response) => {
         return response.text();
       })
