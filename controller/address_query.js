@@ -8,7 +8,7 @@ const pool = new Pool({
   port: process.env.PGPORT,
 });
 
-const getAddress = async function (user_id) {
+const getAddress = async function (user_id, address_id) {
   let query_1 = {
     text: "select address_id from quatro_address where user_id=$1",
     values: [user_id],
@@ -22,8 +22,11 @@ const getAddress = async function (user_id) {
   }
 
   let query = {
-    text: "select address_line_1, address_line_2, address_line_3, postcode, state from quatro_address where user_id = $1 order by address_id asc",
-    values: [user_id],
+    text:
+      "select address_id, address_line_1, address_line_2, address_line_3, postcode, state from quatro_address where user_id = $1" +
+      (address_id ? "and address_id = $2" : "") +
+      "order by address_id asc",
+    values: address_id ? [user_id, address_id] : [user_id],
   };
 
   let resultQuery = await pool.query(query);
@@ -33,9 +36,11 @@ const getAddress = async function (user_id) {
 };
 
 const getAddressAPI = async (request, response) => {
-  const { user_id } = request.body;
   try {
-    let searchAddressUser = await getAddress(request.query.user_id);
+    let searchAddressUser = await getAddress(
+      request.query.user_id,
+      request.query.address_id
+    );
     response.status(200).json({ result: searchAddressUser });
   } catch (error) {
     response.status(404).json({ error: error.message });
@@ -207,7 +212,7 @@ const updateAddressDetails = async function (
     text: `update quatro_address set address_line_1 = coalesce(nullif($1,''), address_line_1),
            address_line_2 = coalesce(nullif($2,''), address_line_2),
            address_line_3 = coalesce(nullif($3,''), address_line_3),
-           postcode = coalesce(nullif($4,''), postcode),
+           postcode = coalesce(cast(nullif($4,0) as integer), postcode),
            state = coalesce(nullif($5,''), state)
            where address_id = $6;`,
     values: [
@@ -277,9 +282,8 @@ const deleteAddress = async function (address_id) {
 };
 
 const deleteAddressAPI = async (request, response) => {
-  const { address_id } = request.body;
   try {
-    let addressDelete = await deleteAddress(address_id);
+    let addressDelete = await deleteAddress(request.query.address_id);
     response
       .status(200)
       .json({ result: addressDelete, message: "Address deleted" });
