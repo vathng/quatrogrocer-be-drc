@@ -111,10 +111,10 @@ const createAddress = async function (
   if (address_line_1 || address_line_2 || address_line_3) {
     if (
       validator.isLength(address_line_1, address_line_2, address_line_3, {
-        max: 30,
+        max: 50,
       })
     ) {
-      throw Error("*Address line  max character is 30");
+      throw Error("*Address line  max character is 50");
     } else if (!regAddress.test(address_line_1)) {
       throw Error("*Address line invalid format");
     }
@@ -230,10 +230,10 @@ const updateAddressDetails = async function (
   if (address_line_1 || address_line_2 || address_line_3) {
     if (
       validator.isLength(address_line_1, address_line_2, address_line_3, {
-        max: 30,
+        max: 50,
       })
     ) {
-      throw Error("*Address line  max character is 30");
+      throw Error("*Address line  max character is 50");
     } else if (!regAddress.test(address_line_1)) {
       throw Error("*Address line invalid format");
     }
