@@ -17,7 +17,7 @@ require("dotenv").config();
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://www.quatrogrocer.one",
     credentials: true,
   })
 );
@@ -38,6 +38,7 @@ app.post("/quatro_user/login", db_user.loginAPI);
 app.post("/quatro_user/create", db_user.createUserAPI);
 app.post("/quatro_user/search", db_user.searchUserAPI);
 app.post("/quatro_user/update", db_user.updateUserAPI);
+app.post("/quatro_user/update_password", db_user.updatePasswordAPI);
 app.delete("/quatro_user/delete", db_user.deleteUserAPI);
 //Product
 app.get("/quatro_product/get", db_product.searchProductAPI);
@@ -76,6 +77,14 @@ app.get("/quatro_address/get", db_address.getAddressAPI);
 app.post("/quatro_address/create", db_address.createAddressAPI);
 app.post("/quatro_address/update_details", db_address.updateAddressDetailsAPI);
 app.delete("/quatro_address/delete", db_address.deleteAddressAPI);
+app.post(
+  "/quatro_address/set_default_address",
+  db_address.setDefaultAddressAPI
+);
+app.post(
+  "/quatro_address/set_nondefault_address",
+  db_address.undefaultAddressAPI
+);
 //Cart
 app.post("/quatro_cart/create", db_cart.createCartAPI);
 app.post("/quatro_cart/delete", db_cart.deleteCartAPI);
@@ -87,15 +96,7 @@ app.post("/quatro_cart/push_discount", db_cart.pushDiscountCartAPI);
 //Transaction
 app.post("/quatro_transaction/create", db_transac.createTransactionAPI);
 app.post("/quatro_transaction/update", db_transac.updateTransactionAPI);
-//Discount Transaction
-app.post(
-  "/quatro_transaction/create_discount",
-  db_transac.updateTransactionDiscountAPI
-);
-app.post(
-  "/quatro_transaction/update_discount",
-  db_transac.updateTransactionDiscountAPI
-);
+app.post("/quatro_transaction/checkout", db_transac.getCheckoutCartAPI);
 //User Credit
 app.post("/quatro_user/minus_credit", db_credit.minusCreditUpdateAPI);
 app.post("/quatro_user/add_credit", db_credit.addCreditUpdateAPI);

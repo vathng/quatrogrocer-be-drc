@@ -44,13 +44,17 @@ create table quatro_transaction(
 product_id int,
 discount_product_id int, 
 user_id int, 
+discount_product_name varchar,
+discount_product_price float,
 product_name varchar, 
-product_quantity int, 
 product_price float,
+product_quantity int, 
 transaction_total float generated always as(product_quantity * product_price) stored,
+transaction_total_discount float generated always as(product_quantity * discount_product_price) stored,
+payment_status boolean,
 transaction_timestamp timestamp,
 product_image varchar,
-payment_status boolean) ;
+discount_product_image varchar);
 
 create table quatro_cart(
 user_id int not null, 
@@ -59,3 +63,8 @@ discount_product_id int,
 product_quantity int not null);
 -- SQL
 
+
+update quatro_transaction
+ set discount_product_price = 
+ (select quatro_product_discount.discount_product_price from quatro_product_discount 
+ where quatro_transaction.product_id = quatro_product_discount.discount_product_id);

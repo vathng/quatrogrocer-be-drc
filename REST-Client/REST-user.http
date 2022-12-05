@@ -51,7 +51,7 @@ Content-Type: application/json
     "email":"",
     "oldPassword":"Abc12345!",
     "password":"!QAZ2wsx",
-    "user_id" : 7
+    "user_id" : 55
 
 }
 ###
@@ -61,3 +61,4 @@ Content-Type: application/json
 {
     "user_id":2
 }
+

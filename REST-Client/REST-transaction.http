@@ -21,26 +21,20 @@ Content-Type: application/json
  "user_id" : "5"
 }
 
-###
-POST http://localhost:5004/quatro_transaction/update_discount
-Content-Type: application/json
-
-{
- "user_id" : "2"
-}
 
 ###
 POST http://localhost:5004/quatro_transaction/update_payment
 Content-Type: application/json
 
 {
- "user_id" : "2"
+ "user_id" : "5",
+ "product_id": ""
 }
 
 ###
-GET http://localhost:5004/quatro_transaction/get_details
+GET http://localhost:5004/quatro_transaction/get_details/5
 Content-Type: application/json
 
-{
-    "user_id": "5"
-}
+# {
+#     "user_id": "5"
+# }
